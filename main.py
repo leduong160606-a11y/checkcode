@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 import google.generativeai as genai
-genai.configure(api_key="AQ.Ab8RN6IQ0TSzv-TZImRDqju58wjkzgM0VKjDzB3a7d5HkQJY7A")
+genai.configure(api_key="AQ.Ab8RN6I-7PFX_7lSPZ8ZdRb5TjgjGBlNIQcW1zsnZik8kvAIaw")
 #models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
 #print(models)
 app = FastAPI()
