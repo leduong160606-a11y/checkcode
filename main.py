@@ -12,7 +12,7 @@ templates = Jinja2Templates(directory=".")
 class CodeSubmission(BaseModel):
     student_name: str
     code_content: str
-@app.get("/"), response_class=HTMLResponse)
+@app.get("/", response_class=HTMLResponse)
 def read_root(request: Request):
     return  templates.TemplateResponse(request,"index.html", {"request":request})
 @app.post("/submit")
