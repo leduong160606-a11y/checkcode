@@ -13,7 +13,6 @@ class CodeSubmission(BaseModel):
     student_name: str
     code_content: str
 
-# Dùng cách đọc file thuần túy để tránh lỗi Jinja2
 @app.get("/", response_class=HTMLResponse)
 async def read_root():
     with open("index.html", "r", encoding="utf-8") as f:
@@ -22,7 +21,7 @@ async def read_root():
 @app.post("/submit")
 async def submit_code(data: CodeSubmission):
     try:
-        model = genai.GenerativeModel('gemini-2.5-flash')
+        model = genai.GenerativeModel('gemini-1.5-flash')
         prompt = f"Học sinh: {data.student_name}. Code: {data.code_content}. Hãy chấm điểm và nhận xét."
         response = model.generate_content(prompt)
         return {"ai_feedback": response.text}
