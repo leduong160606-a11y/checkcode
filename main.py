@@ -25,7 +25,7 @@ def read_root(request: Request):
 @app.post("/submit")
 async def submit_code(data: CodeSubmission):
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-2.5-flash')
         prompt = f"""
         Hãy đóng vai giáo viên chấm bài lập trình nghiêm túc.
         Học sinh: {data.student_name}
