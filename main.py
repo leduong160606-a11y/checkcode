@@ -6,7 +6,7 @@ genai.configure(api_key="AQ.Ab8RN6IQ0TSzv-TZImRDqju58wjkzgM0VKjDzB3a7d5HkQJY7A")
 #models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
 #print(models)
 app = FastAPI()
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory=".")
 class CodeSubmission(BaseModel):
     student_name: str
     code_content: str
