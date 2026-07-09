@@ -18,8 +18,11 @@ class CodeSubmission(BaseModel):
 
 # 2. Trang chủ
 @app.get("/", response_class=HTMLResponse)
-def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+async def read_root(request: Request): 
+    with open("index.html","r", encoding="utf-8") as f:
+        html_content = f.read()
+    return HTMLResponse(content=html_content)    
+   
 
 # 3. API chấm bài
 @app.post("/submit")
