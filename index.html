@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hệ thống Chấm bài tự động</title>
+    <style>
+        body { font-family: sans-serif; padding: 50px; }
+        textarea { width: 100%; height: 200px; margin-bottom: 10px; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+        /* Style cho biểu tượng quay */
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+#ai-result {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border-left: 5px solid #007bff; /* Tạo điểm nhấn bên trái */
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Tạo hiệu ứng nổi */
+}
+    </style>
+</head>
+<body>
+    <h1>Nộp bài tập lập trình</h1>
+    <input type="text" id="name" placeholder="Tên sinh viên"><br><br>
+    <textarea id="code" placeholder="Dán code Python của bạn vào đây..."></textarea><br>
+    <button onclick="submitCode()">Gửi bài</button>
+    <div id="ai-result" style="margin-top: 20px; white-space: pre-wrap; border: 1px solid #ddd; padding: 10px;">
+    Kết quả AI sẽ hiển thị tại đây...
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        async function submitCode() {
+    const btn = document.querySelector('button'); // Lấy nút Gửi bài
+    const resultDiv = document.getElementById('ai-result'); // Chỗ hiển thị kết quả
+    
+    // --- THÊM PHẦN NÀY ĐỂ HIỆN LOADING ---
+    btn.disabled = true; // Khóa nút không cho bấm nhiều lần
+    btn.innerHTML = '<span class="loader"></span> Đang chấm bài...'; 
+    resultDiv.innerText = "Đang phân tích code, vui lòng chờ...";
+    // -------------------------------------
+
+    const data = {
+        student_name: document.getElementById('name').value,
+        code_content: document.getElementById('code').value
+    };
+
+    const response = await fetch('/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    
+    // --- CẬP NHẬT KẾT QUẢ ---
+    alert(result.message);
+    // Sử dụng thư viện marked để chuyển đổi nội dung AI trả về thành HTML đẹp
+resultDiv.innerHTML = marked.parse(result.ai_feedback);
+    
+    // --- KHÔI PHỤC NÚT BẤM ---
+    btn.disabled = false;
+    btn.innerText = "Gửi bài";
+}
+    </script>
+</body>
+</html>
