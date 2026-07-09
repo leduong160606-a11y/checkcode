@@ -1,37 +1,39 @@
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
-from fastapi.responses imprort HTMLResponse
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 import os
 import google.generativeai as genai
-genai.configure(api_key=os.getenv("AQ.Ab8RN6I-7PFX_7lSPZ8ZdRb5TjgjGBlNIQcW1zsnZik8kvAIaw"))
-#models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
-#print(models)
+
+# Cấu hình API Key từ Render (không để key cứng trong code)
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
 app = FastAPI()
 templates = Jinja2Templates(directory=".")
+
 class CodeSubmission(BaseModel):
     student_name: str
     code_content: str
+
 @app.get("/", response_class=HTMLResponse)
 def read_root(request: Request):
-    return  templates.TemplateResponse(request,"index.html", {"request":request})
+    return templates.TemplateResponse("index.html", {"request": request})
+
 @app.post("/submit")
 async def submit_code(data: CodeSubmission):
-    model = genai.GenerativeModel('gemini-2.5-flash')
+    model = genai.GenerativeModel('gemini-1.5-flash')
     prompt = f"""
-Hãy đóng vai một giáo viên chấm điểm lập trình nghiêm túc. 
-Dựa trên đoạn code sau: {data.code_content}
+Hãy đóng vai một giáo viên chấm điểm lập trình.
+Dựa trên đoạn code sau của học sinh {data.student_name}: {data.code_content}
 Hãy trả lời theo cấu trúc sau:
-1. Đánh giá: [Điểm số] (trên thang điểm 10).
-2. Nhận xét: Trả lời ngắn gọn, trực tiếp vào vấn đề.
-3. Điểm cần cải thiện: Nêu tối đa 2 ý chính quan trọng nhất.
+1. Đánh giá: [Điểm số] trên 10.
+2. Nhận xét: Ngắn gọn.
+3. Điểm cần cải thiện: Tối đa 2 ý.
 """
     response = model.generate_content(prompt)
     return {
-    "message": " Đã nhận bài và AI đã chấm xong!",
-    "ai_feedback": response.text
+        "message": "Đã nhận bài và AI đã chấm xong!",
+        "ai_feedback": response.text
     }
-    import uvicorn
-    uvicorn.run("main:app",reload=True)
     
     
