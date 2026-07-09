@@ -5,35 +5,41 @@ from pydantic import BaseModel
 import os
 import google.generativeai as genai
 
-# Cấu hình API Key từ Render (không để key cứng trong code)
+# 1. Cấu hình API
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 app = FastAPI()
+# Đảm bảo file index.html nằm cùng thư mục với main.py
 templates = Jinja2Templates(directory=".")
 
 class CodeSubmission(BaseModel):
     student_name: str
     code_content: str
 
+# 2. Trang chủ
 @app.get("/", response_class=HTMLResponse)
 def read_root(request: Request):
-    return templates.TemplateResponse("name=index.html",context= {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request})
 
+# 3. API chấm bài
 @app.post("/submit")
 async def submit_code(data: CodeSubmission):
-    model = genai.GenerativeModel('gemini-1.5-flash')
-    prompt = f"""
-Hãy đóng vai một giáo viên chấm điểm lập trình.
-Dựa trên đoạn code sau của học sinh {data.student_name}: {data.code_content}
-Hãy trả lời theo cấu trúc sau:
-1. Đánh giá: [Điểm số] trên 10.
-2. Nhận xét: Ngắn gọn.
-3. Điểm cần cải thiện: Tối đa 2 ý.
-"""
-    response = model.generate_content(prompt)
-    return {
-        "message": "Đã nhận bài và AI đã chấm xong!",
-        "ai_feedback": response.text
-    }
+    try:
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        prompt = f"""
+        Hãy đóng vai giáo viên chấm bài lập trình nghiêm túc.
+        Học sinh: {data.student_name}
+        Đoạn code cần chấm:
+        {data.code_content}
+        
+        Hãy trả lời theo cấu trúc:
+        1. Đánh giá: [Điểm số]/10.
+        2. Nhận xét: Trực tiếp, ngắn gọn.
+        3. Điểm cần cải thiện: Tối đa 2 ý.
+        """
+        response = model.generate_content(prompt)
+        return {"ai_feedback": response.text}
+    except Exception as e:
+        return {"ai_feedback": f"Lỗi hệ thống: {str(e)}"}
     
     
