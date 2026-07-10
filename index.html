@@ -1,99 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
+    <meta charset="UTF-8">
     <title>Hệ thống Chấm bài tự động</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        body { font-family: sans-serif; padding: 50px; }
-        textarea { width: 100%; height: 200px; margin-bottom: 10px; }
-        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
-        /* Style cho biểu tượng quay */
-.loader {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    animation: spin 1s linear infinite;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 10px;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-#ai-result {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    border-left: 5px solid #007bff; /* Tạo điểm nhấn bên trái */
-    padding: 20px;
-    margin-top: 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Tạo hiệu ứng nổi */
-}
+        :root { --bg: #0f172a; --card: #1e293b; --accent: #38bdf8; --text: #f1f5f9; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; }
+        nav { background: var(--card); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
+        .container { max-width: 800px; margin: 40px auto; padding: 20px; background: var(--card); border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); flex: 1; }
+        textarea { width: 100%; height: 250px; background: #0f172a; color: #a5f3fc; border: 1px solid #334155; border-radius: 8px; padding: 15px; box-sizing: border-box; font-family: 'Courier New', monospace; margin: 10px 0; }
+        button { background: var(--accent); color: #000; border: none; padding: 12px 25px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        button:disabled { background: #64748b; cursor: not-allowed; }
+        #ai-result { margin-top: 20px; padding: 20px; border-left: 4px solid var(--accent); background: #0f172a; min-height: 50px; }
+        footer { background-color: #1e293b; padding: 30px; text-align: center; border-top: 1px solid #334155; margin-top: auto; }
+        .contact-info { display: flex; justify-content: center; gap: 30px; color: var(--text); }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid var(--accent); border-radius: 50%; width: 16px; height: 16px; animation: spin 1s linear infinite; display: inline-block; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
-<footer style="background-color: #f8f9fa; padding: 30px; text-align: center; border-top: 1px solid #ddd; margin-top: 50px; font-family: sans-serif;">
-    <p style="margin-bottom: 10px; color: #555;">Kết nối với Admin qua:</p>
-    <div style="display: flex; justify-content: center; gap: 30px;">
-        <p style="margin: 0;">📞 SĐT: <strong>0835.888.806</strong></p> <p style="margin: 0;">🌐 Facebook: <a href="https://facebook.com/mingd06" target="_blank" style="color: #007bff; text-decoration: none;">Tại đây</a></p>
-    </div>
-    <p style="font-size: 12px; color: #999; margin-top: 15px;">© 2026 Created by LeDuong</p>
-</footer>
 <body>
-    <nav style="background-color: #ffffff; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-family: sans-serif;">
-    <div style="font-size: 20px; font-weight: bold; color: #333;">Hệ thống Chấm bài</div>
-    <div style="display: flex; gap: 20px;">
-        <a href="/" style="text-decoration: none; color: #333; font-weight: 500;">Trang chủ</a>
-        <a href="#" style="text-decoration: none; color: #666;">Hướng dẫn</a>
+
+<nav>
+    <div style="font-weight: bold; font-size: 1.2rem;">⚡ CodeAutoChecker</div>
+    <div>
+        <a href="/" style="color:var(--text); margin-right:15px; text-decoration:none;">Trang chủ</a>
+        <button onclick="clearStorage()" style="background:transparent; color:#ef4444; border:1px solid #ef4444; padding:5px 10px; cursor:pointer;">Xóa Code Cũ</button>
     </div>
 </nav>
+
+<div class="container">
     <h1>Nộp bài tập lập trình</h1>
-    <input type="text" id="name" placeholder="Tên sinh viên"><br><br>
-    <textarea id="code" placeholder="Dán code Python của bạn vào đây..."></textarea><br>
+    <input type="text" id="name" placeholder="Tên sinh viên" style="width: 100%; padding: 10px; border-radius: 6px; border: none; margin-bottom: 10px; background:#0f172a; color:white;">
+    
+    <textarea id="code" placeholder="Dán code tại đây..."></textarea>
+    
     <button onclick="submitCode()">Gửi bài</button>
-    <div id="ai-result" style="margin-top: 20px; white-space: pre-wrap; border: 1px solid #ddd; padding: 10px;">
-    Kết quả AI sẽ hiển thị tại đây...
+    <div id="ai-result">Kết quả chấm bài sẽ hiển thị tại đây...</div>
 </div>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script>
-   async function submitCode() {
+
+<footer>
+    <p style="margin-bottom: 10px; color: #94a3b8;">Kết nối với Admin qua:</p>
+    <div class="contact-info">
+        <p style="margin: 0;">📞 SĐT: <strong>0835.888.806</strong></p> 
+        <p style="margin: 0;">🌐 Facebook: <a href="https://facebook.com/mingd06" target="_blank" style="color: var(--accent); text-decoration: none;">Tại đây</a></p>
+    </div>
+    <p style="font-size: 12px; color: #475569; margin-top: 15px;">© 2026 Created by LeDuong</p>
+</footer>
+
+<script>
+    const codeArea = document.getElementById('code');
+    codeArea.value = localStorage.getItem('saved_code') || '';
+    codeArea.addEventListener('input', () => localStorage.setItem('saved_code', codeArea.value));
+
+    function clearStorage() { localStorage.removeItem('saved_code'); codeArea.value = ''; alert('Đã xóa bộ nhớ!'); }
+
+    async function submitCode() {
         const btn = document.querySelector('button');
         const resultDiv = document.getElementById('ai-result');
-        
-        // Khóa nút và hiện loading
         btn.disabled = true;
-        btn.innerHTML = '<span class="loader"></span> Đang chấm bài...'; 
-        resultDiv.innerText = "Đang phân tích code, vui lòng chờ...";
-
-        const data = {
-            student_name: document.getElementById('name').value,
-            code_content: document.getElementById('code').value
-        };
-
+        btn.innerHTML = '<span class="loader"></span> Đang chấm...';
+        
         try {
             const response = await fetch('/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                body: JSON.stringify({
+                    student_name: document.getElementById('name').value,
+                    code_content: codeArea.value
+                })
             });
-
             const result = await response.json();
-            
-            // Hiển thị kết quả bằng marked để chữ đẹp hơn và không bị undefined
-            if (result.ai_feedback) {
-                resultDiv.innerHTML = marked.parse(result.ai_feedback);
-            } else {
-                resultDiv.innerHTML = "Có lỗi xảy ra: " + JSON.stringify(result);
-            }
+            resultDiv.innerHTML = result.ai_feedback ? marked.parse(result.ai_feedback) : "Lỗi hệ thống.";
         } catch (error) {
-            resultDiv.innerText = "Lỗi kết nối tới server, vui lòng thử lại!";
+            resultDiv.innerText = "Lỗi kết nối server!";
         }
-        
-        // Khôi phục nút bấm
         btn.disabled = false;
         btn.innerText = "Gửi bài";
     }
-    </script>
+</script>
 </body>
 </html>
