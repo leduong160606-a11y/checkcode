@@ -11,9 +11,16 @@ app = FastAPI()
 api_key = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=api_key)
 
-# Khởi tạo model 1 lần duy nhất khi app vừa chạy
-model = genai.GenerativeModel('gemini-1.5-flash')
 
+
+def get_stable_model():
+    # Liệt kê các model có hỗ trợ generateContent
+    for m in genai.list_models():
+        if 'generateContent' in m.supported_generation_methods:
+            return genai.GenerativeModel(m.name)
+    return None
+
+model = get_stable_model()
 class CodeSubmission(BaseModel):
     student_name: str
     code_content: str
