@@ -13,14 +13,8 @@ genai.configure(api_key=api_key)
 
 
 
-def get_stable_model():
-    # Liệt kê các model có hỗ trợ generateContent
-    for m in genai.list_models():
-        if 'generateContent' in m.supported_generation_methods:
-            return genai.GenerativeModel(m.name)
-    return None
-
-model = get_stable_model()
+# Thử dùng id model này
+model = genai.GenerativeModel('gemini-3.1-flash-lite')
 class CodeSubmission(BaseModel):
     student_name: str
     code_content: str
