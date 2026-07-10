@@ -1,37 +1,37 @@
-    import os
+import os
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 import google.generativeai as genai
 
 app = FastAPI()
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
+# Cấu hình API Key
+# Đảm bảo bạn đã cài đặt biến môi trường GEMINI_API_KEY trên Render Dashboard
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+# Khởi tạo model 1 lần duy nhất khi app vừa chạy
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 class CodeSubmission(BaseModel):
     student_name: str
     code_content: str
 
-# Hàm tự tìm model xịn nhất đang khả dụng
-def get_best_model():
-    for m in genai.list_models():
-        if 'generateContent' in m.supported_generation_methods:
-            return genai.GenerativeModel(m.name)
-    return None
-
 @app.get("/", response_class=HTMLResponse)
 async def read_root():
-    with open("index.html", "r", encoding="utf-8") as f:
-        return HTMLResponse(content=f.read())
+    # File index.html phải nằm cùng cấp với main.py trên Github
+    try:
+        with open("index.html", "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    except FileNotFoundError:
+        return "<h1>Lỗi: Không tìm thấy file index.html</h1>"
 
 @app.post("/submit")
 async def submit_code(data: CodeSubmission):
-    model = get_best_model()
-    if not model:
-        return {"ai_feedback": "Lỗi: Không tìm thấy model AI nào khả dụng cho API Key này."}
-    
     try:
-        prompt = f"Sinh viên: {data.student_name}. Chấm điểm code Python: {data.code_content}"
+        prompt = f"Sinh viên: {data.student_name}. Hãy chấm điểm và nhận xét code Python sau đây:\n\n{data.code_content}"
         response = model.generate_content(prompt)
         return {"ai_feedback": response.text}
     except Exception as e:
-        return {"ai_feedback": f"Lỗi hệ thống: {str(e)}"}
+        return {"ai_feedback": f"Lỗi hệ thống khi gọi AI: {str(e)}"}
