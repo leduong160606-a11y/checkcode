@@ -203,7 +203,7 @@
         <p>📞 Contact: <strong>0835.888.806</strong> <span style="margin: 0 15px; color: #475569;">|</span> 🌐 Facebook: <a href="https://facebook.com/mingd06" target="_blank">Lê Minh Đương</a></p>
         <p style="margin-top: 15px; font-size: 0.9rem; color: #475569;">© 2026 Dự án The Light - Phát triển bởi LeDuong Developer</p>
     </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
     // 1. Xử lý chuyển đổi giao diện
     function showApp(type) {
@@ -218,37 +218,43 @@
             init2048(); // Khởi tạo game khi vào view game
         }
     }
-
-    // 2. Logic CheckCode (Hàm này trước đó bạn bị thiếu)
+    // 2. Logic ai
     async function submitCode() {
-        const resultDiv = document.getElementById('ai-result');
-        const studentName = document.getElementById('name').value;
-        const codeContent = document.getElementById('code').value;
+    const resultDiv = document.getElementById('ai-result');
+    const studentName = document.getElementById('name').value;
+    const codeContent = document.getElementById('code').value;
 
-        if (!studentName || !codeContent) {
-            alert("Vui lòng nhập tên và dán code!");
-            return;
-        }
-
-        submitBtn.innerHTML = '<span class="loader"></span> Đang phân tích...';
-        submitBtn.disabled = true;
-
-        try {
-            // Đây là giả lập, bạn thay URL bằng endpoint thật của bạn
-            const response = await fetch('/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ student_name: studentName, code_content: codeContent })
-            });
-            const data = await response.json();
-            resultDiv.innerText = data.ai_feedback || "Kết quả: Code chạy đúng!";
-        } catch (error) {
-            resultDiv.innerText = "Hệ thống đang bảo trì, vui lòng thử lại sau.";
-        }
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Gửi bài kiểm tra";
+    if (!studentName || !codeContent) {
+        alert("Vui lòng nhập tên và dán code!");
+        return;
     }
 
+    submitBtn.innerHTML = '<span class="loader"></span> Đang phân tích...';
+    submitBtn.disabled = true;
+
+    try {
+        const response = await fetch('/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ student_name: studentName, code_content: codeContent })
+        });
+        const data = await response.json();
+        
+        // Dùng marked.parse để giữ định dạng Markdown (in đậm, tiêu đề)
+        // Kiểm tra nếu thư viện đã load thành công
+        if (typeof marked !== 'undefined') {
+            resultDiv.innerHTML = data.ai_feedback ? marked.parse(data.ai_feedback) : "Kết quả: Code chạy đúng!";
+        } else {
+            // Nếu lỡ chưa load được thư viện thì vẫn hiện text bình thường
+            resultDiv.innerText = data.ai_feedback || "Kết quả: Code chạy đúng!";
+        }
+        
+    } catch (error) {
+        resultDiv.innerText = "Hệ thống đang bảo trì, vui lòng thử lại sau.";
+    }
+    submitBtn.disabled = false;
+    submitBtn.innerText = "Gửi bài kiểm tra";
+}
     // 3. Logic 2048 (Giữ nguyên của bạn)
     let board2048, score2048 = 0;
     function init2048() {
