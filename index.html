@@ -304,6 +304,31 @@
         });
 
         window.onload = init2048;
+        // Thêm hỗ trợ vuốt cho điện thoại
+let touchstartX = 0;
+let touchstartY = 0;
+
+document.addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX;
+    touchstartY = e.changedTouches[0].screenY;
+}, false);
+
+document.addEventListener('touchend', e => {
+    let touchendX = e.changedTouches[0].screenX;
+    let touchendY = e.changedTouches[0].screenY;
+    
+    let diffX = touchendX - touchstartX;
+    let diffY = touchendY - touchstartY;
+
+    // Xác định hướng vuốt
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX > 30) move2048('RIGHT');
+        else if (diffX < -30) move2048('LEFT');
+    } else {
+        if (diffY > 30) move2048('DOWN');
+        else if (diffY < -30) move2048('UP');
+    }
+}, false);
     </script>
 </body>
 </html>
