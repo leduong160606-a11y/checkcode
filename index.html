@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dự án web The Light</title>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <meta charset="utf-8">
+    <title>Du an web The Light</title>
+    <meta name="author" content="LeDuong">
+    <meta name="description" content="Hệ thống chấm bài tập lập trình tự động và giải trí - Phát triển bởi LeDuong ">
+    
     <style>
+        /* Giữ nguyên các phần CSS cũ của bạn ở đây */
+    
+
         :root { 
             --bg: #0b1120; /* Màu nền xanh đen sâu, trang trọng hơn */
             --card: #1e293b; 
@@ -14,6 +18,7 @@
             --text: #f1f5f9; 
         }
         body { 
+            color:#ffffff !important:
             font-family: 'Segoe UI', system-ui, sans-serif; 
             background: var(--bg); 
             color: var(--text); 
@@ -115,8 +120,25 @@
         footer a:hover { color: #fff; text-shadow: 0 0 10px var(--accent-gold);}
 
         .hidden { display: none !important; }
+        /* ================= CSS GAME 2048 ================= */
+        .grid-2048 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; background: #0b1120; padding: 12px; border-radius: 12px; width: 350px; height: 350px; margin: 0 auto; border: 2px solid var(--accent); box-shadow: 0 10px 30px rgba(56, 189, 248, 0.15); }
+        .tile { display: flex; justify-content: center; align-items: center; background: rgba(255,255,255,0.05); border-radius: 8px; font-size: 2rem; font-weight: bold; color: white; transition: 0.15s ease-in-out; }
+        
+        /* Màu sắc các ô số lớn dần */
+        .t-2 { background: #1e293b; color: #38bdf8; border: 1px solid #334155; }
+        .t-4 { background: #0f172a; color: #38bdf8; border: 1px solid #38bdf8; }
+        .t-8 { background: #0284c7; }
+        .t-16 { background: #0369a1; }
+        .t-32 { background: #075985; }
+        .t-64 { background: #f59e0b; }
+        .t-128 { background: #d97706; font-size: 1.6rem; }
+        .t-256 { background: #b45309; font-size: 1.6rem; }
+        .t-512 { background: #facc15; color: #000; font-size: 1.6rem; }
+        .t-1024 { background: #eab308; color: #000; font-size: 1.3rem; }
+        .t-2048 { background: #ca8a04; color: #000; font-size: 1.3rem; box-shadow: 0 0 20px #facc15; }
     </style>
 </head>
+
 <body>
 
     <!-- ================= MÀN HÌNH CHỌN (TRANG CHỦ) ================= -->
@@ -158,16 +180,27 @@
         </div>
 
         <!-- GIAO DIỆN GAME -->
-        <div id="game-view" class="container hidden">
-            <h1>Khu vực giải trí</h1>
-            <p style="color: #94a3b8; font-size: 1.1rem;">Chèn game của bạn vào đây...</p>
+       <div id="game-view" class="container hidden" style="text-align: center;">
+        <h1 style="border-left: none; padding-left: 0; margin-bottom: 5px; color: var(--accent-gold);">🧩 2048 - The Light</h1>
+        <p style="color: #94a3b8; font-size: 1.1rem; margin-bottom: 15px;">Dùng phím mũi tên để gộp các ô số giống nhau lại!</p>
+        
+        <p style="font-size: 1.4rem; font-weight: bold; color: var(--accent); margin-bottom: 25px;">
+            Điểm số: <span id="score2048" style="color: white; font-size: 1.6rem;">0</span>
+        </p>
+        
+        <div id="grid-2048" class="grid-2048"></div>
+        
+        <button onclick="init2048()" style="margin-top: 30px; padding: 12px 30px; background: #1e293b; color: white; border: 1px solid var(--accent); border-radius: 8px; cursor: pointer; font-size: 1.1rem; font-weight: bold; transition: 0.3s;">Chơi Lại</button>
         </div>
     </div>
 
     <!-- ================= FOOTER (LUÔN XUẤT HIỆN) ================= -->
     <footer>
-        <p>Thông tin hỗ trợ kỹ thuật: <strong>0835.888.806</strong> | Facebook: <a href="https://facebook.com/mingd06" target="_blank">Lê Minh Đương</a></p>
-        <p>© 2026 Dự án The Light - Phát triển bởi LeDuong Developer</p>
+        <div style="margin-bottom: 12px;">
+            <span style="color: var(--text); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Thông tin hỗ trợ kỹ thuật</span>
+        </div>
+        <p>📞 Contact: <strong>0835.888.806</strong> <span style="margin: 0 15px; color: #475569;">|</span> 🌐 Facebook: <a href="https://facebook.com/mingd06" target="_blank">Lê Minh Đương</a></p>
+        <p style="margin-top: 15px; font-size: 0.9rem; color: #475569;">© 2026 Dự án The Light - Phát triển bởi LeDuong Developer</p>
     </footer>
 
     <script>
@@ -223,6 +256,22 @@
             submitBtn.disabled = false;
             submitBtn.innerText = "Gửi bài kiểm tra";
         }
+        if(document.getElementById('game-view').classList.contains('hidden')) return;
+
+        if(["ArrowLeft","ArrowUp","ArrowRight","ArrowDown"].indexOf(e.code) > -1) {
+            e.preventDefault(); // Chặn cuộn trang web
+        }
+
+        if(e.code === "ArrowLeft") move2048('LEFT');
+        else if(e.code === "ArrowUp") move2048('UP');
+        else if(e.code === "ArrowRight") move2048('RIGHT');
+        else if(e.code === "ArrowDown") move2048('DOWN');
+    });
+
+    // Khởi động game khi tải trang
+    window.onload = function() {
+        init2048();
+    }
     </script>
 </body>
 </html>
