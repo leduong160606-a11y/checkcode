@@ -241,7 +241,7 @@
                 body: JSON.stringify({ student_name: studentName, code_content: codeContent })
             });
             const data = await response.json();
-            resultDiv.innerHTML = data.ai_feedback ? marked.parse(data.ai_feedback) : "Kết quả: Code chạy đúng!";
+            resultDiv.innerText = data.ai_feedback || "Kết quả: Code chạy đúng!";
         } catch (error) {
             resultDiv.innerText = "Hệ thống đang bảo trì, vui lòng thử lại sau.";
         }
