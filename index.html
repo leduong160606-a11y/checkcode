@@ -17,8 +17,9 @@
             --accent-gold: #facc15; /* Thêm điểm nhấn màu vàng cho The Light */
             --text: #f1f5f9; 
         }
+
         body { 
-            color:#ffffff !important:
+            color:#ffffff !important;
             font-family: 'Segoe UI', system-ui, sans-serif; 
             background: var(--bg); 
             color: var(--text); 
@@ -232,46 +233,77 @@
             }
         }
 
-        async function submitCode() {
-            const resultDiv = document.getElementById('ai-result');
-            submitBtn.disabled = true;
-            // Hiệu ứng loader gốc
-            submitBtn.innerHTML = '<span class="loader"></span> Đang phân tích...';
-            resultDiv.innerHTML = "Hệ thống đang kiểm tra logic code của bạn...";
-            
-            try {
-                const res = await fetch('/submit', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        student_name: document.getElementById('name').value, 
-                        code_content: codeArea.value 
-                    })
-                });
-                const data = await res.json();
-                resultDiv.innerHTML = data.ai_feedback ? marked.parse(data.ai_feedback) : "Lỗi hệ thống.";
-            } catch (e) {
-                resultDiv.innerText = "Lỗi kết nối server!";
+        // [THAY THẾ TOÀN BỘ ĐOẠN SCRIPT TỪ DÒNG 239 TRỞ ĐI BẰNG ĐOẠN NÀY]
+
+        // Logic 2048
+        let board2048, score2048 = 0;
+        function init2048() {
+            board2048 = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]];
+            score2048 = 0;
+            document.getElementById('score2048').innerText = score2048;
+            addTile(); addTile();
+            updateGrid();
+        }
+        function addTile() {
+            let empty = [];
+            for(let r=0; r<4; r++) for(let c=0; c<4; c++) if(board2048[r][c] === 0) empty.push({r,c});
+            if(empty.length > 0) {
+                let s = empty[Math.floor(Math.random() * empty.length)];
+                board2048[s.r][s.c] = Math.random() < 0.9 ? 2 : 4;
             }
-            submitBtn.disabled = false;
-            submitBtn.innerText = "Gửi bài kiểm tra";
         }
-        if(document.getElementById('game-view').classList.contains('hidden')) return;
-
-        if(["ArrowLeft","ArrowUp","ArrowRight","ArrowDown"].indexOf(e.code) > -1) {
-            e.preventDefault(); // Chặn cuộn trang web
+        function updateGrid() {
+            const grid = document.getElementById('grid-2048');
+            grid.innerHTML = '';
+            for(let r=0; r<4; r++) {
+                for(let c=0; c<4; c++) {
+                    let v = board2048[r][c];
+                    let d = document.createElement('div');
+                    d.className = 'tile ' + (v > 0 ? 't-'+v : '');
+                    d.innerText = v > 0 ? v : '';
+                    grid.appendChild(d);
+                }
+            }
+        }
+        function slide(row) {
+            row = row.filter(v => v);
+            for(let i=0; i<row.length-1; i++) if(row[i] === row[i+1]) { row[i]*=2; row[i+1]=0; score2048 += row[i]; }
+            row = row.filter(v => v);
+            while(row.length < 4) row.push(0);
+            return row;
+        }
+        function move2048(dir) {
+            let old = JSON.stringify(board2048);
+            if(dir === 'LEFT' || dir === 'RIGHT') {
+                for(let r=0; r<4; r++) {
+                    let row = board2048[r];
+                    if(dir === 'RIGHT') row.reverse();
+                    row = slide(row);
+                    if(dir === 'RIGHT') row.reverse();
+                    board2048[r] = row;
+                }
+            } else {
+                for(let c=0; c<4; c++) {
+                    let col = [board2048[0][c], board2048[1][c], board2048[2][c], board2048[3][c]];
+                    if(dir === 'DOWN') col.reverse();
+                    col = slide(col);
+                    if(dir === 'DOWN') col.reverse();
+                    for(let r=0; r<4; r++) board2048[r][c] = col[r];
+                }
+            }
+            if(old !== JSON.stringify(board2048)) { addTile(); document.getElementById('score2048').innerText = score2048; updateGrid(); }
         }
 
-        if(e.code === "ArrowLeft") move2048('LEFT');
-        else if(e.code === "ArrowUp") move2048('UP');
-        else if(e.code === "ArrowRight") move2048('RIGHT');
-        else if(e.code === "ArrowDown") move2048('DOWN');
-    });
+        document.addEventListener("keydown", function(e) {
+            if(document.getElementById('game-view').classList.contains('hidden')) return;
+            if(["ArrowLeft","ArrowUp","ArrowRight","ArrowDown"].indexOf(e.code) > -1) e.preventDefault();
+            if(e.code === "ArrowLeft") move2048('LEFT');
+            else if(e.code === "ArrowUp") move2048('UP');
+            else if(e.code === "ArrowRight") move2048('RIGHT');
+            else if(e.code === "ArrowDown") move2048('DOWN');
+        });
 
-    // Khởi động game khi tải trang
-    window.onload = function() {
-        init2048();
-    }
+        window.onload = init2048;
     </script>
 </body>
 </html>
