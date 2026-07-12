@@ -32,9 +32,6 @@ async def read_root():
 
 from fastapi.responses import FileResponse
 
-@app.get("/sitemap.xml")
-async def get_sitemap():
-    return FileResponse('sitemap.xml')
 
 @app.post("/submit")
 async def submit_code(data: CodeSubmission):
