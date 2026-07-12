@@ -26,7 +26,15 @@ async def read_root():
         with open("index.html", "r", encoding="utf-8") as f:
             return HTMLResponse(content=f.read())
     except FileNotFoundError:
-        return "<h1>Lỗi: Không tìm thấy file index.html</h1>"
+ 
+    return "<h1>Lỗi: Không tìm thấy file index.html</h1>"
+
+
+from fastapi.responses import FileResponse
+
+@app.get("/sitemap.xml")
+async def get_sitemap():
+    return FileResponse('sitemap.xml')
 
 @app.post("/submit")
 async def submit_code(data: CodeSubmission):
