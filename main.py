@@ -36,7 +36,7 @@ from fastapi.responses import FileResponse
 @app.post("/submit")
 async def submit_code(data: CodeSubmission):
     try:
-        prompt = f"Sinh viên: {data.student_name}. Hãy chấm điểm và nhận xét code Python sau đây:\n\n{data.code_content}"
+        prompt = f"Sinh viên: {data.student_name}. Hãy chấm điểm và nhận xét code sau đây:\n\n{data.code_content}"
         response = model.generate_content(prompt)
         return {"ai_feedback": response.text}
     except Exception as e:
