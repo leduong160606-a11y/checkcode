@@ -410,30 +410,47 @@
         }
 
         let historyData = [];
+        // Tích hợp AI Chấm Code & Lưu Lịch Sử
         document.getElementById('codeForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btnSubmit');
             const resultBox = document.getElementById('resultBox');
             const student_name = document.getElementById('studentName').value;
             const code_content = document.getElementById('codeContent').value;
-            btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang Xử Lý...';
+
+            btn.disabled = true; 
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang Xử Lý...';
             resultBox.style.display = 'none';
+
             try {
                 const response = await fetch('/submit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ student_name, code_content })
                 });
+
+                if (!response.ok) throw new Error('Backend không phản hồi');
+                
                 const data = await response.json();
-              
-                resultBox.innerHTML = marked.parse(ai_feedback);
+                
+                // ĐÃ SỬA: Dùng data.ai_feedback thay vì biến không tồn tại
+                resultBox.innerHTML = marked.parse(data.ai_feedback);
                 resultBox.style.display = 'block';
-                historyData.unshift({ date: new Date().toLocaleString(), name: student_name, code: code_content, feedback: resultBox.innerText });
+
+                historyData.unshift({ 
+                    date: new Date().toLocaleString(), 
+                    name: student_name, 
+                    code: code_content, 
+                    feedback: data.ai_feedback 
+                });
+                
             } catch (error) {
-                resultBox.innerText = "⚠️ Lỗi kết nối! Hệ thống đang chạy ở chế độ Frontend Demo.";
+                console.error(error);
+                resultBox.innerHTML = "⚠️ <strong>Lỗi kết nối!</strong> Hãy chắc chắn Backend đang chạy tại '/submit'.";
                 resultBox.style.display = 'block';
             } finally {
-                btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Chạy AI Đánh Giá';
+                btn.disabled = false; 
+                btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Chạy AI Đánh Giá';
             }
         });
 
