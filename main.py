@@ -27,7 +27,7 @@ async def read_root():
             return HTMLResponse(content=f.read())
     except FileNotFoundError:
  
-    return "<h1>Lỗi: Không tìm thấy file index.html</h1>"
+        return "<h1>Lỗi: Không tìm thấy file index.html</h1>"
 
 
 from fastapi.responses import FileResponse
