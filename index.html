@@ -425,7 +425,8 @@
                     body: JSON.stringify({ student_name, code_content })
                 });
                 const data = await response.json();
-                resultBox.innerText = data.ai_feedback || "Không nhận được phản hồi từ AI.";
+              
+                resultBox.innerHTML = marked.parse(ai_feedback);
                 resultBox.style.display = 'block';
                 historyData.unshift({ date: new Date().toLocaleString(), name: student_name, code: code_content, feedback: resultBox.innerText });
             } catch (error) {
