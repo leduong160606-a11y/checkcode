@@ -38,8 +38,21 @@
         #fxStarCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999; pointer-events: none; }
         
         /* --- LANDING SCREEN --- */
-        #landingScreen { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: transparent; z-index: 1000; transition: opacity 0.5s ease; }
-        
+       /* --- SỬA LẠI ĐOẠN NÀY --- */
+#landingScreen { 
+    position: relative; /* Thay vì fixed */
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    background: transparent; 
+    z-index: 1000; 
+    transition: opacity 0.5s ease;
+    padding: 2rem 0; /* Thêm padding để không bị dính sát mép trên/dưới */
+    /* ... các thuộc tính trên ... */
+    padding-bottom: 50px; /* Tạo khoảng trống ở cuối trang */
+}
         .lightstar-logo { 
             font-size: 4.5rem; 
             font-weight: 800; 
