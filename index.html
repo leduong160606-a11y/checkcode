@@ -132,7 +132,7 @@
         .history-item:hover { border-color: var(--primary); }
         .history-date { color: var(--primary); font-size: 0.85rem; margin-bottom: 0.5rem; font-weight: 700; }
 
-        /* --- GAME HUB (SHARK ATTACK & APK) --- */
+        /* --- GAME HUB --- */
         .game-layout { display: flex; gap: 2rem; }
         .game-menu { flex: 1; max-width: 260px; background: var(--panel-bg); border: 1px solid var(--border-color); box-shadow: var(--shadow); border-radius: 20px; padding: 1.5rem 1rem; height: fit-content; }
         .game-menu-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 12px; cursor: pointer; transition: 0.3s; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-muted); }
@@ -172,15 +172,10 @@
         .btn-apk:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(40, 167, 69, 0.4); }
 
         #gameFullscreenContainer:fullscreen {
-            width: 100vw;
-            height: 100vh;
-            background: #060b19;
-            justify-content: center;
-            padding: 20px;
+            width: 100vw; height: 100vh; background: #060b19; justify-content: center; padding: 10px;
         }
         #gameFullscreenContainer:fullscreen .scratch-frame {
-            max-width: 100%;
-            height: 85vh;
+            max-width: 100%; height: 90vh;
         }
 
         @media (max-width: 768px) {
@@ -191,6 +186,8 @@
             .scratch-frame { height: 420px; max-width: 100%; }
             .game-controls-row { flex-direction: column; }
             .btn-action { width: 100%; }
+            /* Tự động ẩn nút phóng to ngoài trên điện thoại vì bị trình duyệt chặn */
+            .btn-fullscreen { display: none !important; }
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -260,7 +257,7 @@
                     
                     <div class="scratch-wrapper">
                         <div id="gameFullscreenContainer">
-                            <iframe id="scratchFrame" class="scratch-frame" src="https://scratch.mit.edu/projects/1322817368/embed" allowtransparency="true" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                            <iframe id="scratchFrame" class="scratch-frame" src="https://scratch.mit.edu/projects/1322817368/embed" allowtransparency="true" frameborder="0" scrolling="no" allowfullscreen="true" allow="fullscreen"></iframe>
                         </div>
                         
                         <div class="game-controls-row">
@@ -280,12 +277,18 @@
     <script>
         function toggleFullscreen() {
             const container = document.getElementById('gameFullscreenContainer');
-            if (!document.fullscreenElement) {
-                container.requestFullscreen().catch(err => {
-                    alert(`Lỗi khi mở toàn màn hình: ${err.message}`);
-                });
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen().catch(err => console.log(err));
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                }
             } else {
-                document.exitFullscreen();
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
             }
         }
 
