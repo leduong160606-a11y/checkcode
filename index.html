@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dự Án Web LightStar | AI & Gaming </title>
+    <title>Dự Án Web LightStar | AI & Gaming</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -33,26 +33,23 @@
             position: relative;
         }
 
-        /* --- CANVASES HIỆU ỨNG NGÔI SAO FIX CHUẨN --- */
         #bgStarCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         #fxStarCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999; pointer-events: none; }
         
-        /* --- LANDING SCREEN --- */
-       /* --- SỬA LẠI ĐOẠN NÀY --- */
-#landingScreen { 
-    position: relative; /* Thay vì fixed */
-    min-height: 100vh; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    background: transparent; 
-    z-index: 1000; 
-    transition: opacity 0.5s ease;
-    padding: 2rem 0; /* Thêm padding để không bị dính sát mép trên/dưới */
-    /* ... các thuộc tính trên ... */
-    padding-bottom: 50px; /* Tạo khoảng trống ở cuối trang */
-}
+        #landingScreen { 
+            position: relative; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            background: transparent; 
+            z-index: 1000; 
+            transition: opacity 0.5s ease;
+            padding: 2rem 0;
+            padding-bottom: 50px;
+        }
+        
         .lightstar-logo { 
             font-size: 4.5rem; 
             font-weight: 800; 
@@ -93,14 +90,17 @@
             border-color: var(--accent); 
             box-shadow: 0 15px 35px rgba(255, 204, 0, 0.2); 
         }
-        .path-card i { font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary); transition: 0.3s; }
-        .path-card:hover i { color: var(--accent); }
-        
-        .contact-box { background: var(--panel-bg); padding: 1.5rem; border-radius: 15px; border: 1px solid var(--border-color); text-align: center; width: 100%; max-width: 600px; box-shadow: var(--shadow); position: relative; z-index: 10; }
-        .contact-item { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg-main); padding: 0.8rem 1.5rem; border-radius: 30px; margin: 0.5rem; color: var(--primary); font-weight: 600; text-decoration: none; transition: 0.3s; }
-        .contact-item:hover { background: var(--accent); color: #fff; }
+        .path-card img.game-avatar { 
+            width: 80px; 
+            height: 80px; 
+            object-fit: cover; 
+            border-radius: 50%; 
+            margin-bottom: 1.5rem; 
+            border: 3px solid var(--primary);
+            transition: 0.3s;
+        }
+        .path-card:hover img.game-avatar { border-color: var(--accent); transform: scale(1.05); }
 
-        /* --- MAIN APP --- */
         #mainApp { display: none; flex: 1; flex-direction: column; opacity: 0; transition: opacity 0.5s ease; position: relative; z-index: 10; }
         
         .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: var(--primary); border-bottom: 4px solid var(--accent); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
@@ -115,7 +115,7 @@
         .nav-btn { padding: 0.6rem 1.2rem; border-radius: 20px; border: none; background: transparent; color: rgba(255, 255, 255, 0.7); font-weight: 600; cursor: pointer; transition: 0.3s; }
         .nav-btn.active, .nav-btn:hover { background: #fff; color: var(--primary); }
 
-        .tab-content { display: none; max-width: 1000px; width: 100%; margin: 2rem auto; padding: 0 1.5rem; animation: fadeIn 0.4s ease; }
+        .tab-content { display: none; max-width: 1200px; width: 100%; margin: 2rem auto; padding: 0 1.5rem; animation: fadeIn 0.4s ease; }
         .tab-content.active { display: block; }
         .card { background: var(--panel-bg); border: 1px solid var(--border-color); box-shadow: var(--shadow); border-radius: 20px; padding: 2.5rem; }
         
@@ -132,30 +132,65 @@
         .history-item:hover { border-color: var(--primary); }
         .history-date { color: var(--primary); font-size: 0.85rem; margin-bottom: 0.5rem; font-weight: 700; }
 
-        /* --- GAME HUB --- */
+        /* --- GAME HUB (SHARK ATTACK & APK) --- */
         .game-layout { display: flex; gap: 2rem; }
-        .game-menu { flex: 1; max-width: 250px; background: var(--panel-bg); border: 1px solid var(--border-color); box-shadow: var(--shadow); border-radius: 20px; padding: 1.5rem 1rem; max-height: 620px; overflow-y: auto; }
+        .game-menu { flex: 1; max-width: 260px; background: var(--panel-bg); border: 1px solid var(--border-color); box-shadow: var(--shadow); border-radius: 20px; padding: 1.5rem 1rem; height: fit-content; }
         .game-menu-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 12px; cursor: pointer; transition: 0.3s; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-muted); }
         .game-menu-item:hover, .game-menu-item.active { background: var(--primary); color: #fff; }
         
-        .game-screen { flex: 2; display: flex; flex-direction: column; align-items: center; background: var(--panel-bg); box-shadow: var(--shadow); border: 1px solid var(--border-color); border-radius: 20px; padding: 2rem; min-height: 500px;}
+        .game-screen { flex: 3; display: flex; flex-direction: column; align-items: center; background: var(--panel-bg); box-shadow: var(--shadow); border: 1px solid var(--border-color); border-radius: 20px; padding: 2rem; }
         
-        canvas { background: linear-gradient(135deg, #0a192f, #112240); border: 4px solid var(--primary); border-radius: 10px; display: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .scratch-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
         
-        /* 2048 & Tic Tac Toe Board */
-        #grid-container { display: none; background: #bbada0; padding: 10px; border-radius: 12px; border: 4px solid var(--primary); width: 330px; height: 330px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .tile { border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 2.2rem; font-weight: 800; color: #fff; cursor: pointer; background: rgba(238,228,218,0.35); transition: all 0.15s ease-in-out; }
+        #gameFullscreenContainer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--panel-bg);
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .scratch-frame { width: 100%; max-width: 1000px; height: 650px; border: 4px solid var(--primary); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); background: #000; }
         
-        .mobile-controls { display: none; grid-template-columns: repeat(3, 60px); gap: 10px; margin-top: 1.5rem; }
-        .btn-pad { width: 60px; height: 60px; background: var(--primary); border-radius: 15px; display: flex; justify-content: center; align-items: center; cursor: pointer; color: #fff; font-size: 1.2rem; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,80,158,0.2); }
-        .btn-pad:active { transform: scale(0.9); }
+        .game-controls-row {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            max-width: 1000px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-action { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 1rem 1.8rem; border-radius: 12px; font-weight: 700; font-size: 1.05rem; cursor: pointer; text-decoration: none; transition: 0.3s; border: none; flex: 1; min-width: 220px; }
+        
+        .btn-fullscreen { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: #fff; box-shadow: 0 4px 15px rgba(0, 80, 158, 0.3); }
+        .btn-fullscreen:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0, 80, 158, 0.4); }
+
+        .btn-apk { background: linear-gradient(135deg, #28a745, #20c997); color: #fff; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3); }
+        .btn-apk:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(40, 167, 69, 0.4); }
+
+        #gameFullscreenContainer:fullscreen {
+            width: 100vw;
+            height: 100vh;
+            background: #060b19;
+            justify-content: center;
+            padding: 20px;
+        }
+        #gameFullscreenContainer:fullscreen .scratch-frame {
+            max-width: 100%;
+            height: 85vh;
+        }
 
         @media (max-width: 768px) {
             .game-layout { flex-direction: column; }
-            .game-menu { max-width: 100%; display: flex; overflow-x: auto; padding-bottom: 10px; }
-            .game-menu-item { min-width: 160px; flex-direction: column; text-align: center; }
+            .game-menu { max-width: 100%; }
             .lightstar-logo { font-size: 2.5rem; }
             .top-nav { flex-direction: column; gap: 1rem; }
+            .scratch-frame { height: 420px; max-width: 100%; }
+            .game-controls-row { flex-direction: column; }
+            .btn-action { width: 100%; }
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -171,22 +206,11 @@
         </div>
         
         <div class="path-container">
-            <div class="path-card" onclick="enterApp('study')">
-                <i class="fa-solid fa-microchip"></i>
-                <h3>Hệ Thống AI</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Chấm điểm & Phân tích Code tự động</p>
-            </div>
             <div class="path-card" onclick="enterApp('arcade')">
-                <i class="fa-solid fa-gamepad"></i>
-                <h3>Trung Tâm Game</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Kho 10 Game Trí Tuệ & Giải Trí</p>
+                <img src="https://assets.scratch.mit.edu/get_image/project/1322817368_144x108.png" alt="Shark Attack Avatar" class="game-avatar">
+                <h3>Shark Attack</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Trải nghiệm Game Shark Attack & Tải APK</p>
             </div>
-        </div>
-
-        <div class="contact-box">
-            <h4 style="margin-bottom: 1rem; color: var(--primary); font-size: 1.2rem;">Đội Ngũ Kỹ Thuật LightStar</h4>
-            <a href="tel:0835888806" class="contact-item"><i class="fa-solid fa-phone"></i> 083 588 8806</a>
-            <a href="https://facebook.com/mingd06" target="_blank" class="contact-item"><i class="fa-brands fa-facebook"></i> Facebook Lê Đương</a>
         </div>
     </div>
 
@@ -224,38 +248,29 @@
             </div>
         </div>
 
-        <div id="arcadeTab" class="tab-content">
+        <div id="arcadeTab" class="tab-content active">
             <div class="game-layout">
                 <div class="game-menu">
-                    <h3 style="color: var(--primary); margin-bottom: 1rem; text-align: center; font-size: 1.1rem;">DANH SÁCH GAME</h3>
-                    <div class="game-menu-item active" onclick="loadGame('snake', this)"><i class="fa-solid fa-staff-snake"></i> <span>Rắn Săn Mồi</span></div>
-                    <div class="game-menu-item" onclick="loadGame('2048', this)"><i class="fa-solid fa-table-cells"></i> <span>2048 Siêu Cấp</span></div>
-                    <div class="game-menu-item" onclick="loadGame('tictactoe', this)"><i class="fa-solid fa-xmarks-lines"></i> <span>Caro 3x3</span></div>
-                    <div class="game-menu-item" onclick="loadGame('flappy', this)"><i class="fa-solid fa-dove"></i> <span>Flappy Bird</span></div>
-                    <div class="game-menu-item" onclick="loadGame('space', this)"><i class="fa-solid fa-rocket"></i> <span>Bắn Máy Bay</span></div>
-                    <div class="game-menu-item" onclick="loadGame('car', this)"><i class="fa-solid fa-car"></i> <span>Đua Xe 8-bit</span></div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem; text-align: center; font-size: 1.1rem;">KHO GAME SCRATCH</h3>
+                    <div class="game-menu-item active"><i class="fa-solid fa-gamepad"></i> <span>Shark Attack</span></div>
                 </div>
 
                 <div class="game-screen">
-                    <h2 id="gameTitle" style="color: var(--primary); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Rắn Săn Mồi</h2>
-                    <div style="font-size: 1.2rem; margin-bottom: 15px; color: var(--text-main); font-weight: bold; background: var(--bg-main); padding: 5px 20px; border-radius: 20px; border: 2px solid var(--border-color);">
-                        Điểm: <span id="score" style="color: var(--primary);">0</span>
-                    </div>
+                    <h2 id="gameTitle" style="color: var(--primary); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">Shark Attack</h2>
                     
-                    <canvas id="gameCanvas" width="320" height="320"></canvas>
-                    <div id="grid-container"></div>
-                    
-                    <div id="comingSoonScreen" style="display:none; text-align:center; padding: 4rem 0;">
-                        <i class="fa-solid fa-hammer" style="font-size: 3.5rem; color: var(--accent); margin-bottom: 1rem; display: block;"></i>
-                        <h3 style="color: var(--primary);">Đang Phát Triển</h3>
-                    </div>
-
-                    <div class="mobile-controls" id="dpad">
-                        <div class="btn-pad" style="grid-column: 2; grid-row: 1;" onclick="triggerGameAction('UP')"><i class="fa-solid fa-arrow-up"></i></div>
-                        <div class="btn-pad" style="grid-column: 1; grid-row: 2;" onclick="triggerGameAction('LEFT')"><i class="fa-solid fa-arrow-left"></i></div>
-                        <div class="btn-pad" style="grid-column: 2; grid-row: 2;" onclick="triggerGameAction('DOWN')"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="btn-pad" style="grid-column: 3; grid-row: 2;" onclick="triggerGameAction('RIGHT')"><i class="fa-solid fa-arrow-right"></i></div>
-                        <div class="btn-pad" style="grid-column: 4; grid-row: 2; background: var(--accent); color: #000;" id="actionBtn" onclick="triggerGameAction('ACTION')">ACT</div>
+                    <div class="scratch-wrapper">
+                        <div id="gameFullscreenContainer">
+                            <iframe id="scratchFrame" class="scratch-frame" src="https://scratch.mit.edu/projects/1322817368/embed" allowtransparency="true" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                        </div>
+                        
+                        <div class="game-controls-row">
+                            <button class="btn-action btn-fullscreen" onclick="toggleFullscreen()">
+                                <i class="fa-solid fa-expand"></i> Phóng To Hết Cỡ
+                            </button>
+                            <a id="downloadApkBtn" href="shark-attack.apk" class="btn-action btn-apk" download>
+                                <i class="fa-brands fa-android"></i> Tải APK Android
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -263,7 +278,17 @@
     </div>
 
     <script>
-        // ==================== HỆ THỐNG HIỆU ỨNG NGÔI SAO CHUỘT THỜI GIAN THỰC ====================
+        function toggleFullscreen() {
+            const container = document.getElementById('gameFullscreenContainer');
+            if (!document.fullscreenElement) {
+                container.requestFullscreen().catch(err => {
+                    alert(`Lỗi khi mở toàn màn hình: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
         const bgCanvas = document.getElementById('bgStarCanvas');
         const fxCanvas = document.getElementById('fxStarCanvas');
         const bgCtx = bgCanvas.getContext('2d');
@@ -306,41 +331,30 @@
             constructor(x, y, vx, vy, color, size, lifeDuration, isExplosion) {
                 this.x = x; this.y = y; 
                 this.vx = vx; this.vy = vy;
-                this.color = color; 
-                this.size = size;
-                this.life = lifeDuration; 
-                this.maxLife = lifeDuration;
+                this.color = color; this.size = size;
+                this.life = lifeDuration; this.maxLife = lifeDuration;
                 this.rot = Math.random() * Math.PI * 2;
                 this.rotSpeed = (Math.random() - 0.5) * 0.4;
                 this.isExplosion = isExplosion;
             }
             update() {
                 if (this.isExplosion) {
-                    this.vy += 0.25; 
-                    this.vx *= 0.96; 
-                    this.vy *= 0.96;
+                    this.vy += 0.25; this.vx *= 0.96; this.vy *= 0.96;
                 }
-                this.x += this.vx;
-                this.y += this.vy;
-                this.rot += this.rotSpeed;
-                this.life--;
-                this.size *= 0.96; 
+                this.x += this.vx; this.y += this.vy;
+                this.rot += this.rotSpeed; this.life--; this.size *= 0.96; 
             }
             draw(ctx) {
                 let alpha = Math.max(0, this.life / this.maxLife);
                 ctx.save();
-                ctx.globalAlpha = alpha;
-                ctx.fillStyle = this.color;
-                ctx.shadowBlur = 12;
-                ctx.shadowColor = this.color;
+                ctx.globalAlpha = alpha; ctx.fillStyle = this.color;
+                ctx.shadowBlur = 12; ctx.shadowColor = this.color;
                 drawStarShape(ctx, this.x, this.y, 5, this.size, this.size / 2.5, this.rot);
-                ctx.fill();
-                ctx.restore();
+                ctx.fill(); ctx.restore();
             }
         }
 
         let fxStars = [];
-        
         document.addEventListener('mousemove', (e) => {
             if(Math.random() > 0.1) { 
                 let size = Math.random() * 6 + 3; 
@@ -353,8 +367,7 @@
             for(let i=0; i<35; i++) {
                 let angle = Math.random() * Math.PI * 2;
                 let speed = Math.random() * 8 + 2;
-                let vx = Math.cos(angle) * speed;
-                let vy = Math.sin(angle) * speed;
+                let vx = Math.cos(angle) * speed, vy = Math.sin(angle) * speed;
                 let size = Math.random() * 7 + 4;
                 let color = Math.random() > 0.5 ? '#00509e' : '#ffcc00';
                 fxStars.push(new InteractiveStar(e.clientX, e.clientY, vx, vy, color, size, 50, true));
@@ -364,29 +377,22 @@
         function animateStars() {
             bgCtx.clearRect(0, 0, sw, sh);
             bgStars.forEach(s => {
-                s.y += s.vy;
-                if(s.y > sh + 10) { s.y = -10; s.x = Math.random() * sw; }
-                bgCtx.globalAlpha = s.opacity;
-                bgCtx.fillStyle = s.color;
-                drawStarShape(bgCtx, s.x, s.y, 5, s.radius, s.radius/2);
-                bgCtx.fill();
+                s.y += s.vy; if(s.y > sh + 10) { s.y = -10; s.x = Math.random() * sw; }
+                bgCtx.globalAlpha = s.opacity; bgCtx.fillStyle = s.color;
+                drawStarShape(bgCtx, s.x, s.y, 5, s.radius, s.radius/2); bgCtx.fill();
             });
 
             fxCtx.clearRect(0, 0, sw, sh);
             for(let i = fxStars.length - 1; i >= 0; i--) {
                 let s = fxStars[i];
                 s.update();
-                if(s.life <= 0 || s.size < 0.5) {
-                    fxStars.splice(i, 1);
-                } else {
-                    s.draw(fxCtx);
-                }
+                if(s.life <= 0 || s.size < 0.5) fxStars.splice(i, 1);
+                else s.draw(fxCtx);
             }
             requestAnimationFrame(animateStars);
         }
         animateStars();
 
-        // ==================== ĐIỀU HƯỚNG VÀ AI TAB ====================
         function enterApp(tab) {
             document.getElementById('landingScreen').style.opacity = '0';
             setTimeout(() => {
@@ -400,7 +406,6 @@
 
         function backToHome() {
             document.getElementById('mainApp').style.opacity = '0';
-            clearAllGameLoops();
             setTimeout(() => {
                 document.getElementById('mainApp').style.display = 'none';
                 document.getElementById('landingScreen').style.display = 'flex';
@@ -415,55 +420,33 @@
             
             const btnMap = { 'study': 'navStudy', 'history': 'navHistory', 'arcade': 'navArcade' };
             if(btnMap[tabId]) document.getElementById(btnMap[tabId]).classList.add('active');
-
-            if(tabId === 'arcade') loadGame('snake', document.querySelector('.game-menu-item'));
-            else clearAllGameLoops();
-            
             if(tabId === 'history') renderHistory();
         }
 
         let historyData = [];
-        // Tích hợp AI Chấm Code & Lưu Lịch Sử
         document.getElementById('codeForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btnSubmit');
             const resultBox = document.getElementById('resultBox');
             const student_name = document.getElementById('studentName').value;
             const code_content = document.getElementById('codeContent').value;
-
-            btn.disabled = true; 
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang Xử Lý...';
+            btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang Xử Lý...';
             resultBox.style.display = 'none';
-
             try {
                 const response = await fetch('/submit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ student_name, code_content })
                 });
-
-                if (!response.ok) throw new Error('Backend không phản hồi');
-                
                 const data = await response.json();
-                
-                // ĐÃ SỬA: Dùng data.ai_feedback thay vì biến không tồn tại
                 resultBox.innerHTML = marked.parse(data.ai_feedback);
                 resultBox.style.display = 'block';
-
-                historyData.unshift({ 
-                    date: new Date().toLocaleString(), 
-                    name: student_name, 
-                    code: code_content, 
-                    feedback: data.ai_feedback 
-                });
-                
+                historyData.unshift({ date: new Date().toLocaleString(), name: student_name, code: code_content, feedback: data.ai_feedback });
             } catch (error) {
-                console.error(error);
-                resultBox.innerHTML = "⚠️ <strong>Lỗi kết nối!</strong> Hãy chắc chắn Backend đang chạy tại '/submit'.";
+                resultBox.innerText = "⚠️ Lỗi kết nối! Hệ thống đang chạy ở chế độ Frontend Demo.";
                 resultBox.style.display = 'block';
             } finally {
-                btn.disabled = false; 
-                btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Chạy AI Đánh Giá';
+                btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Chạy AI Đánh Giá';
             }
         });
 
@@ -480,300 +463,6 @@
                     </div>
                 `;
             });
-        }
-
-        // ==================== ENGINE GAME ENGINE HỆ THỐNG V4 TỐI ƯU ====================
-        let gameLoop, gameID = '';
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
-        const gridBox = document.getElementById('grid-container');
-        const scoreSpan = document.getElementById('score');
-
-        function loadGame(id, element) {
-            document.querySelectorAll('.game-menu-item').forEach(el => el.classList.remove('active'));
-            element.classList.add('active');
-            clearAllGameLoops();
-            gameID = id;
-            
-            canvas.style.display = ['snake', 'flappy', 'space', 'car'].includes(id) ? 'block' : 'none';
-            gridBox.style.display = ['2048', 'tictactoe'].includes(id) ? 'grid' : 'none';
-            document.getElementById('comingSoonScreen').style.display = ['moba', 'tetris', 'pacman'].includes(id) ? 'block' : 'none';
-            
-            document.getElementById('dpad').style.display = window.innerWidth <= 768 ? 'grid' : 'none';
-            document.getElementById('actionBtn').style.display = ['flappy', 'space'].includes(id) ? 'flex' : 'none';
-            document.getElementById('gameTitle').innerText = element.querySelector('span').innerText;
-            scoreSpan.innerText = '0';
-
-            if(id === 'snake') initSnake();
-            if(id === '2048') init2048();
-            if(id === 'tictactoe') initTicTacToe();
-            if(id === 'flappy') initFlappy();
-            if(id === 'space') initSpace();
-            if(id === 'car') initCar();
-        }
-
-        function clearAllGameLoops() {
-            clearInterval(gameLoop);
-            cancelAnimationFrame(gameLoop);
-            document.onkeydown = null;
-        }
-
-        function triggerGameAction(action) {
-            if(gameID === 'snake') handleSnakeDir(action);
-            if(gameID === '2048') handle2048Move(action);
-            if(gameID === 'flappy' && action === 'ACTION') flapBird();
-            if(gameID === 'space') handleSpaceMove(action);
-            if(gameID === 'car') handleCarMove(action);
-        }
-
-        // --- 3.1 SNAKE GAME ---
-        let s_snake, s_food, s_dir, s_nextDir, s_score;
-        function initSnake() {
-            s_snake = [{x: 160, y: 160}, {x: 140, y: 160}]; s_dir = "RIGHT"; s_nextDir = "RIGHT"; s_score = 0;
-            s_food = {x: Math.floor(Math.random()*16)*20, y: Math.floor(Math.random()*16)*20};
-            document.onkeydown = (e) => {
-                if(e.key === "ArrowLeft" && s_dir != "RIGHT") s_nextDir = "LEFT";
-                if(e.key === "ArrowUp" && s_dir != "DOWN") s_nextDir = "UP";
-                if(e.key === "ArrowRight" && s_dir != "LEFT") s_nextDir = "RIGHT";
-                if(e.key === "ArrowDown" && s_dir != "UP") s_nextDir = "DOWN";
-            };
-            gameLoop = setInterval(runSnake, 130);
-        }
-        function handleSnakeDir(dir) {
-            if(dir == "LEFT" && s_dir != "RIGHT") s_nextDir = "LEFT";
-            if(dir == "UP" && s_dir != "DOWN") s_nextDir = "UP";
-            if(dir == "RIGHT" && s_dir != "LEFT") s_nextDir = "RIGHT";
-            if(dir == "DOWN" && s_dir != "UP") s_nextDir = "DOWN";
-        }
-        function runSnake() {
-            s_dir = s_nextDir; 
-            ctx.clearRect(0,0,320,320);
-            
-            ctx.shadowBlur = 12; ctx.shadowColor = "#ffcc00"; ctx.fillStyle = "#ffcc00";
-            ctx.beginPath(); ctx.arc(s_food.x+10, s_food.y+10, 8, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur = 0;
-
-            let nx = s_snake[0].x, ny = s_snake[0].y;
-            if(s_dir == "LEFT") nx -= 20; if(s_dir == "UP") ny -= 20;
-            if(s_dir == "RIGHT") nx += 20; if(s_dir == "DOWN") ny += 20;
-            
-            if(nx >= 320) nx = 0; else if(nx < 0) nx = 300;
-            if(ny >= 320) ny = 0; else if(ny < 0) ny = 300;
-
-            if(nx == s_food.x && ny == s_food.y) {
-                s_score += 10; scoreSpan.innerText = s_score;
-                s_food = {x: Math.floor(Math.random()*16)*20, y: Math.floor(Math.random()*16)*20};
-            } else s_snake.pop();
-
-            for(let i=1; i<s_snake.length; i++) if(nx == s_snake[i].x && ny == s_snake[i].y) { clearInterval(gameLoop); return initSnake(); }
-            
-            s_snake.unshift({x: nx, y: ny});
-            
-            s_snake.forEach((v, i) => { 
-                ctx.fillStyle = i==0 ? "#00f2fe" : "#00509e"; 
-                ctx.beginPath(); ctx.roundRect(v.x+1, v.y+1, 18, 18, 6); ctx.fill();
-                if(i == 0) {
-                    ctx.fillStyle = "#000000";
-                    if(s_dir === "RIGHT" || s_dir === "LEFT") { ctx.fillRect(v.x + 8, v.y + 4, 3, 3); ctx.fillRect(v.x + 8, v.y + 12, 3, 3); } 
-                    else { ctx.fillRect(v.x + 4, v.y + 8, 3, 3); ctx.fillRect(v.x + 12, v.y + 8, 3, 3); }
-                }
-            });
-        }
-
-        // --- 3.2 GAME 2048 ---
-        let board2048 = [], score2048 = 0;
-        const premiumColors2048 = {
-            2: { bg: '#eee4da', color: '#776e65' },
-            4: { bg: '#ede0c8', color: '#776e65' },
-            8: { bg: '#f2b179', color: '#f9f6f2' },
-            16: { bg: '#f59563', color: '#f9f6f2' },
-            32: { bg: '#f67c5f', color: '#f9f6f2' },
-            64: { bg: '#f65e3b', color: '#f9f6f2' },
-            128: { bg: '#edcf72', color: '#f9f6f2', glow: 'rgba(237, 207, 114, 0.6)' },
-            256: { bg: '#edcc61', color: '#f9f6f2', glow: 'rgba(237, 204, 97, 0.7)' },
-            512: { bg: '#edc850', color: '#f9f6f2', glow: 'rgba(237, 200, 80, 0.8)' },
-            1024: { bg: '#edc53f', color: '#f9f6f2', glow: 'rgba(237, 197, 63, 0.9)' },
-            2048: { bg: '#edc22e', color: '#f9f6f2', glow: 'rgba(237, 194, 46, 1)' }
-        };
-
-        function init2048() {
-            gridBox.style.gridTemplateColumns = "repeat(4, 1fr)"; gridBox.style.gap = "8px";
-            board2048 = Array(16).fill(0); score2048 = 0; scoreSpan.innerText = score2048;
-            addTile2048(); addTile2048(); draw2048();
-            document.onkeydown = (e) => {
-                if(["ArrowLeft","ArrowUp","ArrowRight","ArrowDown"].includes(e.key)) {
-                    e.preventDefault(); handle2048Move(e.key.replace('Arrow','').toUpperCase());
-                }
-            };
-        }
-        function addTile2048() {
-            let empty = board2048.map((v,i) => v===0?i:-1).filter(v => v!==-1);
-            if(empty.length) board2048[empty[Math.floor(Math.random()*empty.length)]] = Math.random()>0.1?2:4;
-        }
-        function draw2048() {
-            gridBox.innerHTML = '';
-            board2048.forEach(v => {
-                let div = document.createElement('div'); div.className = 'tile';
-                if(v > 0) {
-                    div.innerText = v;
-                    let style = premiumColors2048[v] || { bg: '#3c3a32', color: '#f9f6f2' };
-                    div.style.background = style.bg; div.style.color = style.color;
-                    if(style.glow) div.style.boxShadow = `0 0 15px ${style.glow}`;
-                    if(v >= 100) div.style.fontSize = '1.7rem';
-                    if(v >= 1000) div.style.fontSize = '1.3rem';
-                } else {
-                    div.style.background = 'rgba(238, 228, 218, 0.35)'; div.style.boxShadow = 'none';
-                }
-                gridBox.appendChild(div);
-            });
-        }
-        function handle2048Move(dir) {
-            let moved = false;
-            let slideRow = (row) => {
-                let line = row.filter(v => v);
-                for (let i = 0; i < line.length - 1; i++) {
-                    if (line[i] === line[i + 1]) { line[i] *= 2; score2048 += line[i]; line.splice(i + 1, 1); moved = true; }
-                }
-                while (line.length < 4) line.push(0);
-                return line;
-            };
-            for(let i=0; i<4; i++) {
-                let row = [];
-                if(dir==='LEFT' || dir==='RIGHT') row = [board2048[i*4], board2048[i*4+1], board2048[i*4+2], board2048[i*4+3]];
-                if(dir==='UP' || dir==='DOWN') row = [board2048[i], board2048[i+4], board2048[i+8], board2048[i+12]];
-                let orig = [...row];
-                if(dir==='RIGHT' || dir==='DOWN') row.reverse();
-                row = slideRow(row);
-                if(dir==='RIGHT' || dir==='DOWN') row.reverse();
-                if(orig.join(',') !== row.join(',')) moved = true;
-                if(dir==='LEFT' || dir==='RIGHT') for(let j=0;j<4;j++) board2048[i*4+j] = row[j];
-                if(dir==='UP' || dir==='DOWN') for(let j=0;j<4;j++) board2048[i+j*4] = row[j];
-            }
-            if(moved) { addTile2048(); draw2048(); scoreSpan.innerText = score2048; }
-        }
-
-        // --- 3.3 TIC TAC TOE ---
-        let t_board = [], t_turn = 'X';
-        function initTicTacToe() {
-            gridBox.style.gridTemplateColumns = "repeat(3, 1fr)"; gridBox.style.gap = "6px";
-            t_board = Array(9).fill(''); t_turn = 'X'; drawTic();
-        }
-        function drawTic() {
-            gridBox.innerHTML = '';
-            t_board.forEach((v, i) => {
-                let div = document.createElement('div'); div.className = 'tile';
-                div.style.background = '#003366'; div.style.fontSize = '3.5rem';
-                div.style.color = v==='X'?'#ffcc00':'#007bff'; div.innerText = v;
-                div.onclick = () => { if(!t_board[i]) { t_board[i] = t_turn; t_turn = t_turn==='X'?'O':'X'; drawTic(); checkTicWin(); } };
-                gridBox.appendChild(div);
-            });
-        }
-        function checkTicWin() {
-            const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-            for(let w of wins) if(t_board[w[0]] && t_board[w[0]]===t_board[w[1]] && t_board[w[1]]===t_board[w[2]]) return setTimeout(()=> { alert(t_board[w[0]] + " Thắng!"); initTicTacToe(); }, 100);
-            if(!t_board.includes('')) setTimeout(()=> { alert("Hòa!"); initTicTacToe(); }, 100);
-        }
-
-        // --- 3.4 FLAPPY BIRD ---
-        let f_y = 150, f_v = 0, f_pipes = [], f_score = 0;
-        function initFlappy() {
-            f_y = 150; f_v = 0; f_pipes = []; f_score = 0; scoreSpan.innerText = 0;
-            document.onkeydown = (e) => { if(e.code==='Space') f_v = -6.5; };
-            gameLoop = requestAnimationFrame(runFlappy);
-        }
-        function flapBird() { f_v = -6.5; }
-        function runFlappy() {
-            if(gameID !== 'flappy') return;
-            ctx.clearRect(0,0,320,320); f_v += 0.45; f_y += f_v;
-            ctx.shadowBlur = 10; ctx.shadowColor = "#ffcc00"; ctx.fillStyle = "#ffcc00";
-            ctx.beginPath(); ctx.arc(60, f_y + 10, 10, 0, Math.PI * 2); ctx.fill(); ctx.shadowBlur = 0;
-            if(f_pipes.length===0 || f_pipes[f_pipes.length-1].x < 160) f_pipes.push({x: 320, hole: Math.random()*120 + 70});
-            ctx.fillStyle = "#007bff";
-            for (let i = f_pipes.length - 1; i >= 0; i--) {
-                let p = f_pipes[i]; p.x -= 2.5;
-                ctx.beginPath(); ctx.roundRect(p.x, 0, 35, p.hole - 45, [0, 0, 6, 6]); ctx.fill();
-                ctx.beginPath(); ctx.roundRect(p.x, p.hole + 45, 35, 320, [6, 6, 0, 0]); ctx.fill();
-                if(p.x === 50) { f_score++; scoreSpan.innerText = f_score; }
-                let bX = 60, bY = f_y + 10, r = 9;
-                if((bX + r > p.x && bX - r < p.x + 35) && (bY - r < p.hole - 45 || bY + r > p.hole + 45)) return initFlappy();
-                if(p.x < -40) f_pipes.splice(i, 1);
-            }
-            if(f_y > 320 || f_y < 0) return initFlappy();
-            gameLoop = requestAnimationFrame(runFlappy);
-        }
-
-        // --- 3.5 SPACE SHOOTER ---
-        let sp_px = 150, sp_bul = [], sp_en = [], sp_sc = 0;
-        function initSpace() {
-            sp_px = 150; sp_bul = []; sp_en = []; sp_sc = 0; scoreSpan.innerText = 0;
-            document.onkeydown = (e) => {
-                if(e.key==='ArrowLeft') handleSpaceMove('LEFT');
-                if(e.key==='ArrowRight') handleSpaceMove('RIGHT');
-                if(e.code==='Space') handleSpaceMove('ACTION');
-            };
-            gameLoop = requestAnimationFrame(runSpace);
-        }
-        function handleSpaceMove(act) {
-            if(act==='LEFT' && sp_px>10) sp_px-=20;
-            if(act==='RIGHT' && sp_px<280) sp_px+=20;
-            if(act==='ACTION') sp_bul.push({x: sp_px+15, y: 270});
-        }
-        function runSpace() {
-            if(gameID !== 'space') return;
-            ctx.clearRect(0,0,320,320);
-            ctx.fillStyle = "#00f2fe"; ctx.beginPath(); ctx.moveTo(sp_px + 15, 270); ctx.lineTo(sp_px + 30, 300); ctx.lineTo(sp_px, 300); ctx.closePath(); ctx.fill();
-            ctx.fillStyle = "#ffcc00"; ctx.fillRect(sp_px + 12, 300, 6, 5);
-            for (let i = sp_bul.length - 1; i >= 0; i--) {
-                sp_bul[i].y -= 6; ctx.fillStyle = "#ffcc00"; ctx.fillRect(sp_bul[i].x - 2, sp_bul[i].y, 4, 12);
-                if(sp_bul[i].y < 0) sp_bul.splice(i, 1);
-            }
-            if(Math.random() < 0.04) sp_en.push({x: Math.random()*270 + 10, y: -20});
-            ctx.fillStyle = "#ff3b30";
-            for (let i = sp_en.length - 1; i >= 0; i--) {
-                let e = sp_en[i]; e.y += 2.2;
-                ctx.beginPath(); ctx.arc(e.x, e.y, 10, 0, Math.PI*2); ctx.fill();
-                if(e.y > 330) return initSpace();
-                for(let j = sp_bul.length - 1; j >= 0; j--) {
-                    if(Math.hypot(sp_bul[j].x - e.x, sp_bul[j].y - e.y) < 14) {
-                        sp_sc++; scoreSpan.innerText = sp_sc; sp_en.splice(i, 1); sp_bul.splice(j, 1); break;
-                    }
-                }
-            }
-            gameLoop = requestAnimationFrame(runSpace);
-        }
-
-        // --- 3.6 CAR RACING ---
-        let c_lane = 1, c_obs = [], c_sc = 0, roadStripesY = 0;
-        function initCar() {
-            c_lane = 1; c_obs = []; c_sc = 0; scoreSpan.innerText = 0;
-            document.onkeydown = (e) => {
-                if(e.key==='ArrowLeft') handleCarMove('LEFT');
-                if(e.key==='ArrowRight') handleCarMove('RIGHT');
-            };
-            gameLoop = requestAnimationFrame(runCar);
-        }
-        function handleCarMove(act) {
-            if(act==='LEFT' && c_lane>0) c_lane--;
-            if(act==='RIGHT' && c_lane<2) c_lane++;
-        }
-        function runCar() {
-            if(gameID !== 'car') return;
-            ctx.clearRect(0,0,320,320);
-            roadStripesY += 6; if(roadStripesY > 40) roadStripesY = 0;
-            ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
-            for(let i=-40; i<320; i+=40) { ctx.fillRect(106, i + roadStripesY, 4, 20); ctx.fillRect(212, i + roadStripesY, 4, 20); }
-            let drawAdvCar = (x, y, color) => {
-                ctx.fillStyle = color; ctx.beginPath(); ctx.roundRect(x, y, 32, 52, 5); ctx.fill();
-                ctx.fillStyle = "#111"; ctx.fillRect(x - 4, y + 8, 4, 10); ctx.fillRect(x + 32, y + 8, 4, 10); ctx.fillRect(x - 4, y + 34, 4, 10); ctx.fillRect(x + 32, y + 34, 4, 10);
-                ctx.fillStyle = "#87ceeb"; ctx.fillRect(x + 5, y + 12, 22, 9);
-            };
-            drawAdvCar(44 + c_lane * 80, 250, "#00f2fe");
-            if(Math.random() < 0.025) c_obs.push({lane: Math.floor(Math.random()*3), y: -60});
-            for (let i = c_obs.length - 1; i >= 0; i--) {
-                let o = c_obs[i]; o.y += 5; drawAdvCar(44 + o.lane * 80, o.y, "#ff3b30");
-                if(o.lane === c_lane && o.y + 50 > 250 && o.y < 302) return initCar();
-                if(o.y > 325) { c_sc += 10; scoreSpan.innerText = c_sc; c_obs.splice(i, 1); }
-            }
-            gameLoop = requestAnimationFrame(runCar);
         }
     </script>
 </body>
