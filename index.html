@@ -150,6 +150,7 @@
             background: var(--panel-bg);
             padding: 10px;
             border-radius: 12px;
+            transition: all 0.3s ease;
         }
 
         .scratch-frame { width: 100%; max-width: 1000px; height: 650px; border: 4px solid var(--primary); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); background: #000; }
@@ -168,14 +169,45 @@
         .btn-fullscreen { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: #fff; box-shadow: 0 4px 15px rgba(0, 80, 158, 0.3); }
         .btn-fullscreen:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0, 80, 158, 0.4); }
 
-        .btn-apk { background: linear-gradient(135deg, #28a745, #20c997); color: #fff; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3); }
+        .btn-apk { background: linear-gradient(135deg, #28a745, #20c997); color: #fff; box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3); }
         .btn-apk:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(40, 167, 69, 0.4); }
 
-        #gameFullscreenContainer:fullscreen {
-            width: 100vw; height: 100vh; background: #060b19; justify-content: center; padding: 10px;
+        /* Kỹ thuật CSS Fullscreen thông minh: Ép khung game phủ kín màn hình điện thoại mà không bị trình duyệt chặn */
+        .is-fullscreen {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 999999 !important;
+            background: #000 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            justify-content: center !important;
+            align-items: center !important;
         }
-        #gameFullscreenContainer:fullscreen .scratch-frame {
-            max-width: 100%; height: 90vh;
+        .is-fullscreen .scratch-frame {
+            max-width: 100% !important;
+            width: 100% !important;
+            height: 100vh !important;
+            border: none !important;
+            border-radius: 0 !important;
+        }
+        /* Nút thu nhỏ lại khi đang ở chế độ toàn màn hình để người dùng bấm thoát */
+        .is-fullscreen .btn-exit-fs {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 1000000;
+            background: rgba(255, 0, 0, 0.8);
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         @media (max-width: 768px) {
@@ -186,8 +218,6 @@
             .scratch-frame { height: 420px; max-width: 100%; }
             .game-controls-row { flex-direction: column; }
             .btn-action { width: 100%; }
-            /* Tự động ẩn nút phóng to ngoài trên điện thoại vì bị trình duyệt chặn */
-            .btn-fullscreen { display: none !important; }
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -277,18 +307,24 @@
     <script>
         function toggleFullscreen() {
             const container = document.getElementById('gameFullscreenContainer');
-            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                if (container.requestFullscreen) {
-                    container.requestFullscreen().catch(err => console.log(err));
-                } else if (container.webkitRequestFullscreen) {
-                    container.webkitRequestFullscreen();
+            
+            // Sử dụng lớp CSS tùy chỉnh thay vì requestFullscreen() để tránh bị trình duyệt di động chặn
+            if (!container.classList.contains('is-fullscreen')) {
+                container.classList.add('is-fullscreen');
+                
+                // Thêm nút thoát nhanh khi ở chế độ toàn màn hình trên điện thoại
+                if (!document.getElementById('exitFsBtn')) {
+                    const exitBtn = document.createElement('button');
+                    exitBtn.id = 'exitFsBtn';
+                    exitBtn.className = 'btn-exit-fs';
+                    exitBtn.innerHTML = '<i class="fa-solid fa-compress"></i> Thu Nhỏ';
+                    exitBtn.onclick = toggleFullscreen;
+                    container.appendChild(exitBtn);
                 }
             } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                }
+                container.classList.remove('is-fullscreen');
+                const exitBtn = document.getElementById('exitFsBtn');
+                if (exitBtn) exitBtn.remove();
             }
         }
 
