@@ -31,7 +31,7 @@ from urllib.parse import urlparse
 FACTS_META = {
     "T": {
         "name": "Thương hiệu",
-        "icon": "🏢",
+        "icon": "brand",
         "items": {
             "T1": "Canon",
             "T2": "Sony",
@@ -42,7 +42,7 @@ FACTS_META = {
     },
     "L": {
         "name": "Loại máy ảnh",
-        "icon": "📷",
+        "icon": "camera",
         "items": {
             "L1": "DSLR (Phản xạ ống kính đơn)",
             "L2": "Mirrorless (Không gương lật)"
@@ -50,7 +50,7 @@ FACTS_META = {
     },
     "C": {
         "name": "Kích cỡ cảm biến",
-        "icon": "🎞️",
+        "icon": "sensor",
         "items": {
             "C1": "Full-frame",
             "C2": "Crop (APS-C)",
@@ -60,7 +60,7 @@ FACTS_META = {
     },
     "M": {
         "name": "Màn hình cảm ứng",
-        "icon": "📱",
+        "icon": "touch",
         "items": {
             "M1": "Có màn hình cảm ứng",
             "M2": "Không có màn hình cảm ứng"
@@ -68,7 +68,7 @@ FACTS_META = {
     },
     "V": {
         "name": "Khả năng quay video",
-        "icon": "🎬",
+        "icon": "video",
         "items": {
             "V1": "Quay cơ bản (FHD / 4K 30p)",
             "V2": "Quay nâng cao (4K 60p / 10-bit / Log)",
@@ -77,7 +77,7 @@ FACTS_META = {
     },
     "N": {
         "name": "Mục đích sử dụng",
-        "icon": "🎯",
+        "icon": "purpose",
         "items": {
             "N1": "Cơ bản, Du lịch, Đường phố",
             "N2": "Chân dung, Phong cảnh",
@@ -90,7 +90,7 @@ FACTS_META = {
     },
     "G": {
         "name": "Phân khúc giá",
-        "icon": "💰",
+        "icon": "price",
         "items": {
             "G1": "Từ 0 - 10 triệu đồng",
             "G2": "Từ 10 - 20 triệu đồng",
