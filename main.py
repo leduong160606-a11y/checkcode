@@ -22,7 +22,7 @@ import json
 import os
 import sys
 import webbrowser
-from http.server import HTTPServer, SimpleHTTPRequestHandler
+from http.server import HTTPServer, ThreadingHTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse
 
 # ==============================================================================
@@ -4004,27 +4004,157 @@ expert_system = CameraExpertSystem(FACTS_META, CAMERAS, RULES)
 
 
 # ==============================================================================
-# 5. WEB SERVER PHỤC VỤ GIAO DIỆN INDEX.HTML VÀ REST API
+# 5. WEB SERVER & WSGI APP (TƯƠNG THÍCH GITHUB, RENDER, GUNICORN & LOCAL)
 # ==============================================================================
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def app(environ, start_response):
+    """
+    WSGI Application hỗ trợ chạy trực tiếp với Gunicorn trên Render:
+      gunicorn main:app
+    hoặc chạy trực tiếp bằng lệnh:
+      python main.py
+    """
+    method = environ.get("REQUEST_METHOD", "GET").upper()
+    path = environ.get("PATH_INFO", "/")
+
+    cors_headers = [
+        ("Access-Control-Allow-Origin", "*"),
+        ("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD"),
+        ("Access-Control-Allow-Headers", "Content-Type, Accept"),
+    ]
+
+    if method == "OPTIONS":
+        start_response("204 No Content", cors_headers)
+        return [b""]
+
+    if path in ("/", "/index.html"):
+        html_path = os.path.join(BASE_DIR, "index.html")
+        if os.path.exists(html_path):
+            with open(html_path, "rb") as f:
+                body = f.read()
+            headers = [("Content-Type", "text/html; charset=utf-8"), ("Content-Length", str(len(body)))] + cors_headers
+            start_response("200 OK", headers)
+            return [b""] if method == "HEAD" else [body]
+        msg = "<h1>Không tìm thấy file index.html trong cùng thư mục!</h1>".encode("utf-8")
+        headers = [("Content-Type", "text/html; charset=utf-8"), ("Content-Length", str(len(msg)))] + cors_headers
+        start_response("404 Not Found", headers)
+        return [b""] if method == "HEAD" else [msg]
+
+    if path in ("/api/health", "/healthz"):
+        body = json.dumps({"status": "ok", "cameras": len(CAMERAS), "rules": len(RULES)}, ensure_ascii=False).encode("utf-8")
+        headers = [("Content-Type", "application/json; charset=utf-8"), ("Content-Length", str(len(body)))] + cors_headers
+        start_response("200 OK", headers)
+        return [b""] if method == "HEAD" else [body]
+
+    if path == "/api/kb":
+        body = json.dumps({
+            "facts_meta": expert_system.facts_meta,
+            "cameras": list(expert_system.cameras.values()),
+            "rules": expert_system.rules
+        }, ensure_ascii=False).encode("utf-8")
+        headers = [("Content-Type", "application/json; charset=utf-8"), ("Content-Length", str(len(body)))] + cors_headers
+        start_response("200 OK", headers)
+        return [b""] if method == "HEAD" else [body]
+
+    if path == "/api/consult":
+        if method == "POST":
+            try:
+                length = int(environ.get("CONTENT_LENGTH") or 0)
+            except ValueError:
+                length = 0
+            raw = environ["wsgi.input"].read(length).decode("utf-8") if length > 0 else "{}"
+            try:
+                payload = json.loads(raw)
+            except Exception:
+                payload = {}
+            facts = payload.get("facts", [])
+        else:
+            facts = []
+        result = expert_system.forward_chaining(facts)
+        body = json.dumps(result, ensure_ascii=False).encode("utf-8")
+        headers = [("Content-Type", "application/json; charset=utf-8"), ("Content-Length", str(len(body)))] + cors_headers
+        start_response("200 OK", headers)
+        return [body]
+
+    if path == "/api/add-rule" and method == "POST":
+        try:
+            length = int(environ.get("CONTENT_LENGTH") or 0)
+        except ValueError:
+            length = 0
+        raw = environ["wsgi.input"].read(length).decode("utf-8") if length > 0 else "{}"
+        try:
+            payload = json.loads(raw)
+        except Exception:
+            payload = {}
+        conditions = payload.get("conditions", [])
+        conclusion = payload.get("conclusion", "K1")
+        description = payload.get("description", "")
+        new_rule = expert_system.add_rule(conditions, conclusion, description)
+        body = json.dumps({"status": "ok", "rule": new_rule, "total_rules": len(expert_system.rules)}, ensure_ascii=False).encode("utf-8")
+        headers = [("Content-Type", "application/json; charset=utf-8"), ("Content-Length", str(len(body)))] + cors_headers
+        start_response("200 OK", headers)
+        return [body]
+
+    body = json.dumps({"error": "Endpoint not found"}, ensure_ascii=False).encode("utf-8")
+    headers = [("Content-Type", "application/json; charset=utf-8"), ("Content-Length", str(len(body)))] + cors_headers
+    start_response("404 Not Found", headers)
+    return [body]
+
+
+# Alias chuẩn cho các dịch vụ Cloud PaaS (Render / Gunicorn / uWSGI)
+application = app
+
+
 class ExpertSystemRequestHandler(SimpleHTTPRequestHandler):
+    def do_OPTIONS(self):
+        self.send_response(204)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type, Accept")
+        self.end_headers()
+
+    def do_HEAD(self):
+        parsed = urlparse(self.path)
+        if parsed.path in ("/", "/index.html", "/api/health", "/healthz"):
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+        else:
+            super().do_HEAD()
+
     def do_GET(self):
         parsed = urlparse(self.path)
         if parsed.path in ("/", "/index.html"):
-            self.send_response(200)
-            self.send_header("Content-Type", "text/html; charset=utf-8")
-            self.end_headers()
-            html_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "index.html")
+            html_path = os.path.join(BASE_DIR, "index.html")
             if os.path.exists(html_path):
                 with open(html_path, "rb") as f:
-                    self.wfile.write(f.read())
+                    data = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(data)))
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(data)
             else:
-                self.wfile.write(b"<h1>Khong tim thay file index.html trong cung thu muc!</h1>")
+                msg = b"<h1>Khong tim thay file index.html trong cung thu muc!</h1>"
+                self.send_response(404)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(msg)))
+                self.end_headers()
+                self.wfile.write(msg)
+        elif parsed.path in ("/api/health", "/healthz"):
+            self._send_json({"status": "ok", "cameras": len(CAMERAS), "rules": len(RULES)})
         elif parsed.path == "/api/kb":
             self._send_json({
                 "facts_meta": expert_system.facts_meta,
                 "cameras": list(expert_system.cameras.values()),
                 "rules": expert_system.rules
             })
+        elif parsed.path == "/api/consult":
+            self._send_json(expert_system.forward_chaining([]))
         else:
             super().do_GET()
 
@@ -4055,6 +4185,8 @@ class ExpertSystemRequestHandler(SimpleHTTPRequestHandler):
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type, Accept")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
@@ -4085,17 +4217,18 @@ if __name__ == "__main__":
         run_cli_demo()
     else:
         port = int(os.environ.get("PORT", 8000))
-        server = HTTPServer(("0.0.0.0", port), ExpertSystemRequestHandler)
+        server = ThreadingHTTPServer(("0.0.0.0", port), ExpertSystemRequestHandler)
         url = f"http://localhost:{port}"
         print("=" * 72)
         print("MINGDSHOP CAMERA AI - HỆ CHUYÊN GIA TƯ VẤN MÁY ẢNH (NHÓM 22 - ĐH ĐỒNG THÁP)")
-        print(f"Server đang chạy tại: {url}")
+        print(f"Server đang chạy tại: {url} (0.0.0.0:{port})")
         print("Nhấn Ctrl+C để dừng Server.")
         print("=" * 72)
-        try:
-            webbrowser.open(url)
-        except Exception:
-            pass
+        if not os.environ.get("RENDER") and not os.environ.get("PORT"):
+            try:
+                webbrowser.open(url)
+            except Exception:
+                pass
         try:
             server.serve_forever()
         except KeyboardInterrupt:
