@@ -288,7 +288,7 @@
               <span>TVC QUẢNG CÁO • 4K HDR WIDESCREEN</span>
             </span>
             <span id="videoSceneBadge" class="inline-flex items-center px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-sky-200 text-[11px] sm:text-xs font-semibold border border-white/15">
-              Cảnh 1/3: Studio Mirrorless Flagship
+              Máy 1/5: Canon EOS R5 • Flagship 8K
             </span>
           </div>
 
@@ -333,9 +333,11 @@
           <!-- Video Chapter Scrubber Bar & Quick Category Links -->
           <div class="mt-4 pt-3 border-t border-white/15 flex flex-wrap items-center justify-between gap-3">
             <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
-              <button onclick="setPromoScene(0)" id="sceneBtn0" class="px-3 py-1 rounded-xl text-[11px] sm:text-xs font-bold bg-blue-600 text-white transition">01. Studio Flagship</button>
-              <button onclick="setPromoScene(1)" id="sceneBtn1" class="px-3 py-1 rounded-xl text-[11px] sm:text-xs font-semibold bg-white/10 text-slate-300 hover:bg-white/20 transition">02. Du Lịch &amp; Vlog</button>
-              <button onclick="setPromoScene(2)" id="sceneBtn2" class="px-3 py-1 rounded-xl text-[11px] sm:text-xs font-semibold bg-white/10 text-slate-300 hover:bg-white/20 transition">03. Cinema 8K &amp; Thể Thao</button>
+              <button onclick="setPromoScene(0)" id="sceneBtn0" class="px-3 py-1 rounded-xl text-[11px] sm:text-xs font-bold bg-blue-600 text-white transition">01. Canon EOS R5</button>
+              <button onclick="setPromoScene(1)" id="sceneBtn1" class="px-3 py-1 rounded-xl text-[11px] sm:text-xs font-semibold bg-white/10 text-slate-300 hover:bg-white/20 transition">02. Fujifilm X-T5</button>
+              <button onclick="setPromoScene(2)" id="sceneBtn2" class="px-3 py-1 rounded-xl text-[11px] sm:text-xs font-semibold bg-white/10 text-slate-300 hover:bg-white/20 transition">03. Nikon Z8</button>
+              <button onclick="setPromoScene(3)" id="sceneBtn3" class="px-3 py-1 rounded-xl text-[11px] sm:text-xs font-semibold bg-white/10 text-slate-300 hover:bg-white/20 transition">04. Sony A7R V</button>
+              <button onclick="setPromoScene(4)" id="sceneBtn4" class="px-3 py-1 rounded-xl text-[11px] sm:text-xs font-semibold bg-white/10 text-slate-300 hover:bg-white/20 transition">05. Lumix S5 II</button>
             </div>
             <div class="w-full sm:w-64 h-1.5 bg-white/20 rounded-full overflow-hidden">
               <div id="videoProgressBar" class="h-full bg-sky-400 transition-all duration-150" style="width: 15%"></div>
@@ -820,34 +822,49 @@
     // ================= INITIALIZE VISUAL THUMBNAILS & FULL-WIDTH COMMERCIAL VIDEO PLAYER =================
     const promoScenes = [
       {
-        badge: 'Cảnh 1/3: Studio Mirrorless Flagship',
-        subTitle: 'MINGDSHOP OFFICIAL COMMERCIAL 2026 • WIDESCREEN SHOWREEL',
-        title: 'Bắt Trọn Từng Khoảnh Khắc Điện Ảnh 8K',
-        desc: 'Trải nghiệm cảm biến Full-frame 45MP–61MP & lấy nét AI thế hệ mới trên Canon EOS R5 và Sony Alpha A7R V chính hãng tại MingDShop.',
+        badge: 'Máy 1/5: Canon EOS R5 • Flagship 8K',
+        subTitle: 'MINGDSHOP OFFICIAL COMMERCIAL 2026 • GIỚI THIỆU TỪNG DÒNG MÁY',
+        title: 'Canon EOS R5 — Đỉnh Cao Chụp Studio & Quay 8K RAW',
+        desc: 'Trang bị cảm biến Full-frame 45MP, quay video 8K 30p RAW nội bộ và chống rung IBIS 8-stops siêu mượt — Ưu đãi giảm 15% tại MingDShop.',
         bannerKey: 'banner_1',
         camId: 'K8',
-        secondaryCamId: 'K18',
         specs: ['45MP Full-Frame', '8K 30p RAW', 'IBIS 8-Stops']
       },
       {
-        badge: 'Cảnh 2/3: Du Lịch & Sáng Tạo Nội Dung',
-        subTitle: 'MINGDSHOP TRAVEL & VLOG SERIES • WIDESCREEN SHOWREEL',
-        title: 'Gọn Nhẹ Tinh Tế • Sắc Màu Phim Cổ Điển',
-        desc: 'Đồng hành trên mọi cung đường cùng Fujifilm X-T5 và Sony ZV-E10 — Quay Vlog 4K sắc nét, lấy nét ánh mắt tức thì.',
+        badge: 'Máy 2/5: Fujifilm X-T5 • Hoài Cổ 40MP',
+        subTitle: 'MINGDSHOP TRAVEL & STREETLIFE • GIỚI THIỆU TỪNG DÒNG MÁY',
+        title: 'Fujifilm X-T5 — Cảm Biến 40MP & 19 Giả Lập Màu Phim',
+        desc: 'Thiết kế vòng xoay cơ học hoài cổ kết hợp cảm biến X-Trans CMOS 5 HR 40MP, chống rung 7-stops và quay 6.2K sắc nét cho du lịch, chân dung.',
         bannerKey: 'banner_2',
         camId: 'K36',
-        secondaryCamId: 'K11',
         specs: ['40MP X-Trans V', '6.2K 30p 10-Bit', '19 Film Simulations']
       },
       {
-        badge: 'Cảnh 3/3: Chuyên Nghiệp Điện Ảnh & Thể Thao',
-        subTitle: 'MINGDSHOP PRO CINEMA & SPORTS • WIDESCREEN SHOWREEL',
-        title: 'Sức Mạnh Tốc Độ Đỉnh Cao Không Giới Hạn',
-        desc: 'Chinh phục mọi tác vụ quay phim TVC và thể thao tốc độ cao cùng Nikon Z8 & Panasonic Lumix S5 II.',
+        badge: 'Máy 3/5: Nikon Z8 • Baby Z9 Siêu Tốc',
+        subTitle: 'MINGDSHOP PRO CINEMA & SPORTS • GIỚI THIỆU TỪNG DÒNG MÁY',
+        title: 'Nikon Z8 — Sức Mạnh Stacked CMOS 45.7MP & 8.3K N-RAW',
+        desc: 'Cảm biến xếp chồng Stacked BSI 45.7MP không màn trập cơ học, chụp liên tiếp 20 FPS RAW và quay 8.3K 60p N-RAW chuyên nghiệp.',
         bannerKey: 'banner_3',
         camId: 'K29',
-        secondaryCamId: 'K49',
-        specs: ['8.3K 60p N-RAW', 'Stacked CMOS', '20 FPS RAW']
+        specs: ['45.7MP Stacked', '8.3K 60p N-RAW', '20 FPS RAW']
+      },
+      {
+        badge: 'Máy 4/5: Sony Alpha A7R V • Độ Phân Giải 61MP',
+        subTitle: 'MINGDSHOP AI AUTOFOCUS MASTER • GIỚI THIỆU TỪNG DÒNG MÁY',
+        title: 'Sony Alpha A7R V — Chip AI Chuyên Biệt & Cảm Biến 61MP',
+        desc: 'Độ phân giải siêu cao 61.0MP cùng vi xử lý AI nhận diện chủ thể thông minh, màn hình xoay lật 4 trục và quay video 8K chuẩn thương mại.',
+        bannerKey: 'banner_1',
+        camId: 'K18',
+        specs: ['61MP BSI CMOS', 'AI Subject AF', '8K 24p / 4K 60p']
+      },
+      {
+        badge: 'Máy 5/5: Panasonic Lumix S5 II • Hybrid Cinema',
+        subTitle: 'MINGDSHOP FULL-FRAME FILMMAKER • GIỚI THIỆU TỪNG DÒNG MÁY',
+        title: 'Panasonic Lumix S5 II — Lấy Nét Phase Hybrid AF & Quay 6K',
+        desc: 'Bước đột phá với hệ thống lấy nét theo pha Phase Hybrid AF, quạt tản nhiệt chủ động quay 6K 30p 10-bit không giới hạn và chống rung Active I.S.',
+        bannerKey: 'banner_3',
+        camId: 'K49',
+        specs: ['24.2MP Full-Frame', '6K 30p 10-Bit', 'Phase Hybrid AF']
       }
     ];
 
@@ -923,7 +940,7 @@
       document.getElementById('videoMainTitle').textContent = sc.title;
       document.getElementById('videoDescText').textContent = sc.desc;
 
-      [0, 1, 2].forEach(i => {
+      [0, 1, 2, 3, 4].forEach(i => {
         const btn = document.getElementById('sceneBtn' + i);
         if (!btn) return;
         if (i === promoState.sceneIdx) {
@@ -958,69 +975,79 @@
       ctx.drawImage(img, ox, oy, sw, sh);
     }
 
-    function drawShowcaseCameraCard(ctx, camId, cardX, cardY, cardW, cardH, tagText) {
+    function drawShowcaseCameraCard(ctx, camId, cardX, cardY, cardW, cardH, specsArr, sceneNum, totalScenes) {
       const camImg = promoState.camImgs[camId];
       const camObj = cameraMap[camId];
       if (!camImg || !camImg.complete || camImg.naturalWidth === 0 || !camObj) return;
 
       ctx.save();
-      // Subtle drop shadow for crisp depth
-      ctx.shadowColor = 'rgba(2, 6, 23, 0.45)';
-      ctx.shadowBlur = 18;
-      ctx.shadowOffsetY = 8;
+      // Crisp drop shadow for the single featured camera showcase card
+      ctx.shadowColor = 'rgba(2, 6, 23, 0.52)';
+      ctx.shadowBlur = 24;
+      ctx.shadowOffsetY = 10;
 
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.96)';
-      ctx.strokeStyle = 'rgba(56, 189, 248, 0.9)';
-      ctx.lineWidth = 1.8;
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.97)';
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.95)';
+      ctx.lineWidth = 2.2;
       ctx.beginPath();
-      ctx.roundRect(cardX, cardY, cardW, cardH, 18);
+      ctx.roundRect(cardX, cardY, cardW, cardH, 22);
       ctx.fill();
 
-      // Reset shadow for inner elements
       ctx.shadowColor = 'transparent';
       ctx.shadowBlur = 0;
       ctx.shadowOffsetY = 0;
       ctx.stroke();
 
-      // Discount badge
+      // Top Left: Discount badge
       ctx.fillStyle = '#2563eb';
       ctx.beginPath();
-      ctx.roundRect(cardX + 11, cardY + 11, 46, 19, 7);
+      ctx.roundRect(cardX + 16, cardY + 14, 58, 22, 8);
       ctx.fill();
       ctx.fillStyle = '#ffffff';
-      ctx.font = '800 10px Inter, sans-serif';
+      ctx.font = '800 11px Inter, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('-' + camObj.discount + '%', cardX + 34, cardY + 24);
+      ctx.fillText('-' + camObj.discount + '%', cardX + 45, cardY + 29);
 
-      // High-res camera image
+      // Top Right: Single camera spotlight index badge
+      ctx.fillStyle = '#f0f9ff';
+      ctx.beginPath();
+      ctx.roundRect(cardX + cardW - 110, cardY + 14, 94, 22, 8);
+      ctx.fill();
+      ctx.fillStyle = '#0369a1';
+      ctx.font = '800 10.5px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('MÁY 0' + sceneNum + ' / 0' + totalScenes, cardX + cardW - 63, cardY + 29);
+
+      // High-res Single Featured Camera Image (large & centered)
       const aspect = camImg.naturalWidth / camImg.naturalHeight;
-      let drawW = 128;
+      let drawW = 165;
       let drawH = drawW / aspect;
-      if (drawH > 98) {
-        drawH = 98;
+      if (drawH > 114) {
+        drawH = 114;
         drawW = drawH * aspect;
       }
-      ctx.drawImage(camImg, cardX + (cardW - drawW) / 2, cardY + 20, drawW, drawH);
+      ctx.drawImage(camImg, cardX + (cardW - drawW) / 2, cardY + 30, drawW, drawH);
 
       // Camera Title
       ctx.fillStyle = '#0f172a';
-      ctx.font = '800 12px Inter, sans-serif';
+      ctx.font = '800 15px Inter, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(camObj.name, cardX + cardW / 2, cardY + 136);
+      ctx.fillText(camObj.name, cardX + cardW / 2, cardY + 158);
 
-      // Price
+      // Price & Old Price
       ctx.fillStyle = '#0284c7';
-      ctx.font = '900 14.5px Inter, sans-serif';
-      ctx.fillText(camObj.price_text, cardX + cardW / 2, cardY + 156);
+      ctx.font = '900 17px Inter, sans-serif';
+      ctx.fillText(camObj.price_text + '  (Trả góp 0%)', cardX + cardW / 2, cardY + 180);
 
       // Spec Pill
+      const tagText = (specsArr || []).join('  •  ');
       ctx.fillStyle = '#eff6ff';
       ctx.beginPath();
-      ctx.roundRect(cardX + 12, cardY + 165, cardW - 24, 19, 6);
+      ctx.roundRect(cardX + 16, cardY + 190, cardW - 32, 22, 8);
       ctx.fill();
       ctx.fillStyle = '#1d4ed8';
-      ctx.font = '700 9.5px Inter, sans-serif';
-      ctx.fillText(tagText, cardX + cardW / 2, cardY + 178);
+      ctx.font = '700 10.5px Inter, sans-serif';
+      ctx.fillText(tagText, cardX + cardW / 2, cardY + 205);
       ctx.restore();
     }
 
@@ -1101,11 +1128,20 @@
           ctx.fill();
         }
 
-        // 4. Two Floating Flagship Camera Cards on the Right Widescreen Stage (HD sharp renders)
-        const floatY1 = Math.sin(now * 0.003) * 6;
-        const floatY2 = Math.cos(now * 0.003 + 0.8) * 6;
-        drawShowcaseCameraCard(ctx, sc.camId, W - 475, 56 + floatY1, 210, 194, sc.specs[0] + ' • ' + sc.specs[1]);
-        drawShowcaseCameraCard(ctx, sc.secondaryCamId, W - 245, 68 + floatY2, 210, 194, sc.specs[1] + ' • ' + sc.specs[2]);
+        // 4. Single Spotlight Camera Card on the Right Widescreen Stage (Introduce 1 camera at a time)
+        const floatY1 = Math.sin(now * 0.0028) * 6;
+        const slideOffsetX = p < 0.08 ? (1 - p / 0.08) * 28 : 0;
+        drawShowcaseCameraCard(
+          ctx,
+          sc.camId,
+          W - 380 + slideOffsetX,
+          44 + floatY1,
+          336,
+          224,
+          sc.specs,
+          promoState.sceneIdx + 1,
+          promoScenes.length
+        );
 
         // 5. Cinema Viewfinder Focus Brackets, Audio Spectrum & Timecode HUD on Left/Center
         ctx.save();
@@ -1801,28 +1837,10 @@
       showToast('Đã áp dụng bộ tiêu chí mẫu!');
     }
 
-    async function runExpertConsultation(scrollToOutput) {
-      let res = forwardChainingLocal(state.selectedFacts);
-
-      try {
-        const resp = await window.fetch(window.location.origin + '/api/' + 'consult', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ facts: state.selectedFacts })
-        });
-        if (resp.ok) {
-          const apiData = await resp.json();
-          if (apiData && apiData.recommendations) {
-            apiData.recommendations.forEach(r => {
-              if (r.camera && cameraMap[r.camera.id]) {
-                r.camera = cameraMap[r.camera.id];
-              }
-            });
-            res = apiData;
-          }
-        }
-      } catch (err) {}
-
+    function runExpertConsultation(scrollToOutput) {
+      // Chạy trực tiếp thuật toán Suy diễn tiến (Forward Chaining) ngay trên trình duyệt,
+      // hoạt động 100% độc lập trên GitHub Pages, Render, Vercel, Netlify mà không bị lỗi API.
+      const res = forwardChainingLocal(state.selectedFacts);
       renderConsultationResult(res);
       if (scrollToOutput) {
         const outEl = document.getElementById('consultationOutputSection');
