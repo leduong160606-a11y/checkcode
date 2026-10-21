@@ -12,8 +12,9 @@ Nhóm thực hiện: Nhóm 22
   2. Nguyễn Hoàng Ân - MSSV: 0024416497
 ================================================================================
 Hướng dẫn chạy chương trình:
-  - Chạy Web Server + Hệ chuyên gia: python main.py
-  - Sau đó mở trình duyệt tại: http://localhost:8000
+  - Chạy trực tiếp Web Server: python main.py
+  - Chạy với Uvicorn (ASGI trên Render): uvicorn main:app --host 0.0.0.0 --port $PORT
+  - Chạy với Gunicorn (WSGI trên Render): gunicorn main:app
   - Hoặc chạy chế độ dòng lệnh (CLI): python main.py --cli
 ================================================================================
 """
@@ -123,20 +124,8 @@ CAMERAS = [
         "price_range": "10 - 20 triệu đồng (Giá tham khảo: 15.490.000 VNĐ)",
         "price_num": 15490000,
         "price_text": "15.490.000đ",
-        "rules": [
-            1,
-            2
-        ],
-        "facts": [
-            "C2",
-            "G2",
-            "L2",
-            "M1",
-            "N1",
-            "N4",
-            "T1",
-            "V1"
-        ],
+        "rules": [1, 2],
+        "facts": ["C2", "G2", "L2", "M1", "N1", "N4", "T1", "V1"],
         "mp": "24.2MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -162,20 +151,8 @@ CAMERAS = [
         "price_range": "10 - 20 triệu đồng (Giá tham khảo: 11.990.000 VNĐ)",
         "price_num": 11990000,
         "price_text": "11.990.000đ",
-        "rules": [
-            3,
-            4
-        ],
-        "facts": [
-            "C2",
-            "G2",
-            "L2",
-            "M2",
-            "N1",
-            "N2",
-            "T1",
-            "V1"
-        ],
+        "rules": [3, 4],
+        "facts": ["C2", "G2", "L2", "M2", "N1", "N2", "T1", "V1"],
         "mp": "24.1MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -201,22 +178,8 @@ CAMERAS = [
         "price_range": "10 - 20 triệu đồng (Giá tham khảo: 19.790.000 VNĐ)",
         "price_num": 19790000,
         "price_text": "19.790.000đ",
-        "rules": [
-            5,
-            6,
-            7
-        ],
-        "facts": [
-            "C2",
-            "G2",
-            "L2",
-            "M1",
-            "N3",
-            "N5",
-            "T1",
-            "V1",
-            "V2"
-        ],
+        "rules": [5, 6, 7],
+        "facts": ["C2", "G2", "L2", "M1", "N3", "N5", "T1", "V1", "V2"],
         "mp": "24.2MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -242,20 +205,8 @@ CAMERAS = [
         "price_range": "0 - 10 triệu đồng (Giá tham khảo máy cũ: ~ 6.500.000 VNĐ)",
         "price_num": 6500000,
         "price_text": "6.500.000đ",
-        "rules": [
-            8,
-            9
-        ],
-        "facts": [
-            "C1",
-            "G1",
-            "L1",
-            "M2",
-            "N1",
-            "N2",
-            "T1",
-            "V1"
-        ],
+        "rules": [8, 9],
+        "facts": ["C1", "G1", "L1", "M2", "N1", "N2", "T1", "V1"],
         "mp": "20.2MP",
         "video_short": "FHD 60p",
         "sensor_short": "Full-frame",
@@ -281,20 +232,8 @@ CAMERAS = [
         "price_range": "10 - 20 triệu đồng (Giá tham khảo đã qua sử dụng: ~ 15.250.000 VNĐ)",
         "price_num": 15250000,
         "price_text": "15.250.000đ",
-        "rules": [
-            10,
-            11
-        ],
-        "facts": [
-            "C1",
-            "G2",
-            "L1",
-            "M2",
-            "N2",
-            "N3",
-            "T1",
-            "V1"
-        ],
+        "rules": [10, 11],
+        "facts": ["C1", "G2", "L1", "M2", "N2", "N3", "T1", "V1"],
         "mp": "22.3MP",
         "video_short": "FHD 60p",
         "sensor_short": "Full-frame",
@@ -320,22 +259,8 @@ CAMERAS = [
         "price_range": "20 - 30 triệu đồng (Giá tham khảo: 27.790.000 VNĐ)",
         "price_num": 27790000,
         "price_text": "27.790.000đ",
-        "rules": [
-            12,
-            13,
-            14
-        ],
-        "facts": [
-            "C1",
-            "G3",
-            "L2",
-            "M1",
-            "N1",
-            "N2",
-            "N4",
-            "T1",
-            "V2"
-        ],
+        "rules": [12, 13, 14],
+        "facts": ["C1", "G3", "L2", "M1", "N1", "N2", "N4", "T1", "V2"],
         "mp": "24.2MP",
         "video_short": "4K UHD",
         "sensor_short": "Full-frame",
@@ -361,22 +286,8 @@ CAMERAS = [
         "price_range": "40 - 50 triệu đồng (Giá khuyến mãi tham khảo: 40.490.000 VNĐ)",
         "price_num": 40490000,
         "price_text": "40.490.000đ",
-        "rules": [
-            15,
-            16,
-            17
-        ],
-        "facts": [
-            "C1",
-            "G5",
-            "L2",
-            "M1",
-            "N3",
-            "N5",
-            "N6",
-            "T1",
-            "V2"
-        ],
+        "rules": [15, 16, 17],
+        "facts": ["C1", "G5", "L2", "M1", "N3", "N5", "N6", "T1", "V2"],
         "mp": "24.2MP",
         "video_short": "4K UHD",
         "sensor_short": "Full-frame",
@@ -402,22 +313,8 @@ CAMERAS = [
         "price_range": "60 - 70 triệu đồng (Giá khuyến mãi tham khảo: 64.900.000 VNĐ)",
         "price_num": 64900000,
         "price_text": "64.900.000đ",
-        "rules": [
-            18,
-            19,
-            20
-        ],
-        "facts": [
-            "C1",
-            "G7",
-            "L2",
-            "M1",
-            "N6",
-            "N7",
-            "T1",
-            "V2",
-            "V3"
-        ],
+        "rules": [18, 19, 20],
+        "facts": ["C1", "G7", "L2", "M1", "N6", "N7", "T1", "V2", "V3"],
         "mp": "45MP",
         "video_short": "8K RAW",
         "sensor_short": "Full-frame",
@@ -443,20 +340,8 @@ CAMERAS = [
         "price_range": "20 - 30 triệu đồng (Giá tham khảo: ~ 26.500.000 VNĐ)",
         "price_num": 26500000,
         "price_text": "26.500.000đ",
-        "rules": [
-            21,
-            22
-        ],
-        "facts": [
-            "C2",
-            "G3",
-            "L1",
-            "M1",
-            "N3",
-            "N5",
-            "T1",
-            "V1"
-        ],
+        "rules": [21, 22],
+        "facts": ["C2", "G3", "L1", "M1", "N3", "N5", "T1", "V1"],
         "mp": "32.5MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -482,20 +367,8 @@ CAMERAS = [
         "price_range": "Trên 80 triệu đồng (Giá tham khảo: ~ 125.000.000 VNĐ)",
         "price_num": 125000000,
         "price_text": "125.000.000đ",
-        "rules": [
-            23,
-            24
-        ],
-        "facts": [
-            "C1",
-            "G9",
-            "L2",
-            "M1",
-            "N5",
-            "N6",
-            "T1",
-            "V3"
-        ],
+        "rules": [23, 24],
+        "facts": ["C1", "G9", "L2", "M1", "N5", "N6", "T1", "V3"],
         "mp": "24.1MP",
         "video_short": "6K Pro",
         "sensor_short": "Full-frame",
@@ -521,20 +394,8 @@ CAMERAS = [
         "price_range": "10 - 20 triệu đồng (Giá tham khảo: ~ 15.500.000 VNĐ)",
         "price_num": 15500000,
         "price_text": "15.500.000đ",
-        "rules": [
-            25,
-            26
-        ],
-        "facts": [
-            "C2",
-            "G2",
-            "L2",
-            "M1",
-            "N1",
-            "N4",
-            "T2",
-            "V1"
-        ],
+        "rules": [25, 26],
+        "facts": ["C2", "G2", "L2", "M1", "N1", "N4", "T2", "V1"],
         "mp": "24.2MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -560,20 +421,8 @@ CAMERAS = [
         "price_range": "10 - 20 triệu đồng (Giá tham khảo: ~ 18.500.000 VNĐ)",
         "price_num": 18500000,
         "price_text": "18.500.000đ",
-        "rules": [
-            27,
-            28
-        ],
-        "facts": [
-            "C2",
-            "G2",
-            "L2",
-            "M1",
-            "N1",
-            "N4",
-            "T2",
-            "V1"
-        ],
+        "rules": [27, 28],
+        "facts": ["C2", "G2", "L2", "M1", "N1", "N4", "T2", "V1"],
         "mp": "24.2MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -599,22 +448,8 @@ CAMERAS = [
         "price_range": "30 - 40 triệu đồng (Giá tham khảo: ~ 34.000.000 VNĐ)",
         "price_num": 34000000,
         "price_text": "34.000.000đ",
-        "rules": [
-            29,
-            30,
-            31
-        ],
-        "facts": [
-            "C2",
-            "G4",
-            "L2",
-            "M1",
-            "N3",
-            "N4",
-            "N5",
-            "T2",
-            "V2"
-        ],
+        "rules": [29, 30, 31],
+        "facts": ["C2", "G4", "L2", "M1", "N3", "N4", "N5", "T2", "V2"],
         "mp": "26MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -640,20 +475,8 @@ CAMERAS = [
         "price_range": "10 - 20 triệu đồng (Giá tham khảo: ~ 14.000.000 VNĐ)",
         "price_num": 14000000,
         "price_text": "14.000.000đ",
-        "rules": [
-            32,
-            33
-        ],
-        "facts": [
-            "C1",
-            "G2",
-            "L2",
-            "M2",
-            "N1",
-            "N2",
-            "T2",
-            "V1"
-        ],
+        "rules": [32, 33],
+        "facts": ["C1", "G2", "L2", "M2", "N1", "N2", "T2", "V1"],
         "mp": "24.3MP",
         "video_short": "FHD 60p",
         "sensor_short": "Full-frame",
@@ -679,22 +502,8 @@ CAMERAS = [
         "price_range": "20 - 30 triệu đồng (Giá tham khảo: ~ 29.500.000 VNĐ)",
         "price_num": 29500000,
         "price_text": "29.500.000đ",
-        "rules": [
-            34,
-            35,
-            36
-        ],
-        "facts": [
-            "C1",
-            "G3",
-            "L2",
-            "M1",
-            "N2",
-            "N3",
-            "N6",
-            "T2",
-            "V1"
-        ],
+        "rules": [34, 35, 36],
+        "facts": ["C1", "G3", "L2", "M1", "N2", "N3", "N6", "T2", "V1"],
         "mp": "24.2MP",
         "video_short": "4K UHD",
         "sensor_short": "Full-frame",
@@ -720,22 +529,8 @@ CAMERAS = [
         "price_range": "40 - 50 triệu đồng (Giá tham khảo: ~ 47.500.000 VNĐ)",
         "price_num": 47500000,
         "price_text": "47.500.000đ",
-        "rules": [
-            37,
-            38,
-            39
-        ],
-        "facts": [
-            "C1",
-            "G5",
-            "L2",
-            "M1",
-            "N1",
-            "N3",
-            "N4",
-            "T2",
-            "V2"
-        ],
+        "rules": [37, 38, 39],
+        "facts": ["C1", "G5", "L2", "M1", "N1", "N3", "N4", "T2", "V2"],
         "mp": "33MP",
         "video_short": "4K UHD",
         "sensor_short": "Full-frame",
@@ -761,22 +556,8 @@ CAMERAS = [
         "price_range": "50 - 60 triệu đồng (Giá tham khảo: ~ 53.500.000 VNĐ)",
         "price_num": 53500000,
         "price_text": "53.500.000đ",
-        "rules": [
-            40,
-            41,
-            42
-        ],
-        "facts": [
-            "C1",
-            "G6",
-            "L2",
-            "M1",
-            "N2",
-            "N3",
-            "N6",
-            "T2",
-            "V2"
-        ],
+        "rules": [40, 41, 42],
+        "facts": ["C1", "G6", "L2", "M1", "N2", "N3", "N6", "T2", "V2"],
         "mp": "33MP",
         "video_short": "4K UHD",
         "sensor_short": "Full-frame",
@@ -802,22 +583,8 @@ CAMERAS = [
         "price_range": "Trên 80 triệu đồng (Giá tham khảo: ~ 83.000.000 VNĐ)",
         "price_num": 83000000,
         "price_text": "83.000.000đ",
-        "rules": [
-            43,
-            44,
-            45
-        ],
-        "facts": [
-            "C1",
-            "G9",
-            "L2",
-            "M1",
-            "N2",
-            "N7",
-            "T2",
-            "V2",
-            "V3"
-        ],
+        "rules": [43, 44, 45],
+        "facts": ["C1", "G9", "L2", "M1", "N2", "N7", "T2", "V2", "V3"],
         "mp": "61MP",
         "video_short": "8K RAW",
         "sensor_short": "Full-frame",
@@ -843,20 +610,8 @@ CAMERAS = [
         "price_range": "70 - 80 triệu đồng (Giá tham khảo: ~ 76.500.000 VNĐ)",
         "price_num": 76500000,
         "price_text": "76.500.000đ",
-        "rules": [
-            46,
-            47
-        ],
-        "facts": [
-            "C1",
-            "G8",
-            "L2",
-            "M1",
-            "N3",
-            "N6",
-            "T2",
-            "V2"
-        ],
+        "rules": [46, 47],
+        "facts": ["C1", "G8", "L2", "M1", "N3", "N6", "T2", "V2"],
         "mp": "12.1MP",
         "video_short": "4K UHD",
         "sensor_short": "Full-frame",
@@ -882,22 +637,8 @@ CAMERAS = [
         "price_range": "Trên 80 triệu đồng (Giá tham khảo: ~ 142.000.000 VNĐ)",
         "price_num": 142000000,
         "price_text": "142.000.000đ",
-        "rules": [
-            48,
-            49,
-            50
-        ],
-        "facts": [
-            "C1",
-            "G9",
-            "L2",
-            "M1",
-            "N5",
-            "N6",
-            "N7",
-            "T2",
-            "V3"
-        ],
+        "rules": [48, 49, 50],
+        "facts": ["C1", "G9", "L2", "M1", "N5", "N6", "N7", "T2", "V3"],
         "mp": "50.1MP",
         "video_short": "8K RAW",
         "sensor_short": "Full-frame",
@@ -923,20 +664,8 @@ CAMERAS = [
         "price_range": "10 - 20 triệu đồng (Giá tham khảo: 18.500.000 VNĐ)",
         "price_num": 18500000,
         "price_text": "18.500.000đ",
-        "rules": [
-            51,
-            52
-        ],
-        "facts": [
-            "C2",
-            "G2",
-            "L1",
-            "M1",
-            "N3",
-            "N5",
-            "T3",
-            "V1"
-        ],
+        "rules": [51, 52],
+        "facts": ["C2", "G2", "L1", "M1", "N3", "N5", "T3", "V1"],
         "mp": "20.9MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -962,20 +691,8 @@ CAMERAS = [
         "price_range": "40 - 50 triệu đồng (Giá tham khảo: 49.000.000 VNĐ)",
         "price_num": 49000000,
         "price_text": "49.000.000đ",
-        "rules": [
-            53,
-            54
-        ],
-        "facts": [
-            "C1",
-            "G5",
-            "L1",
-            "M1",
-            "N2",
-            "N7",
-            "T3",
-            "V1"
-        ],
+        "rules": [53, 54],
+        "facts": ["C1", "G5", "L1", "M1", "N2", "N7", "T3", "V1"],
         "mp": "45.7MP",
         "video_short": "4K UHD",
         "sensor_short": "Full-frame",
@@ -1001,20 +718,8 @@ CAMERAS = [
         "price_range": "10 - 20 triệu đồng (Giá tham khảo: 14.900.000 VNĐ)",
         "price_num": 14900000,
         "price_text": "14.900.000đ",
-        "rules": [
-            55,
-            56
-        ],
-        "facts": [
-            "C2",
-            "G2",
-            "L2",
-            "M1",
-            "N1",
-            "N4",
-            "T3",
-            "V1"
-        ],
+        "rules": [55, 56],
+        "facts": ["C2", "G2", "L2", "M1", "N1", "N4", "T3", "V1"],
         "mp": "20.9MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -1040,20 +745,8 @@ CAMERAS = [
         "price_range": "10 - 20 triệu đồng (Giá tham khảo: 18.000.000 VNĐ)",
         "price_num": 18000000,
         "price_text": "18.000.000đ",
-        "rules": [
-            57,
-            58
-        ],
-        "facts": [
-            "C2",
-            "G2",
-            "L2",
-            "M1",
-            "N1",
-            "N4",
-            "T3",
-            "V1"
-        ],
+        "rules": [57, 58],
+        "facts": ["C2", "G2", "L2", "M1", "N1", "N4", "T3", "V1"],
         "mp": "20.9MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -1079,20 +772,8 @@ CAMERAS = [
         "price_range": "20 - 30 triệu đồng (Giá tham khảo: 21.500.000 VNĐ)",
         "price_num": 21500000,
         "price_text": "21.500.000đ",
-        "rules": [
-            59,
-            60
-        ],
-        "facts": [
-            "C2",
-            "G3",
-            "L2",
-            "M1",
-            "N1",
-            "N4",
-            "T3",
-            "V1"
-        ],
+        "rules": [59, 60],
+        "facts": ["C2", "G3", "L2", "M1", "N1", "N4", "T3", "V1"],
         "mp": "20.9MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -1118,20 +799,8 @@ CAMERAS = [
         "price_range": "20 - 30 triệu đồng (Giá tham khảo: 23.000.000 VNĐ)",
         "price_num": 23000000,
         "price_text": "23.000.000đ",
-        "rules": [
-            61,
-            62
-        ],
-        "facts": [
-            "C1",
-            "G3",
-            "L2",
-            "M1",
-            "N2",
-            "N3",
-            "T3",
-            "V1"
-        ],
+        "rules": [61, 62],
+        "facts": ["C1", "G3", "L2", "M1", "N2", "N3", "T3", "V1"],
         "mp": "24.3MP",
         "video_short": "4K UHD",
         "sensor_short": "Full-frame",
@@ -1157,22 +826,8 @@ CAMERAS = [
         "price_range": "30 - 40 triệu đồng (Giá tham khảo: 38.000.000 VNĐ)",
         "price_num": 38000000,
         "price_text": "38.000.000đ",
-        "rules": [
-            63,
-            64,
-            65
-        ],
-        "facts": [
-            "C1",
-            "G4",
-            "L2",
-            "M1",
-            "N2",
-            "N3",
-            "T3",
-            "V1",
-            "V2"
-        ],
+        "rules": [63, 64, 65],
+        "facts": ["C1", "G4", "L2", "M1", "N2", "N3", "T3", "V1", "V2"],
         "mp": "24.5MP",
         "video_short": "4K UHD",
         "sensor_short": "Full-frame",
@@ -1198,20 +853,8 @@ CAMERAS = [
         "price_range": "50 - 60 triệu đồng (Giá tham khảo: 56.000.000 VNĐ)",
         "price_num": 56000000,
         "price_text": "56.000.000đ",
-        "rules": [
-            66,
-            67
-        ],
-        "facts": [
-            "C1",
-            "G6",
-            "L2",
-            "M1",
-            "N2",
-            "N7",
-            "T3",
-            "V2"
-        ],
+        "rules": [66, 67],
+        "facts": ["C1", "G6", "L2", "M1", "N2", "N7", "T3", "V2"],
         "mp": "45.7MP",
         "video_short": "4K UHD",
         "sensor_short": "Full-frame",
@@ -1237,22 +880,8 @@ CAMERAS = [
         "price_range": "Trên 80 triệu đồng (Giá tham khảo: 92.000.000 VNĐ)",
         "price_num": 92000000,
         "price_text": "92.000.000đ",
-        "rules": [
-            68,
-            69,
-            70
-        ],
-        "facts": [
-            "C1",
-            "G9",
-            "L2",
-            "M1",
-            "N5",
-            "N6",
-            "N7",
-            "T3",
-            "V3"
-        ],
+        "rules": [68, 69, 70],
+        "facts": ["C1", "G9", "L2", "M1", "N5", "N6", "N7", "T3", "V3"],
         "mp": "45.7MP",
         "video_short": "8K RAW",
         "sensor_short": "Full-frame",
@@ -1278,20 +907,8 @@ CAMERAS = [
         "price_range": "Trên 80 triệu đồng (Giá tham khảo: 122.000.000 VNĐ)",
         "price_num": 122000000,
         "price_text": "122.000.000đ",
-        "rules": [
-            71,
-            72
-        ],
-        "facts": [
-            "C1",
-            "G9",
-            "L2",
-            "M1",
-            "N5",
-            "N6",
-            "T3",
-            "V3"
-        ],
+        "rules": [71, 72],
+        "facts": ["C1", "G9", "L2", "M1", "N5", "N6", "T3", "V3"],
         "mp": "45.7MP",
         "video_short": "8K RAW",
         "sensor_short": "Full-frame",
@@ -1317,20 +934,8 @@ CAMERAS = [
         "price_range": "20 - 30 triệu đồng (Giá tham khảo: 21.000.000 VNĐ)",
         "price_num": 21000000,
         "price_text": "21.000.000đ",
-        "rules": [
-            73,
-            74
-        ],
-        "facts": [
-            "C2",
-            "G3",
-            "L2",
-            "M1",
-            "N1",
-            "N2",
-            "T4",
-            "V1"
-        ],
+        "rules": [73, 74],
+        "facts": ["C2", "G3", "L2", "M1", "N1", "N2", "T4", "V1"],
         "mp": "26.1MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -1356,18 +961,8 @@ CAMERAS = [
         "price_range": "20 - 30 triệu đồng (Giá tham khảo: 22.000.000 VNĐ)",
         "price_num": 22000000,
         "price_text": "22.000.000đ",
-        "rules": [
-            75
-        ],
-        "facts": [
-            "C2",
-            "G3",
-            "L2",
-            "M1",
-            "N1",
-            "T4",
-            "V1"
-        ],
+        "rules": [75],
+        "facts": ["C2", "G3", "L2", "M1", "N1", "T4", "V1"],
         "mp": "26.1MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -1393,20 +988,8 @@ CAMERAS = [
         "price_range": "20 - 30 triệu đồng (Giá tham khảo: 23.500.000 VNĐ)",
         "price_num": 23500000,
         "price_text": "23.500.000đ",
-        "rules": [
-            76,
-            77
-        ],
-        "facts": [
-            "C2",
-            "G3",
-            "L2",
-            "M1",
-            "N3",
-            "N4",
-            "T4",
-            "V1"
-        ],
+        "rules": [76, 77],
+        "facts": ["C2", "G3", "L2", "M1", "N3", "N4", "T4", "V1"],
         "mp": "26.1MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -1432,22 +1015,8 @@ CAMERAS = [
         "price_range": "30 - 40 triệu đồng (Giá tham khảo: 30.500.000 VNĐ)",
         "price_num": 30500000,
         "price_text": "30.500.000đ",
-        "rules": [
-            78,
-            79,
-            80
-        ],
-        "facts": [
-            "C2",
-            "G4",
-            "L2",
-            "M1",
-            "N3",
-            "N4",
-            "T4",
-            "V2",
-            "V3"
-        ],
+        "rules": [78, 79, 80],
+        "facts": ["C2", "G4", "L2", "M1", "N3", "N4", "T4", "V2", "V3"],
         "mp": "26.1MP",
         "video_short": "6K Pro",
         "sensor_short": "APS-C CMOS",
@@ -1473,20 +1042,8 @@ CAMERAS = [
         "price_range": "30 - 40 triệu đồng (Giá tham khảo: 33.000.000 VNĐ)",
         "price_num": 33000000,
         "price_text": "33.000.000đ",
-        "rules": [
-            81,
-            82
-        ],
-        "facts": [
-            "C2",
-            "G4",
-            "L2",
-            "M1",
-            "N3",
-            "N6",
-            "T4",
-            "V2"
-        ],
+        "rules": [81, 82],
+        "facts": ["C2", "G4", "L2", "M1", "N3", "N6", "T4", "V2"],
         "mp": "26.1MP",
         "video_short": "4K UHD",
         "sensor_short": "APS-C CMOS",
@@ -1512,22 +1069,8 @@ CAMERAS = [
         "price_range": "40 - 50 triệu đồng (Giá tham khảo: 41.500.000 VNĐ)",
         "price_num": 41500000,
         "price_text": "41.500.000đ",
-        "rules": [
-            83,
-            84,
-            85
-        ],
-        "facts": [
-            "C2",
-            "G5",
-            "L2",
-            "M1",
-            "N1",
-            "N2",
-            "N3",
-            "T4",
-            "V3"
-        ],
+        "rules": [83, 84, 85],
+        "facts": ["C2", "G5", "L2", "M1", "N1", "N2", "N3", "T4", "V3"],
         "mp": "40MP",
         "video_short": "6K Pro",
         "sensor_short": "APS-C CMOS",
@@ -1553,20 +1096,8 @@ CAMERAS = [
         "price_range": "40 - 50 triệu đồng (Giá tham khảo: 44.000.000 VNĐ)",
         "price_num": 44000000,
         "price_text": "44.000.000đ",
-        "rules": [
-            86,
-            87
-        ],
-        "facts": [
-            "C2",
-            "G5",
-            "L2",
-            "M1",
-            "N6",
-            "N7",
-            "T4",
-            "V3"
-        ],
+        "rules": [86, 87],
+        "facts": ["C2", "G5", "L2", "M1", "N6", "N7", "T4", "V3"],
         "mp": "40MP",
         "video_short": "8K RAW",
         "sensor_short": "APS-C CMOS",
@@ -1592,20 +1123,8 @@ CAMERAS = [
         "price_range": "50 – 60  triệu đồng (Giá tham khảo: 54.000.000 VNĐ)",
         "price_num": 54000000,
         "price_text": "54.000.000đ",
-        "rules": [
-            88,
-            89
-        ],
-        "facts": [
-            "C2",
-            "G6",
-            "L2",
-            "M1",
-            "N5",
-            "N6",
-            "T4",
-            "V3"
-        ],
+        "rules": [88, 89],
+        "facts": ["C2", "G6", "L2", "M1", "N5", "N6", "T4", "V3"],
         "mp": "26.1MP",
         "video_short": "6K Pro",
         "sensor_short": "APS-C CMOS",
@@ -1631,20 +1150,8 @@ CAMERAS = [
         "price_range": "trên 80 triệu đồng (Giá tham khảo: 82.000.000 VNĐ)",
         "price_num": 82000000,
         "price_text": "82.000.000đ",
-        "rules": [
-            90,
-            91
-        ],
-        "facts": [
-            "C3",
-            "G9",
-            "L2",
-            "M1",
-            "N2",
-            "N7",
-            "T4",
-            "V1"
-        ],
+        "rules": [90, 91],
+        "facts": ["C3", "G9", "L2", "M1", "N2", "N7", "T4", "V1"],
         "mp": "51.4MP",
         "video_short": "FHD 60p",
         "sensor_short": "M.Format",
@@ -1670,20 +1177,8 @@ CAMERAS = [
         "price_range": "trên 80 triệu đồng (Giá tham khảo: 129.000.000 VNĐ)",
         "price_num": 129000000,
         "price_text": "129.000.000đ",
-        "rules": [
-            92,
-            93
-        ],
-        "facts": [
-            "C3",
-            "G9",
-            "L2",
-            "M1",
-            "N2",
-            "N7",
-            "T4",
-            "V2"
-        ],
+        "rules": [92, 93],
+        "facts": ["C3", "G9", "L2", "M1", "N2", "N7", "T4", "V2"],
         "mp": "102MP",
         "video_short": "4K UHD",
         "sensor_short": "M.Format",
@@ -1709,20 +1204,8 @@ CAMERAS = [
         "price_range": "10 – 20  triệu đồng (Giá tham khảo: 12.500.000 VNĐ)",
         "price_num": 12500000,
         "price_text": "12.500.000đ",
-        "rules": [
-            94,
-            95
-        ],
-        "facts": [
-            "C4",
-            "G2",
-            "L2",
-            "M1",
-            "N1",
-            "N4",
-            "T5",
-            "V1"
-        ],
+        "rules": [94, 95],
+        "facts": ["C4", "G2", "L2", "M1", "N1", "N4", "T5", "V1"],
         "mp": "20.3MP",
         "video_short": "4K UHD",
         "sensor_short": "M4/3 CMOS",
@@ -1748,20 +1231,8 @@ CAMERAS = [
         "price_range": "10 - 20 triệu đồng (Giá tham khảo: 15.000.000 VNĐ)",
         "price_num": 15000000,
         "price_text": "15.000.000đ",
-        "rules": [
-            96,
-            97
-        ],
-        "facts": [
-            "C4",
-            "G2",
-            "L2",
-            "M1",
-            "N1",
-            "N4",
-            "T5",
-            "V1"
-        ],
+        "rules": [96, 97],
+        "facts": ["C4", "G2", "L2", "M1", "N1", "N4", "T5", "V1"],
         "mp": "16.0MP",
         "video_short": "4K UHD",
         "sensor_short": "M4/3 CMOS",
@@ -1787,20 +1258,8 @@ CAMERAS = [
         "price_range": "10 - 20 triệu đồng (Giá tham khảo: 18.500.000 VNĐ)",
         "price_num": 18500000,
         "price_text": "18.500.000đ",
-        "rules": [
-            98,
-            99
-        ],
-        "facts": [
-            "C4",
-            "G2",
-            "L2",
-            "M1",
-            "N3",
-            "N4",
-            "T5",
-            "V1"
-        ],
+        "rules": [98, 99],
+        "facts": ["C4", "G2", "L2", "M1", "N3", "N4", "T5", "V1"],
         "mp": "20.3MP",
         "video_short": "4K UHD",
         "sensor_short": "M4/3 CMOS",
@@ -1826,20 +1285,8 @@ CAMERAS = [
         "price_range": "20 - 30 triệu đồng (Giá tham khảo: 24.000.000 VNĐ)",
         "price_num": 24000000,
         "price_text": "24.000.000đ",
-        "rules": [
-            100,
-            101
-        ],
-        "facts": [
-            "C4",
-            "G3",
-            "L2",
-            "M1",
-            "N3",
-            "N6",
-            "T5",
-            "V2"
-        ],
+        "rules": [100, 101],
+        "facts": ["C4", "G3", "L2", "M1", "N3", "N6", "T5", "V2"],
         "mp": "20.3MP",
         "video_short": "4K UHD",
         "sensor_short": "M4/3 CMOS",
@@ -1865,20 +1312,8 @@ CAMERAS = [
         "price_range": "30 - 40 triệu đồng (Giá tham khảo: 32.000.000 VNĐ)",
         "price_num": 32000000,
         "price_text": "32.000.000đ",
-        "rules": [
-            102,
-            103
-        ],
-        "facts": [
-            "C4",
-            "G4",
-            "L2",
-            "M1",
-            "N4",
-            "N6",
-            "T5",
-            "V2"
-        ],
+        "rules": [102, 103],
+        "facts": ["C4", "G4", "L2", "M1", "N4", "N6", "T5", "V2"],
         "mp": "20.3MP",
         "video_short": "4K UHD",
         "sensor_short": "M4/3 CMOS",
@@ -1904,20 +1339,8 @@ CAMERAS = [
         "price_range": "30 - 40 triệu đồng (Giá tham khảo: 33.500.000 VNĐ)",
         "price_num": 33500000,
         "price_text": "33.500.000đ",
-        "rules": [
-            104,
-            105
-        ],
-        "facts": [
-            "C1",
-            "G4",
-            "L2",
-            "M1",
-            "N2",
-            "N6",
-            "T5",
-            "V2"
-        ],
+        "rules": [104, 105],
+        "facts": ["C1", "G4", "L2", "M1", "N2", "N6", "T5", "V2"],
         "mp": "96MP",
         "video_short": "4K UHD",
         "sensor_short": "Full-frame",
@@ -1943,20 +1366,8 @@ CAMERAS = [
         "price_range": "30 - 40 triệu đồng (Giá tham khảo: 38.000.000 VNĐ)",
         "price_num": 38000000,
         "price_text": "38.000.000đ",
-        "rules": [
-            106,
-            107
-        ],
-        "facts": [
-            "C4",
-            "G4",
-            "L2",
-            "M1",
-            "N6",
-            "T5",
-            "V2",
-            "V3"
-        ],
+        "rules": [106, 107],
+        "facts": ["C4", "G4", "L2", "M1", "N6", "T5", "V2", "V3"],
         "mp": "25.2MP",
         "video_short": "6K Pro",
         "sensor_short": "M4/3 CMOS",
@@ -1982,20 +1393,8 @@ CAMERAS = [
         "price_range": "40 - 50 triệu đồng (Giá tham khảo: 42.000.000 VNĐ)",
         "price_num": 42000000,
         "price_text": "42.000.000đ",
-        "rules": [
-            108,
-            109
-        ],
-        "facts": [
-            "C4",
-            "G5",
-            "L2",
-            "M1",
-            "N5",
-            "N6",
-            "T5",
-            "V3"
-        ],
+        "rules": [108, 109],
+        "facts": ["C4", "G5", "L2", "M1", "N5", "N6", "T5", "V3"],
         "mp": "25.2MP",
         "video_short": "6K Pro",
         "sensor_short": "M4/3 CMOS",
@@ -2021,20 +1420,8 @@ CAMERAS = [
         "price_range": "40 - 50 triệu đồng (Giá tham khảo: 43.000.000 VNĐ)",
         "price_num": 43000000,
         "price_text": "43.000.000đ",
-        "rules": [
-            110,
-            111
-        ],
-        "facts": [
-            "C1",
-            "G5",
-            "L2",
-            "M1",
-            "N3",
-            "N6",
-            "T5",
-            "V3"
-        ],
+        "rules": [110, 111],
+        "facts": ["C1", "G5", "L2", "M1", "N3", "N6", "T5", "V3"],
         "mp": "24.2MP",
         "video_short": "6K Pro",
         "sensor_short": "Full-frame",
@@ -2060,20 +1447,8 @@ CAMERAS = [
         "price_range": "trên 80 triệu đồng (Giá tham khảo: 85.000.000 VNĐ)",
         "price_num": 85000000,
         "price_text": "85.000.000đ",
-        "rules": [
-            112,
-            113
-        ],
-        "facts": [
-            "C1",
-            "G9",
-            "L2",
-            "M1",
-            "N6",
-            "T5",
-            "V2",
-            "V3"
-        ],
+        "rules": [112, 113],
+        "facts": ["C1", "G9", "L2", "M1", "N6", "T5", "V2", "V3"],
         "mp": "24.2MP",
         "video_short": "6K Pro",
         "sensor_short": "Full-frame",
@@ -2093,1701 +1468,119 @@ CAMERAS = [
 #   IF (T_i ∧ L_j ∧ C_k ∧ M_l ∧ V_m ∧ N_n ∧ G_p) THEN K_q
 # ==============================================================================
 RULES = [
-    {
-        "id": 1,
-        "conditions": [
-            "T1",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N4",
-            "G2"
-        ],
-        "conclusion": "K1",
-        "formula": "T1∧L2∧C2∧M1∧V1∧N4∧G2→K1",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R50."
-    },
-    {
-        "id": 2,
-        "conditions": [
-            "T1",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N1",
-            "G2"
-        ],
-        "conclusion": "K1",
-        "formula": "T1∧L2∧C2∧M1∧V1∧N1∧G2→K1",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R50."
-    },
-    {
-        "id": 3,
-        "conditions": [
-            "T1",
-            "L2",
-            "C2",
-            "M2",
-            "V1",
-            "N1",
-            "G2"
-        ],
-        "conclusion": "K2",
-        "formula": "T1∧L2∧C2∧M2∧V1∧N1∧G2→K2",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R100."
-    },
-    {
-        "id": 4,
-        "conditions": [
-            "T1",
-            "L2",
-            "C2",
-            "M2",
-            "V1",
-            "N2",
-            "G2"
-        ],
-        "conclusion": "K2",
-        "formula": "T1∧L2∧C2∧M2∧V1∧N2∧G2→K2",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R100."
-    },
-    {
-        "id": 5,
-        "conditions": [
-            "T1",
-            "L2",
-            "C2",
-            "M1",
-            "V2",
-            "N3",
-            "G2"
-        ],
-        "conclusion": "K3",
-        "formula": "T1∧L2∧C2∧M1∧V2∧N3∧G2→K3",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R10."
-    },
-    {
-        "id": 6,
-        "conditions": [
-            "T1",
-            "L2",
-            "C2",
-            "M1",
-            "V2",
-            "N5",
-            "G2"
-        ],
-        "conclusion": "K3",
-        "formula": "T1∧L2∧C2∧M1∧V2∧N5∧G2→K3",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R10."
-    },
-    {
-        "id": 7,
-        "conditions": [
-            "T1",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N3",
-            "G2"
-        ],
-        "conclusion": "K3",
-        "formula": "T1∧L2∧C2∧M1∧V1∧N3∧G2→K3",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R10."
-    },
-    {
-        "id": 8,
-        "conditions": [
-            "T1",
-            "L1",
-            "C1",
-            "M2",
-            "V1",
-            "N2",
-            "G1"
-        ],
-        "conclusion": "K4",
-        "formula": "T1∧L1∧C1∧M2∧V1∧N2∧G1→K4",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy DSLR, trang bị cảm biến Full-frame, không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 0 - 10 triệu đồng thì nên chọn Máy ảnh Canon EOS 6D."
-    },
-    {
-        "id": 9,
-        "conditions": [
-            "T1",
-            "L1",
-            "C1",
-            "M2",
-            "V1",
-            "N1",
-            "G1"
-        ],
-        "conclusion": "K4",
-        "formula": "T1∧L1∧C1∧M2∧V1∧N1∧G1→K4",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy DSLR, trang bị cảm biến Full-frame, không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 0 - 10 triệu đồng thì nên chọn Máy ảnh Canon EOS 6D."
-    },
-    {
-        "id": 10,
-        "conditions": [
-            "T1",
-            "L1",
-            "C1",
-            "M2",
-            "V1",
-            "N3",
-            "G2"
-        ],
-        "conclusion": "K5",
-        "formula": "T1∧L1∧C1∧M2∧V1∧N3∧G2→K5",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy DSLR, trang bị cảm biến Full-frame, không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS 5D Mark III."
-    },
-    {
-        "id": 11,
-        "conditions": [
-            "T1",
-            "L1",
-            "C1",
-            "M2",
-            "V1",
-            "N2",
-            "G2"
-        ],
-        "conclusion": "K5",
-        "formula": "T1∧L1∧C1∧M2∧V1∧N2∧G2→K5",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy DSLR, trang bị cảm biến Full-frame, không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS 5D Mark III."
-    },
-    {
-        "id": 12,
-        "conditions": [
-            "T1",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N2",
-            "G3"
-        ],
-        "conclusion": "K6",
-        "formula": "T1∧L2∧C1∧M1∧V2∧N2∧G3→K6",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Canon EOS R8."
-    },
-    {
-        "id": 13,
-        "conditions": [
-            "T1",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N1",
-            "G3"
-        ],
-        "conclusion": "K6",
-        "formula": "T1∧L2∧C1∧M1∧V2∧N1∧G3→K6",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Canon EOS R8."
-    },
-    {
-        "id": 14,
-        "conditions": [
-            "T1",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N4",
-            "G3"
-        ],
-        "conclusion": "K6",
-        "formula": "T1∧L2∧C1∧M1∧V2∧N4∧G3→K6",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Canon EOS R8."
-    },
-    {
-        "id": 15,
-        "conditions": [
-            "T1",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N3",
-            "G5"
-        ],
-        "conclusion": "K7",
-        "formula": "T1∧L2∧C1∧M1∧V2∧N3∧G5→K7",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Canon EOS R6 Mark II."
-    },
-    {
-        "id": 16,
-        "conditions": [
-            "T1",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N5",
-            "G5"
-        ],
-        "conclusion": "K7",
-        "formula": "T1∧L2∧C1∧M1∧V2∧N5∧G5→K7",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Canon EOS R6 Mark II."
-    },
-    {
-        "id": 17,
-        "conditions": [
-            "T1",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N6",
-            "G5"
-        ],
-        "conclusion": "K7",
-        "formula": "T1∧L2∧C1∧M1∧V2∧N6∧G5→K7",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Canon EOS R6 Mark II."
-    },
-    {
-        "id": 18,
-        "conditions": [
-            "T1",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N7",
-            "G7"
-        ],
-        "conclusion": "K8",
-        "formula": "T1∧L2∧C1∧M1∧V3∧N7∧G7→K8",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chụp Studio, thương mại với phân khúc giá từ 60 - 70 triệu đồng thì nên chọn Máy ảnh Canon EOS R5."
-    },
-    {
-        "id": 19,
-        "conditions": [
-            "T1",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N6",
-            "G7"
-        ],
-        "conclusion": "K8",
-        "formula": "T1∧L2∧C1∧M1∧V3∧N6∧G7→K8",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 60 - 70 triệu đồng thì nên chọn Máy ảnh Canon EOS R5."
-    },
-    {
-        "id": 20,
-        "conditions": [
-            "T1",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N7",
-            "G7"
-        ],
-        "conclusion": "K8",
-        "formula": "T1∧L2∧C1∧M1∧V2∧N7∧G7→K8",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chụp Studio, thương mại với phân khúc giá từ 60 - 70 triệu đồng thì nên chọn Máy ảnh Canon EOS R5."
-    },
-    {
-        "id": 21,
-        "conditions": [
-            "T1",
-            "L1",
-            "C2",
-            "M1",
-            "V1",
-            "N5",
-            "G3"
-        ],
-        "conclusion": "K9",
-        "formula": "T1∧L1∧C2∧M1∧V1∧N5∧G3→K9",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy DSLR, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Canon EOS 90D."
-    },
-    {
-        "id": 22,
-        "conditions": [
-            "T1",
-            "L1",
-            "C2",
-            "M1",
-            "V1",
-            "N3",
-            "G3"
-        ],
-        "conclusion": "K9",
-        "formula": "T1∧L1∧C2∧M1∧V1∧N3∧G3→K9",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy DSLR, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Canon EOS 90D."
-    },
-    {
-        "id": 23,
-        "conditions": [
-            "T1",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N5",
-            "G9"
-        ],
-        "conclusion": "K10",
-        "formula": "T1∧L2∧C1∧M1∧V3∧N5∧G9→K10",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Canon EOS R3."
-    },
-    {
-        "id": 24,
-        "conditions": [
-            "T1",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N6",
-            "G9"
-        ],
-        "conclusion": "K10",
-        "formula": "T1∧L2∧C1∧M1∧V3∧N6∧G9→K10",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Canon EOS R3."
-    },
-    {
-        "id": 25,
-        "conditions": [
-            "T2",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N4",
-            "G2"
-        ],
-        "conclusion": "K11",
-        "formula": "T2∧L2∧C2∧M1∧V1∧N4∧G2→K11",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Sony ZV-E10."
-    },
-    {
-        "id": 26,
-        "conditions": [
-            "T2",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N1",
-            "G2"
-        ],
-        "conclusion": "K11",
-        "formula": "T2∧L2∧C2∧M1∧V1∧N1∧G2→K11",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Sony ZV-E10."
-    },
-    {
-        "id": 27,
-        "conditions": [
-            "T2",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N4",
-            "G2"
-        ],
-        "conclusion": "K12",
-        "formula": "T2∧L2∧C2∧M1∧V1∧N4∧G2→K12",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Sony Alpha A6400."
-    },
-    {
-        "id": 28,
-        "conditions": [
-            "T2",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N1",
-            "G2"
-        ],
-        "conclusion": "K12",
-        "formula": "T2∧L2∧C2∧M1∧V1∧N1∧G2→K12",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Sony Alpha A6400."
-    },
-    {
-        "id": 29,
-        "conditions": [
-            "T2",
-            "L2",
-            "C2",
-            "M1",
-            "V2",
-            "N3",
-            "G4"
-        ],
-        "conclusion": "K13",
-        "formula": "T2∧L2∧C2∧M1∧V2∧N3∧G4→K13",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Sony Alpha A6700."
-    },
-    {
-        "id": 30,
-        "conditions": [
-            "T2",
-            "L2",
-            "C2",
-            "M1",
-            "V2",
-            "N4",
-            "G4"
-        ],
-        "conclusion": "K13",
-        "formula": "T2∧L2∧C2∧M1∧V2∧N4∧G4→K13",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Sony Alpha A6700."
-    },
-    {
-        "id": 31,
-        "conditions": [
-            "T2",
-            "L2",
-            "C2",
-            "M1",
-            "V2",
-            "N5",
-            "G4"
-        ],
-        "conclusion": "K13",
-        "formula": "T2∧L2∧C2∧M1∧V2∧N5∧G4→K13",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Sony Alpha A6700."
-    },
-    {
-        "id": 32,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M2",
-            "V1",
-            "N2",
-            "G2"
-        ],
-        "conclusion": "K14",
-        "formula": "T2∧L2∧C1∧M2∧V1∧N2∧G2→K14",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 II."
-    },
-    {
-        "id": 33,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M2",
-            "V1",
-            "N1",
-            "G2"
-        ],
-        "conclusion": "K14",
-        "formula": "T2∧L2∧C1∧M2∧V1∧N1∧G2→K14",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 II."
-    },
-    {
-        "id": 34,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V1",
-            "N3",
-            "G3"
-        ],
-        "conclusion": "K15",
-        "formula": "T2∧L2∧C1∧M1∧V1∧N3∧G3→K15",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 III."
-    },
-    {
-        "id": 35,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V1",
-            "N2",
-            "G3"
-        ],
-        "conclusion": "K15",
-        "formula": "T2∧L2∧C1∧M1∧V1∧N2∧G3→K15",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 III."
-    },
-    {
-        "id": 36,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V1",
-            "N6",
-            "G3"
-        ],
-        "conclusion": "K15",
-        "formula": "T2∧L2∧C1∧M1∧V1∧N6∧G3→K15",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 III."
-    },
-    {
-        "id": 37,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N4",
-            "G5"
-        ],
-        "conclusion": "K16",
-        "formula": "T2∧L2∧C1∧M1∧V2∧N4∧G5→K16",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7C II."
-    },
-    {
-        "id": 38,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N1",
-            "G5"
-        ],
-        "conclusion": "K16",
-        "formula": "T2∧L2∧C1∧M1∧V2∧N1∧G5→K16",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7C II."
-    },
-    {
-        "id": 39,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N3",
-            "G5"
-        ],
-        "conclusion": "K16",
-        "formula": "T2∧L2∧C1∧M1∧V2∧N3∧G5→K16",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7C II."
-    },
-    {
-        "id": 40,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N3",
-            "G6"
-        ],
-        "conclusion": "K17",
-        "formula": "T2∧L2∧C1∧M1∧V2∧N3∧G6→K17",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 IV."
-    },
-    {
-        "id": 41,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N2",
-            "G6"
-        ],
-        "conclusion": "K17",
-        "formula": "T2∧L2∧C1∧M1∧V2∧N2∧G6→K17",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 IV."
-    },
-    {
-        "id": 42,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N6",
-            "G6"
-        ],
-        "conclusion": "K17",
-        "formula": "T2∧L2∧C1∧M1∧V2∧N6∧G6→K17",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 IV."
-    },
-    {
-        "id": 43,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N7",
-            "G9"
-        ],
-        "conclusion": "K18",
-        "formula": "T2∧L2∧C1∧M1∧V3∧N7∧G9→K18",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chụp Studio, thương mại với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7R V."
-    },
-    {
-        "id": 44,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N2",
-            "G9"
-        ],
-        "conclusion": "K18",
-        "formula": "T2∧L2∧C1∧M1∧V3∧N2∧G9→K18",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chân dung, phong cảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7R V."
-    },
-    {
-        "id": 45,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N7",
-            "G9"
-        ],
-        "conclusion": "K18",
-        "formula": "T2∧L2∧C1∧M1∧V2∧N7∧G9→K18",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chụp Studio, thương mại với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7R V."
-    },
-    {
-        "id": 46,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N6",
-            "G8"
-        ],
-        "conclusion": "K19",
-        "formula": "T2∧L2∧C1∧M1∧V2∧N6∧G8→K19",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 70 - 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7S III."
-    },
-    {
-        "id": 47,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N3",
-            "G8"
-        ],
-        "conclusion": "K19",
-        "formula": "T2∧L2∧C1∧M1∧V2∧N3∧G8→K19",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 70 - 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7S III."
-    },
-    {
-        "id": 48,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N5",
-            "G9"
-        ],
-        "conclusion": "K20",
-        "formula": "T2∧L2∧C1∧M1∧V3∧N5∧G9→K20",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A1."
-    },
-    {
-        "id": 49,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N7",
-            "G9"
-        ],
-        "conclusion": "K20",
-        "formula": "T2∧L2∧C1∧M1∧V3∧N7∧G9→K20",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chụp Studio, thương mại với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A1."
-    },
-    {
-        "id": 50,
-        "conditions": [
-            "T2",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N6",
-            "G9"
-        ],
-        "conclusion": "K20",
-        "formula": "T2∧L2∧C1∧M1∧V3∧N6∧G9→K20",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A1."
-    },
-    {
-        "id": 51,
-        "conditions": [
-            "T3",
-            "L1",
-            "C2",
-            "M1",
-            "V1",
-            "N5",
-            "G2"
-        ],
-        "conclusion": "K21",
-        "formula": "T3∧L1∧C2∧M1∧V1∧N5∧G2→K21",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy DSLR, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Nikon D7500."
-    },
-    {
-        "id": 52,
-        "conditions": [
-            "T3",
-            "L1",
-            "C2",
-            "M1",
-            "V1",
-            "N3",
-            "G2"
-        ],
-        "conclusion": "K21",
-        "formula": "T3∧L1∧C2∧M1∧V1∧N3∧G2→K21",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy DSLR, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Nikon D7500."
-    },
-    {
-        "id": 53,
-        "conditions": [
-            "T3",
-            "L1",
-            "C1",
-            "M1",
-            "V1",
-            "N7",
-            "G5"
-        ],
-        "conclusion": "K22",
-        "formula": "T3∧L1∧C1∧M1∧V1∧N7∧G5→K22",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy DSLR, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chụp Studio, thương mại với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Nikon D850."
-    },
-    {
-        "id": 54,
-        "conditions": [
-            "T3",
-            "L1",
-            "C1",
-            "M1",
-            "V1",
-            "N2",
-            "G5"
-        ],
-        "conclusion": "K22",
-        "formula": "T3∧L1∧C1∧M1∧V1∧N2∧G5→K22",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy DSLR, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Nikon D850."
-    },
-    {
-        "id": 55,
-        "conditions": [
-            "T3",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N4",
-            "G2"
-        ],
-        "conclusion": "K23",
-        "formula": "T3∧L2∧C2∧M1∧V1∧N4∧G2→K23",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Nikon Z30."
-    },
-    {
-        "id": 56,
-        "conditions": [
-            "T3",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N1",
-            "G2"
-        ],
-        "conclusion": "K23",
-        "formula": "T3∧L2∧C2∧M1∧V1∧N1∧G2→K23",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Nikon Z30."
-    },
-    {
-        "id": 57,
-        "conditions": [
-            "T3",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N1",
-            "G2"
-        ],
-        "conclusion": "K24",
-        "formula": "T3∧L2∧C2∧M1∧V1∧N1∧G2→K24",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Nikon Z50."
-    },
-    {
-        "id": 58,
-        "conditions": [
-            "T3",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N4",
-            "G2"
-        ],
-        "conclusion": "K24",
-        "formula": "T3∧L2∧C2∧M1∧V1∧N4∧G2→K24",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Nikon Z50."
-    },
-    {
-        "id": 59,
-        "conditions": [
-            "T3",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N1",
-            "G3"
-        ],
-        "conclusion": "K25",
-        "formula": "T3∧L2∧C2∧M1∧V1∧N1∧G3→K25",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Nikon Z fc."
-    },
-    {
-        "id": 60,
-        "conditions": [
-            "T3",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N4",
-            "G3"
-        ],
-        "conclusion": "K25",
-        "formula": "T3∧L2∧C2∧M1∧V1∧N4∧G3→K25",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Nikon Z fc."
-    },
-    {
-        "id": 61,
-        "conditions": [
-            "T3",
-            "L2",
-            "C1",
-            "M1",
-            "V1",
-            "N2",
-            "G3"
-        ],
-        "conclusion": "K26",
-        "formula": "T3∧L2∧C1∧M1∧V1∧N2∧G3→K26",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Nikon Z5."
-    },
-    {
-        "id": 62,
-        "conditions": [
-            "T3",
-            "L2",
-            "C1",
-            "M1",
-            "V1",
-            "N3",
-            "G3"
-        ],
-        "conclusion": "K26",
-        "formula": "T3∧L2∧C1∧M1∧V1∧N3∧G3→K26",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Nikon Z5."
-    },
-    {
-        "id": 63,
-        "conditions": [
-            "T3",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N3",
-            "G4"
-        ],
-        "conclusion": "K27",
-        "formula": "T3∧L2∧C1∧M1∧V2∧N3∧G4→K27",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Nikon Z6 II."
-    },
-    {
-        "id": 64,
-        "conditions": [
-            "T3",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N2",
-            "G4"
-        ],
-        "conclusion": "K27",
-        "formula": "T3∧L2∧C1∧M1∧V2∧N2∧G4→K27",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Nikon Z6 II."
-    },
-    {
-        "id": 65,
-        "conditions": [
-            "T3",
-            "L2",
-            "C1",
-            "M1",
-            "V1",
-            "N3",
-            "G4"
-        ],
-        "conclusion": "K27",
-        "formula": "T3∧L2∧C1∧M1∧V1∧N3∧G4→K27",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Nikon Z6 II."
-    },
-    {
-        "id": 66,
-        "conditions": [
-            "T3",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N7",
-            "G6"
-        ],
-        "conclusion": "K28",
-        "formula": "T3∧L2∧C1∧M1∧V2∧N7∧G6→K28",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chụp Studio, thương mại với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Nikon Z7 II."
-    },
-    {
-        "id": 67,
-        "conditions": [
-            "T3",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N2",
-            "G6"
-        ],
-        "conclusion": "K28",
-        "formula": "T3∧L2∧C1∧M1∧V2∧N2∧G6→K28",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Nikon Z7 II."
-    },
-    {
-        "id": 68,
-        "conditions": [
-            "T3",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N6",
-            "G9"
-        ],
-        "conclusion": "K29",
-        "formula": "T3∧L2∧C1∧M1∧V3∧N6∧G9→K29",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Nikon Z8."
-    },
-    {
-        "id": 69,
-        "conditions": [
-            "T3",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N5",
-            "G9"
-        ],
-        "conclusion": "K29",
-        "formula": "T3∧L2∧C1∧M1∧V3∧N5∧G9→K29",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Nikon Z8."
-    },
-    {
-        "id": 70,
-        "conditions": [
-            "T3",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N7",
-            "G9"
-        ],
-        "conclusion": "K29",
-        "formula": "T3∧L2∧C1∧M1∧V3∧N7∧G9→K29",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chụp Studio, thương mại với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Nikon Z8."
-    },
-    {
-        "id": 71,
-        "conditions": [
-            "T3",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N5",
-            "G9"
-        ],
-        "conclusion": "K30",
-        "formula": "T3∧L2∧C1∧M1∧V3∧N5∧G9→K30",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Nikon Z9."
-    },
-    {
-        "id": 72,
-        "conditions": [
-            "T3",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N6",
-            "G9"
-        ],
-        "conclusion": "K30",
-        "formula": "T3∧L2∧C1∧M1∧V3∧N6∧G9→K30",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Nikon Z9."
-    },
-    {
-        "id": 73,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N1",
-            "G3"
-        ],
-        "conclusion": "K31",
-        "formula": "T4∧L2∧C2∧M1∧V1∧N1∧G3→K31",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T30 II."
-    },
-    {
-        "id": 74,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N2",
-            "G3"
-        ],
-        "conclusion": "K31",
-        "formula": "T4∧L2∧C2∧M1∧V1∧N2∧G3→K31",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T30 II."
-    },
-    {
-        "id": 75,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N1",
-            "G3"
-        ],
-        "conclusion": "K32",
-        "formula": "T4∧L2∧C2∧M1∧V1∧N1∧G3→K32",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Fujifilm X-E4."
-    },
-    {
-        "id": 76,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N3",
-            "G3"
-        ],
-        "conclusion": "K33",
-        "formula": "T4∧L2∧C2∧M1∧V1∧N3∧G3→K33",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Fujifilm X-S10."
-    },
-    {
-        "id": 77,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V1",
-            "N4",
-            "G3"
-        ],
-        "conclusion": "K33",
-        "formula": "T4∧L2∧C2∧M1∧V1∧N4∧G3→K33",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Fujifilm X-S10."
-    },
-    {
-        "id": 78,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V3",
-            "N4",
-            "G4"
-        ],
-        "conclusion": "K34",
-        "formula": "T4∧L2∧C2∧M1∧V3∧N4∧G4→K34",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Fujifilm X-S20."
-    },
-    {
-        "id": 79,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V2",
-            "N4",
-            "G4"
-        ],
-        "conclusion": "K34",
-        "formula": "T4∧L2∧C2∧M1∧V2∧N4∧G4→K34",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Fujifilm X-S20."
-    },
-    {
-        "id": 80,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V3",
-            "N3",
-            "G4"
-        ],
-        "conclusion": "K34",
-        "formula": "T4∧L2∧C2∧M1∧V3∧N3∧G4→K34",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Fujifilm X-S20."
-    },
-    {
-        "id": 81,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V2",
-            "N3",
-            "G4"
-        ],
-        "conclusion": "K35",
-        "formula": "T4∧L2∧C2∧M1∧V2∧N3∧G4→K35",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T4."
-    },
-    {
-        "id": 82,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V2",
-            "N6",
-            "G4"
-        ],
-        "conclusion": "K35",
-        "formula": "T4∧L2∧C2∧M1∧V2∧N6∧G4→K35",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T4."
-    },
-    {
-        "id": 83,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V3",
-            "N2",
-            "G5"
-        ],
-        "conclusion": "K36",
-        "formula": "T4∧L2∧C2∧M1∧V3∧N2∧G5→K36",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T5."
-    },
-    {
-        "id": 84,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V3",
-            "N1",
-            "G5"
-        ],
-        "conclusion": "K36",
-        "formula": "T4∧L2∧C2∧M1∧V3∧N1∧G5→K36",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T5."
-    },
-    {
-        "id": 85,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V3",
-            "N3",
-            "G5"
-        ],
-        "conclusion": "K36",
-        "formula": "T4∧L2∧C2∧M1∧V3∧N3∧G5→K36",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T5."
-    },
-    {
-        "id": 86,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V3",
-            "N7",
-            "G5"
-        ],
-        "conclusion": "K37",
-        "formula": "T4∧L2∧C2∧M1∧V3∧N7∧G5→K37",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chụp Studio, thương mại với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Fujifilm X-H2."
-    },
-    {
-        "id": 87,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V3",
-            "N6",
-            "G5"
-        ],
-        "conclusion": "K37",
-        "formula": "T4∧L2∧C2∧M1∧V3∧N6∧G5→K37",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Fujifilm X-H2."
-    },
-    {
-        "id": 88,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V3",
-            "N5",
-            "G6"
-        ],
-        "conclusion": "K38",
-        "formula": "T4∧L2∧C2∧M1∧V3∧N5∧G6→K38",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Fujifilm X-H2S."
-    },
-    {
-        "id": 89,
-        "conditions": [
-            "T4",
-            "L2",
-            "C2",
-            "M1",
-            "V3",
-            "N6",
-            "G6"
-        ],
-        "conclusion": "K38",
-        "formula": "T4∧L2∧C2∧M1∧V3∧N6∧G6→K38",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Fujifilm X-H2S."
-    },
-    {
-        "id": 90,
-        "conditions": [
-            "T4",
-            "L2",
-            "C3",
-            "M1",
-            "V1",
-            "N2",
-            "G9"
-        ],
-        "conclusion": "K39",
-        "formula": "T4∧L2∧C3∧M1∧V1∧N2∧G9→K39",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Medium Format, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Fujifilm GFX 50S II."
-    },
-    {
-        "id": 91,
-        "conditions": [
-            "T4",
-            "L2",
-            "C3",
-            "M1",
-            "V1",
-            "N7",
-            "G9"
-        ],
-        "conclusion": "K39",
-        "formula": "T4∧L2∧C3∧M1∧V1∧N7∧G9→K39",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Medium Format, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chụp Studio, thương mại với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Fujifilm GFX 50S II."
-    },
-    {
-        "id": 92,
-        "conditions": [
-            "T4",
-            "L2",
-            "C3",
-            "M1",
-            "V2",
-            "N7",
-            "G9"
-        ],
-        "conclusion": "K40",
-        "formula": "T4∧L2∧C3∧M1∧V2∧N7∧G9→K40",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Medium Format, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chụp Studio, thương mại với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Fujifilm GFX 100S."
-    },
-    {
-        "id": 93,
-        "conditions": [
-            "T4",
-            "L2",
-            "C3",
-            "M1",
-            "V2",
-            "N2",
-            "G9"
-        ],
-        "conclusion": "K40",
-        "formula": "T4∧L2∧C3∧M1∧V2∧N2∧G9→K40",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Medium Format, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chân dung, phong cảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Fujifilm GFX 100S."
-    },
-    {
-        "id": 94,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V1",
-            "N4",
-            "G2"
-        ],
-        "conclusion": "K41",
-        "formula": "T5∧L2∧C4∧M1∧V1∧N4∧G2→K41",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G100."
-    },
-    {
-        "id": 95,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V1",
-            "N1",
-            "G2"
-        ],
-        "conclusion": "K41",
-        "formula": "T5∧L2∧C4∧M1∧V1∧N1∧G2→K41",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G100."
-    },
-    {
-        "id": 96,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V1",
-            "N1",
-            "G2"
-        ],
-        "conclusion": "K42",
-        "formula": "T5∧L2∧C4∧M1∧V1∧N1∧G2→K42",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G85."
-    },
-    {
-        "id": 97,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V1",
-            "N4",
-            "G2"
-        ],
-        "conclusion": "K42",
-        "formula": "T5∧L2∧C4∧M1∧V1∧N4∧G2→K42",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G85."
-    },
-    {
-        "id": 98,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V1",
-            "N4",
-            "G2"
-        ],
-        "conclusion": "K43",
-        "formula": "T5∧L2∧C4∧M1∧V1∧N4∧G2→K43",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G95."
-    },
-    {
-        "id": 99,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V1",
-            "N3",
-            "G2"
-        ],
-        "conclusion": "K43",
-        "formula": "T5∧L2∧C4∧M1∧V1∧N3∧G2→K43",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G95."
-    },
-    {
-        "id": 100,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V2",
-            "N6",
-            "G3"
-        ],
-        "conclusion": "K44",
-        "formula": "T5∧L2∧C4∧M1∧V2∧N6∧G3→K44",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix GH5."
-    },
-    {
-        "id": 101,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V2",
-            "N3",
-            "G3"
-        ],
-        "conclusion": "K44",
-        "formula": "T5∧L2∧C4∧M1∧V2∧N3∧G3→K44",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix GH5."
-    },
-    {
-        "id": 102,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V2",
-            "N6",
-            "G4"
-        ],
-        "conclusion": "K45",
-        "formula": "T5∧L2∧C4∧M1∧V2∧N6∧G4→K45",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix GH5 II."
-    },
-    {
-        "id": 103,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V2",
-            "N4",
-            "G4"
-        ],
-        "conclusion": "K45",
-        "formula": "T5∧L2∧C4∧M1∧V2∧N4∧G4→K45",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix GH5 II."
-    },
-    {
-        "id": 104,
-        "conditions": [
-            "T5",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N2",
-            "G4"
-        ],
-        "conclusion": "K46",
-        "formula": "T5∧L2∧C1∧M1∧V2∧N2∧G4→K46",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix S5."
-    },
-    {
-        "id": 105,
-        "conditions": [
-            "T5",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N6",
-            "G4"
-        ],
-        "conclusion": "K46",
-        "formula": "T5∧L2∧C1∧M1∧V2∧N6∧G4→K46",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix S5."
-    },
-    {
-        "id": 106,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V3",
-            "N6",
-            "G4"
-        ],
-        "conclusion": "K47",
-        "formula": "T5∧L2∧C4∧M1∧V3∧N6∧G4→K47",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix GH6."
-    },
-    {
-        "id": 107,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V2",
-            "N6",
-            "G4"
-        ],
-        "conclusion": "K47",
-        "formula": "T5∧L2∧C4∧M1∧V2∧N6∧G4→K47",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix GH6."
-    },
-    {
-        "id": 108,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V3",
-            "N5",
-            "G5"
-        ],
-        "conclusion": "K48",
-        "formula": "T5∧L2∧C4∧M1∧V3∧N5∧G5→K48",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G9 II."
-    },
-    {
-        "id": 109,
-        "conditions": [
-            "T5",
-            "L2",
-            "C4",
-            "M1",
-            "V3",
-            "N6",
-            "G5"
-        ],
-        "conclusion": "K48",
-        "formula": "T5∧L2∧C4∧M1∧V3∧N6∧G5→K48",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G9 II."
-    },
-    {
-        "id": 110,
-        "conditions": [
-            "T5",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N3",
-            "G5"
-        ],
-        "conclusion": "K49",
-        "formula": "T5∧L2∧C1∧M1∧V3∧N3∧G5→K49",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix S5 II."
-    },
-    {
-        "id": 111,
-        "conditions": [
-            "T5",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N6",
-            "G5"
-        ],
-        "conclusion": "K49",
-        "formula": "T5∧L2∧C1∧M1∧V3∧N6∧G5→K49",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix S5 II."
-    },
-    {
-        "id": 112,
-        "conditions": [
-            "T5",
-            "L2",
-            "C1",
-            "M1",
-            "V3",
-            "N6",
-            "G9"
-        ],
-        "conclusion": "K50",
-        "formula": "T5∧L2∧C1∧M1∧V3∧N6∧G9→K50",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix S1H."
-    },
-    {
-        "id": 113,
-        "conditions": [
-            "T5",
-            "L2",
-            "C1",
-            "M1",
-            "V2",
-            "N6",
-            "G9"
-        ],
-        "conclusion": "K50",
-        "formula": "T5∧L2∧C1∧M1∧V2∧N6∧G9→K50",
-        "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix S1H."
-    }
+    {"id": 1, "conditions": ["T1", "L2", "C2", "M1", "V1", "N4", "G2"], "conclusion": "K1", "formula": "T1∧L2∧C2∧M1∧V1∧N4∧G2→K1", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R50."},
+    {"id": 2, "conditions": ["T1", "L2", "C2", "M1", "V1", "N1", "G2"], "conclusion": "K1", "formula": "T1∧L2∧C2∧M1∧V1∧N1∧G2→K1", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R50."},
+    {"id": 3, "conditions": ["T1", "L2", "C2", "M2", "V1", "N1", "G2"], "conclusion": "K2", "formula": "T1∧L2∧C2∧M2∧V1∧N1∧G2→K2", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R100."},
+    {"id": 4, "conditions": ["T1", "L2", "C2", "M2", "V1", "N2", "G2"], "conclusion": "K2", "formula": "T1∧L2∧C2∧M2∧V1∧N2∧G2→K2", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R100."},
+    {"id": 5, "conditions": ["T1", "L2", "C2", "M1", "V2", "N3", "G2"], "conclusion": "K3", "formula": "T1∧L2∧C2∧M1∧V2∧N3∧G2→K3", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R10."},
+    {"id": 6, "conditions": ["T1", "L2", "C2", "M1", "V2", "N5", "G2"], "conclusion": "K3", "formula": "T1∧L2∧C2∧M1∧V2∧N5∧G2→K3", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R10."},
+    {"id": 7, "conditions": ["T1", "L2", "C2", "M1", "V1", "N3", "G2"], "conclusion": "K3", "formula": "T1∧L2∧C2∧M1∧V1∧N3∧G2→K3", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS R10."},
+    {"id": 8, "conditions": ["T1", "L1", "C1", "M2", "V1", "N2", "G1"], "conclusion": "K4", "formula": "T1∧L1∧C1∧M2∧V1∧N2∧G1→K4", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy DSLR, trang bị cảm biến Full-frame, không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 0 - 10 triệu đồng thì nên chọn Máy ảnh Canon EOS 6D."},
+    {"id": 9, "conditions": ["T1", "L1", "C1", "M2", "V1", "N1", "G1"], "conclusion": "K4", "formula": "T1∧L1∧C1∧M2∧V1∧N1∧G1→K4", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy DSLR, trang bị cảm biến Full-frame, không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 0 - 10 triệu đồng thì nên chọn Máy ảnh Canon EOS 6D."},
+    {"id": 10, "conditions": ["T1", "L1", "C1", "M2", "V1", "N3", "G2"], "conclusion": "K5", "formula": "T1∧L1∧C1∧M2∧V1∧N3∧G2→K5", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy DSLR, trang bị cảm biến Full-frame, không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS 5D Mark III."},
+    {"id": 11, "conditions": ["T1", "L1", "C1", "M2", "V1", "N2", "G2"], "conclusion": "K5", "formula": "T1∧L1∧C1∧M2∧V1∧N2∧G2→K5", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy DSLR, trang bị cảm biến Full-frame, không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Canon EOS 5D Mark III."},
+    {"id": 12, "conditions": ["T1", "L2", "C1", "M1", "V2", "N2", "G3"], "conclusion": "K6", "formula": "T1∧L2∧C1∧M1∧V2∧N2∧G3→K6", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Canon EOS R8."},
+    {"id": 13, "conditions": ["T1", "L2", "C1", "M1", "V2", "N1", "G3"], "conclusion": "K6", "formula": "T1∧L2∧C1∧M1∧V2∧N1∧G3→K6", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Canon EOS R8."},
+    {"id": 14, "conditions": ["T1", "L2", "C1", "M1", "V2", "N4", "G3"], "conclusion": "K6", "formula": "T1∧L2∧C1∧M1∧V2∧N4∧G3→K6", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Canon EOS R8."},
+    {"id": 15, "conditions": ["T1", "L2", "C1", "M1", "V2", "N3", "G5"], "conclusion": "K7", "formula": "T1∧L2∧C1∧M1∧V2∧N3∧G5→K7", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Canon EOS R6 Mark II."},
+    {"id": 16, "conditions": ["T1", "L2", "C1", "M1", "V2", "N5", "G5"], "conclusion": "K7", "formula": "T1∧L2∧C1∧M1∧V2∧N5∧G5→K7", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Canon EOS R6 Mark II."},
+    {"id": 17, "conditions": ["T1", "L2", "C1", "M1", "V2", "N6", "G5"], "conclusion": "K7", "formula": "T1∧L2∧C1∧M1∧V2∧N6∧G5→K7", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Canon EOS R6 Mark II."},
+    {"id": 18, "conditions": ["T1", "L2", "C1", "M1", "V3", "N7", "G7"], "conclusion": "K8", "formula": "T1∧L2∧C1∧M1∧V3∧N7∧G7→K8", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chụp Studio, thương mại với phân khúc giá từ 60 - 70 triệu đồng thì nên chọn Máy ảnh Canon EOS R5."},
+    {"id": 19, "conditions": ["T1", "L2", "C1", "M1", "V3", "N6", "G7"], "conclusion": "K8", "formula": "T1∧L2∧C1∧M1∧V3∧N6∧G7→K8", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 60 - 70 triệu đồng thì nên chọn Máy ảnh Canon EOS R5."},
+    {"id": 20, "conditions": ["T1", "L2", "C1", "M1", "V2", "N7", "G7"], "conclusion": "K8", "formula": "T1∧L2∧C1∧M1∧V2∧N7∧G7→K8", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chụp Studio, thương mại với phân khúc giá từ 60 - 70 triệu đồng thì nên chọn Máy ảnh Canon EOS R5."},
+    {"id": 21, "conditions": ["T1", "L1", "C2", "M1", "V1", "N5", "G3"], "conclusion": "K9", "formula": "T1∧L1∧C2∧M1∧V1∧N5∧G3→K9", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy DSLR, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Canon EOS 90D."},
+    {"id": 22, "conditions": ["T1", "L1", "C2", "M1", "V1", "N3", "G3"], "conclusion": "K9", "formula": "T1∧L1∧C2∧M1∧V1∧N3∧G3→K9", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy DSLR, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Canon EOS 90D."},
+    {"id": 23, "conditions": ["T1", "L2", "C1", "M1", "V3", "N5", "G9"], "conclusion": "K10", "formula": "T1∧L2∧C1∧M1∧V3∧N5∧G9→K10", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Canon EOS R3."},
+    {"id": 24, "conditions": ["T1", "L2", "C1", "M1", "V3", "N6", "G9"], "conclusion": "K10", "formula": "T1∧L2∧C1∧M1∧V3∧N6∧G9→K10", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Canon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Canon EOS R3."},
+    {"id": 25, "conditions": ["T2", "L2", "C2", "M1", "V1", "N4", "G2"], "conclusion": "K11", "formula": "T2∧L2∧C2∧M1∧V1∧N4∧G2→K11", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Sony ZV-E10."},
+    {"id": 26, "conditions": ["T2", "L2", "C2", "M1", "V1", "N1", "G2"], "conclusion": "K11", "formula": "T2∧L2∧C2∧M1∧V1∧N1∧G2→K11", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Sony ZV-E10."},
+    {"id": 27, "conditions": ["T2", "L2", "C2", "M1", "V1", "N4", "G2"], "conclusion": "K12", "formula": "T2∧L2∧C2∧M1∧V1∧N4∧G2→K12", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Sony Alpha A6400."},
+    {"id": 28, "conditions": ["T2", "L2", "C2", "M1", "V1", "N1", "G2"], "conclusion": "K12", "formula": "T2∧L2∧C2∧M1∧V1∧N1∧G2→K12", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Sony Alpha A6400."},
+    {"id": 29, "conditions": ["T2", "L2", "C2", "M1", "V2", "N3", "G4"], "conclusion": "K13", "formula": "T2∧L2∧C2∧M1∧V2∧N3∧G4→K13", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Sony Alpha A6700."},
+    {"id": 30, "conditions": ["T2", "L2", "C2", "M1", "V2", "N4", "G4"], "conclusion": "K13", "formula": "T2∧L2∧C2∧M1∧V2∧N4∧G4→K13", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Sony Alpha A6700."},
+    {"id": 31, "conditions": ["T2", "L2", "C2", "M1", "V2", "N5", "G4"], "conclusion": "K13", "formula": "T2∧L2∧C2∧M1∧V2∧N5∧G4→K13", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Sony Alpha A6700."},
+    {"id": 32, "conditions": ["T2", "L2", "C1", "M2", "V1", "N2", "G2"], "conclusion": "K14", "formula": "T2∧L2∧C1∧M2∧V1∧N2∧G2→K14", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 II."},
+    {"id": 33, "conditions": ["T2", "L2", "C1", "M2", "V1", "N1", "G2"], "conclusion": "K14", "formula": "T2∧L2∧C1∧M2∧V1∧N1∧G2→K14", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, không có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 II."},
+    {"id": 34, "conditions": ["T2", "L2", "C1", "M1", "V1", "N3", "G3"], "conclusion": "K15", "formula": "T2∧L2∧C1∧M1∧V1∧N3∧G3→K15", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 III."},
+    {"id": 35, "conditions": ["T2", "L2", "C1", "M1", "V1", "N2", "G3"], "conclusion": "K15", "formula": "T2∧L2∧C1∧M1∧V1∧N2∧G3→K15", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 III."},
+    {"id": 36, "conditions": ["T2", "L2", "C1", "M1", "V1", "N6", "G3"], "conclusion": "K15", "formula": "T2∧L2∧C1∧M1∧V1∧N6∧G3→K15", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 III."},
+    {"id": 37, "conditions": ["T2", "L2", "C1", "M1", "V2", "N4", "G5"], "conclusion": "K16", "formula": "T2∧L2∧C1∧M1∧V2∧N4∧G5→K16", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7C II."},
+    {"id": 38, "conditions": ["T2", "L2", "C1", "M1", "V2", "N1", "G5"], "conclusion": "K16", "formula": "T2∧L2∧C1∧M1∧V2∧N1∧G5→K16", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7C II."},
+    {"id": 39, "conditions": ["T2", "L2", "C1", "M1", "V2", "N3", "G5"], "conclusion": "K16", "formula": "T2∧L2∧C1∧M1∧V2∧N3∧G5→K16", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7C II."},
+    {"id": 40, "conditions": ["T2", "L2", "C1", "M1", "V2", "N3", "G6"], "conclusion": "K17", "formula": "T2∧L2∧C1∧M1∧V2∧N3∧G6→K17", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 IV."},
+    {"id": 41, "conditions": ["T2", "L2", "C1", "M1", "V2", "N2", "G6"], "conclusion": "K17", "formula": "T2∧L2∧C1∧M1∧V2∧N2∧G6→K17", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 IV."},
+    {"id": 42, "conditions": ["T2", "L2", "C1", "M1", "V2", "N6", "G6"], "conclusion": "K17", "formula": "T2∧L2∧C1∧M1∧V2∧N6∧G6→K17", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7 IV."},
+    {"id": 43, "conditions": ["T2", "L2", "C1", "M1", "V3", "N7", "G9"], "conclusion": "K18", "formula": "T2∧L2∧C1∧M1∧V3∧N7∧G9→K18", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chụp Studio, thương mại với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7R V."},
+    {"id": 44, "conditions": ["T2", "L2", "C1", "M1", "V3", "N2", "G9"], "conclusion": "K18", "formula": "T2∧L2∧C1∧M1∧V3∧N2∧G9→K18", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chân dung, phong cảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7R V."},
+    {"id": 45, "conditions": ["T2", "L2", "C1", "M1", "V2", "N7", "G9"], "conclusion": "K18", "formula": "T2∧L2∧C1∧M1∧V2∧N7∧G9→K18", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chụp Studio, thương mại với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7R V."},
+    {"id": 46, "conditions": ["T2", "L2", "C1", "M1", "V2", "N6", "G8"], "conclusion": "K19", "formula": "T2∧L2∧C1∧M1∧V2∧N6∧G8→K19", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 70 - 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7S III."},
+    {"id": 47, "conditions": ["T2", "L2", "C1", "M1", "V2", "N3", "G8"], "conclusion": "K19", "formula": "T2∧L2∧C1∧M1∧V2∧N3∧G8→K19", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 70 - 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A7S III."},
+    {"id": 48, "conditions": ["T2", "L2", "C1", "M1", "V3", "N5", "G9"], "conclusion": "K20", "formula": "T2∧L2∧C1∧M1∧V3∧N5∧G9→K20", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A1."},
+    {"id": 49, "conditions": ["T2", "L2", "C1", "M1", "V3", "N7", "G9"], "conclusion": "K20", "formula": "T2∧L2∧C1∧M1∧V3∧N7∧G9→K20", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chụp Studio, thương mại với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A1."},
+    {"id": 50, "conditions": ["T2", "L2", "C1", "M1", "V3", "N6", "G9"], "conclusion": "K20", "formula": "T2∧L2∧C1∧M1∧V3∧N6∧G9→K20", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Sony, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Sony Alpha A1."},
+    {"id": 51, "conditions": ["T3", "L1", "C2", "M1", "V1", "N5", "G2"], "conclusion": "K21", "formula": "T3∧L1∧C2∧M1∧V1∧N5∧G2→K21", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy DSLR, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Nikon D7500."},
+    {"id": 52, "conditions": ["T3", "L1", "C2", "M1", "V1", "N3", "G2"], "conclusion": "K21", "formula": "T3∧L1∧C2∧M1∧V1∧N3∧G2→K21", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy DSLR, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Nikon D7500."},
+    {"id": 53, "conditions": ["T3", "L1", "C1", "M1", "V1", "N7", "G5"], "conclusion": "K22", "formula": "T3∧L1∧C1∧M1∧V1∧N7∧G5→K22", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy DSLR, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chụp Studio, thương mại với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Nikon D850."},
+    {"id": 54, "conditions": ["T3", "L1", "C1", "M1", "V1", "N2", "G5"], "conclusion": "K22", "formula": "T3∧L1∧C1∧M1∧V1∧N2∧G5→K22", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy DSLR, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Nikon D850."},
+    {"id": 55, "conditions": ["T3", "L2", "C2", "M1", "V1", "N4", "G2"], "conclusion": "K23", "formula": "T3∧L2∧C2∧M1∧V1∧N4∧G2→K23", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Nikon Z30."},
+    {"id": 56, "conditions": ["T3", "L2", "C2", "M1", "V1", "N1", "G2"], "conclusion": "K23", "formula": "T3∧L2∧C2∧M1∧V1∧N1∧G2→K23", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Nikon Z30."},
+    {"id": 57, "conditions": ["T3", "L2", "C2", "M1", "V1", "N1", "G2"], "conclusion": "K24", "formula": "T3∧L2∧C2∧M1∧V1∧N1∧G2→K24", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Nikon Z50."},
+    {"id": 58, "conditions": ["T3", "L2", "C2", "M1", "V1", "N4", "G2"], "conclusion": "K24", "formula": "T3∧L2∧C2∧M1∧V1∧N4∧G2→K24", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Nikon Z50."},
+    {"id": 59, "conditions": ["T3", "L2", "C2", "M1", "V1", "N1", "G3"], "conclusion": "K25", "formula": "T3∧L2∧C2∧M1∧V1∧N1∧G3→K25", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Nikon Z fc."},
+    {"id": 60, "conditions": ["T3", "L2", "C2", "M1", "V1", "N4", "G3"], "conclusion": "K25", "formula": "T3∧L2∧C2∧M1∧V1∧N4∧G3→K25", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Nikon Z fc."},
+    {"id": 61, "conditions": ["T3", "L2", "C1", "M1", "V1", "N2", "G3"], "conclusion": "K26", "formula": "T3∧L2∧C1∧M1∧V1∧N2∧G3→K26", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Nikon Z5."},
+    {"id": 62, "conditions": ["T3", "L2", "C1", "M1", "V1", "N3", "G3"], "conclusion": "K26", "formula": "T3∧L2∧C1∧M1∧V1∧N3∧G3→K26", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Nikon Z5."},
+    {"id": 63, "conditions": ["T3", "L2", "C1", "M1", "V2", "N3", "G4"], "conclusion": "K27", "formula": "T3∧L2∧C1∧M1∧V2∧N3∧G4→K27", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Nikon Z6 II."},
+    {"id": 64, "conditions": ["T3", "L2", "C1", "M1", "V2", "N2", "G4"], "conclusion": "K27", "formula": "T3∧L2∧C1∧M1∧V2∧N2∧G4→K27", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Nikon Z6 II."},
+    {"id": 65, "conditions": ["T3", "L2", "C1", "M1", "V1", "N3", "G4"], "conclusion": "K27", "formula": "T3∧L2∧C1∧M1∧V1∧N3∧G4→K27", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Nikon Z6 II."},
+    {"id": 66, "conditions": ["T3", "L2", "C1", "M1", "V2", "N7", "G6"], "conclusion": "K28", "formula": "T3∧L2∧C1∧M1∧V2∧N7∧G6→K28", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chụp Studio, thương mại với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Nikon Z7 II."},
+    {"id": 67, "conditions": ["T3", "L2", "C1", "M1", "V2", "N2", "G6"], "conclusion": "K28", "formula": "T3∧L2∧C1∧M1∧V2∧N2∧G6→K28", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Nikon Z7 II."},
+    {"id": 68, "conditions": ["T3", "L2", "C1", "M1", "V3", "N6", "G9"], "conclusion": "K29", "formula": "T3∧L2∧C1∧M1∧V3∧N6∧G9→K29", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Nikon Z8."},
+    {"id": 69, "conditions": ["T3", "L2", "C1", "M1", "V3", "N5", "G9"], "conclusion": "K29", "formula": "T3∧L2∧C1∧M1∧V3∧N5∧G9→K29", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Nikon Z8."},
+    {"id": 70, "conditions": ["T3", "L2", "C1", "M1", "V3", "N7", "G9"], "conclusion": "K29", "formula": "T3∧L2∧C1∧M1∧V3∧N7∧G9→K29", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chụp Studio, thương mại với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Nikon Z8."},
+    {"id": 71, "conditions": ["T3", "L2", "C1", "M1", "V3", "N5", "G9"], "conclusion": "K30", "formula": "T3∧L2∧C1∧M1∧V3∧N5∧G9→K30", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Nikon Z9."},
+    {"id": 72, "conditions": ["T3", "L2", "C1", "M1", "V3", "N6", "G9"], "conclusion": "K30", "formula": "T3∧L2∧C1∧M1∧V3∧N6∧G9→K30", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Nikon, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Nikon Z9."},
+    {"id": 73, "conditions": ["T4", "L2", "C2", "M1", "V1", "N1", "G3"], "conclusion": "K31", "formula": "T4∧L2∧C2∧M1∧V1∧N1∧G3→K31", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T30 II."},
+    {"id": 74, "conditions": ["T4", "L2", "C2", "M1", "V1", "N2", "G3"], "conclusion": "K31", "formula": "T4∧L2∧C2∧M1∧V1∧N2∧G3→K31", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T30 II."},
+    {"id": 75, "conditions": ["T4", "L2", "C2", "M1", "V1", "N1", "G3"], "conclusion": "K32", "formula": "T4∧L2∧C2∧M1∧V1∧N1∧G3→K32", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Fujifilm X-E4."},
+    {"id": 76, "conditions": ["T4", "L2", "C2", "M1", "V1", "N3", "G3"], "conclusion": "K33", "formula": "T4∧L2∧C2∧M1∧V1∧N3∧G3→K33", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Fujifilm X-S10."},
+    {"id": 77, "conditions": ["T4", "L2", "C2", "M1", "V1", "N4", "G3"], "conclusion": "K33", "formula": "T4∧L2∧C2∧M1∧V1∧N4∧G3→K33", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Fujifilm X-S10."},
+    {"id": 78, "conditions": ["T4", "L2", "C2", "M1", "V3", "N4", "G4"], "conclusion": "K34", "formula": "T4∧L2∧C2∧M1∧V3∧N4∧G4→K34", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Fujifilm X-S20."},
+    {"id": 79, "conditions": ["T4", "L2", "C2", "M1", "V2", "N4", "G4"], "conclusion": "K34", "formula": "T4∧L2∧C2∧M1∧V2∧N4∧G4→K34", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Fujifilm X-S20."},
+    {"id": 80, "conditions": ["T4", "L2", "C2", "M1", "V3", "N3", "G4"], "conclusion": "K34", "formula": "T4∧L2∧C2∧M1∧V3∧N3∧G4→K34", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Fujifilm X-S20."},
+    {"id": 81, "conditions": ["T4", "L2", "C2", "M1", "V2", "N3", "G4"], "conclusion": "K35", "formula": "T4∧L2∧C2∧M1∧V2∧N3∧G4→K35", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T4."},
+    {"id": 82, "conditions": ["T4", "L2", "C2", "M1", "V2", "N6", "G4"], "conclusion": "K35", "formula": "T4∧L2∧C2∧M1∧V2∧N6∧G4→K35", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T4."},
+    {"id": 83, "conditions": ["T4", "L2", "C2", "M1", "V3", "N2", "G5"], "conclusion": "K36", "formula": "T4∧L2∧C2∧M1∧V3∧N2∧G5→K36", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T5."},
+    {"id": 84, "conditions": ["T4", "L2", "C2", "M1", "V3", "N1", "G5"], "conclusion": "K36", "formula": "T4∧L2∧C2∧M1∧V3∧N1∧G5→K36", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T5."},
+    {"id": 85, "conditions": ["T4", "L2", "C2", "M1", "V3", "N3", "G5"], "conclusion": "K36", "formula": "T4∧L2∧C2∧M1∧V3∧N3∧G5→K36", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Fujifilm X-T5."},
+    {"id": 86, "conditions": ["T4", "L2", "C2", "M1", "V3", "N7", "G5"], "conclusion": "K37", "formula": "T4∧L2∧C2∧M1∧V3∧N7∧G5→K37", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chụp Studio, thương mại với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Fujifilm X-H2."},
+    {"id": 87, "conditions": ["T4", "L2", "C2", "M1", "V3", "N6", "G5"], "conclusion": "K37", "formula": "T4∧L2∧C2∧M1∧V3∧N6∧G5→K37", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Fujifilm X-H2."},
+    {"id": 88, "conditions": ["T4", "L2", "C2", "M1", "V3", "N5", "G6"], "conclusion": "K38", "formula": "T4∧L2∧C2∧M1∧V3∧N5∧G6→K38", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Fujifilm X-H2S."},
+    {"id": 89, "conditions": ["T4", "L2", "C2", "M1", "V3", "N6", "G6"], "conclusion": "K38", "formula": "T4∧L2∧C2∧M1∧V3∧N6∧G6→K38", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Crop (APS-C), có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 50 - 60 triệu đồng thì nên chọn Máy ảnh Fujifilm X-H2S."},
+    {"id": 90, "conditions": ["T4", "L2", "C3", "M1", "V1", "N2", "G9"], "conclusion": "K39", "formula": "T4∧L2∧C3∧M1∧V1∧N2∧G9→K39", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Medium Format, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chân dung, phong cảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Fujifilm GFX 50S II."},
+    {"id": 91, "conditions": ["T4", "L2", "C3", "M1", "V1", "N7", "G9"], "conclusion": "K39", "formula": "T4∧L2∧C3∧M1∧V1∧N7∧G9→K39", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Medium Format, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích chụp Studio, thương mại với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Fujifilm GFX 50S II."},
+    {"id": 92, "conditions": ["T4", "L2", "C3", "M1", "V2", "N7", "G9"], "conclusion": "K40", "formula": "T4∧L2∧C3∧M1∧V2∧N7∧G9→K40", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Medium Format, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chụp Studio, thương mại với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Fujifilm GFX 100S."},
+    {"id": 93, "conditions": ["T4", "L2", "C3", "M1", "V2", "N2", "G9"], "conclusion": "K40", "formula": "T4∧L2∧C3∧M1∧V2∧N2∧G9→K40", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Fujifilm, thuộc dòng máy Mirrorless, trang bị cảm biến Medium Format, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chân dung, phong cảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Fujifilm GFX 100S."},
+    {"id": 94, "conditions": ["T5", "L2", "C4", "M1", "V1", "N4", "G2"], "conclusion": "K41", "formula": "T5∧L2∧C4∧M1∧V1∧N4∧G2→K41", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G100."},
+    {"id": 95, "conditions": ["T5", "L2", "C4", "M1", "V1", "N1", "G2"], "conclusion": "K41", "formula": "T5∧L2∧C4∧M1∧V1∧N1∧G2→K41", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G100."},
+    {"id": 96, "conditions": ["T5", "L2", "C4", "M1", "V1", "N1", "G2"], "conclusion": "K42", "formula": "T5∧L2∧C4∧M1∧V1∧N1∧G2→K42", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích cơ bản, du lịch, đường phố với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G85."},
+    {"id": 97, "conditions": ["T5", "L2", "C4", "M1", "V1", "N4", "G2"], "conclusion": "K42", "formula": "T5∧L2∧C4∧M1∧V1∧N4∧G2→K42", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G85."},
+    {"id": 98, "conditions": ["T5", "L2", "C4", "M1", "V1", "N4", "G2"], "conclusion": "K43", "formula": "T5∧L2∧C4∧M1∧V1∧N4∧G2→K43", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G95."},
+    {"id": 99, "conditions": ["T5", "L2", "C4", "M1", "V1", "N3", "G2"], "conclusion": "K43", "formula": "T5∧L2∧C4∧M1∧V1∧N3∧G2→K43", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay cơ bản, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 10 - 20 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G95."},
+    {"id": 100, "conditions": ["T5", "L2", "C4", "M1", "V2", "N6", "G3"], "conclusion": "K44", "formula": "T5∧L2∧C4∧M1∧V2∧N6∧G3→K44", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix GH5."},
+    {"id": 101, "conditions": ["T5", "L2", "C4", "M1", "V2", "N3", "G3"], "conclusion": "K44", "formula": "T5∧L2∧C4∧M1∧V2∧N3∧G3→K44", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 20 - 30 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix GH5."},
+    {"id": 102, "conditions": ["T5", "L2", "C4", "M1", "V2", "N6", "G4"], "conclusion": "K45", "formula": "T5∧L2∧C4∧M1∧V2∧N6∧G4→K45", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix GH5 II."},
+    {"id": 103, "conditions": ["T5", "L2", "C4", "M1", "V2", "N4", "G4"], "conclusion": "K45", "formula": "T5∧L2∧C4∧M1∧V2∧N4∧G4→K45", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích quay Vlog, sáng tạo nội dung với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix GH5 II."},
+    {"id": 104, "conditions": ["T5", "L2", "C1", "M1", "V2", "N2", "G4"], "conclusion": "K46", "formula": "T5∧L2∧C1∧M1∧V2∧N2∧G4→K46", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chân dung, phong cảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix S5."},
+    {"id": 105, "conditions": ["T5", "L2", "C1", "M1", "V2", "N6", "G4"], "conclusion": "K46", "formula": "T5∧L2∧C1∧M1∧V2∧N6∧G4→K46", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix S5."},
+    {"id": 106, "conditions": ["T5", "L2", "C4", "M1", "V3", "N6", "G4"], "conclusion": "K47", "formula": "T5∧L2∧C4∧M1∧V3∧N6∧G4→K47", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix GH6."},
+    {"id": 107, "conditions": ["T5", "L2", "C4", "M1", "V2", "N6", "G4"], "conclusion": "K47", "formula": "T5∧L2∧C4∧M1∧V2∧N6∧G4→K47", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 30 - 40 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix GH6."},
+    {"id": 108, "conditions": ["T5", "L2", "C4", "M1", "V3", "N5", "G5"], "conclusion": "K48", "formula": "T5∧L2∧C4∧M1∧V3∧N5∧G5→K48", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích thể thao, tốc độ cao với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G9 II."},
+    {"id": 109, "conditions": ["T5", "L2", "C4", "M1", "V3", "N6", "G5"], "conclusion": "K48", "formula": "T5∧L2∧C4∧M1∧V3∧N6∧G5→K48", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Micro Four Thirds / M43, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix G9 II."},
+    {"id": 110, "conditions": ["T5", "L2", "C1", "M1", "V3", "N3", "G5"], "conclusion": "K49", "formula": "T5∧L2∧C1∧M1∧V3∧N3∧G5→K49", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích đa dụng, sự kiện với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix S5 II."},
+    {"id": 111, "conditions": ["T5", "L2", "C1", "M1", "V3", "N6", "G5"], "conclusion": "K49", "formula": "T5∧L2∧C1∧M1∧V3∧N6∧G5→K49", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá từ 40 - 50 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix S5 II."},
+    {"id": 112, "conditions": ["T5", "L2", "C1", "M1", "V3", "N6", "G9"], "conclusion": "K50", "formula": "T5∧L2∧C1∧M1∧V3∧N6∧G9→K50", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay điện ảnh siêu nét, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix S1H."},
+    {"id": 113, "conditions": ["T5", "L2", "C1", "M1", "V2", "N6", "G9"], "conclusion": "K50", "formula": "T5∧L2∧C1∧M1∧V2∧N6∧G9→K50", "description": "Nếu bạn muốn chọn máy ảnh thương hiệu Panasonic, thuộc dòng máy Mirrorless, trang bị cảm biến Full-frame, có màn hình cảm ứng, khả năng quay nâng cao, phục vụ mục đích chuyên sản xuất Video, điện ảnh với phân khúc giá trên 80 triệu đồng thì nên chọn Máy ảnh Panasonic Lumix S1H."}
 ]
 
 
@@ -3820,22 +1613,9 @@ class CameraExpertSystem:
         return code
 
     def forward_chaining(self, selected_facts):
-        """
-        Thuật toán Suy diễn tiến (Forward Chaining):
-        - Đầu vào: Tập sự kiện ban đầu trong Bộ nhớ làm việc (Working Memory).
-        - Quá trình:
-          1. Nạp các từ khóa sự kiện người dùng chọn vào Working Memory.
-          2. Duyệt tập luật (RULES) để lập Lịch công việc (Agenda):
-             + Luật khớp hoàn toàn (khi người dùng chọn đủ 7 tiêu chí và khớp 7/7,
-               hoặc khi tập sự kiện người dùng chọn là tập con khớp 100% với luật).
-             + Luật khớp một phần (xếp hạng theo số lượng sự kiện thỏa mãn).
-          3. Kích hoạt luật ưu tiên cao nhất, bổ sung kết luận K_i vào Working Memory.
-          4. Sinh lời giải thích tự động (Explanation) và vết suy diễn (Inference Trace).
-        """
         working_memory = list(dict.fromkeys(selected_facts))
         selected_set = set(working_memory)
 
-        # Phân nhóm các sự kiện người dùng đã chọn theo nhóm T, L, C, M, V, N, G
         selected_by_group = {}
         for f in working_memory:
             grp = f[0] if f else ""
@@ -3857,11 +1637,9 @@ class CameraExpertSystem:
         partial_matched_rules = []
 
         for rule in self.rules:
-            cond_set = set(rule["conditions"])
             matched_facts = [f for f in rule["conditions"] if f in selected_set]
             missing_facts = [f for f in rule["conditions"] if f not in selected_set]
 
-            # Kiểm tra xem có nhóm nào người dùng đã chọn nhưng luật này không thỏa không
             group_conflict = False
             for grp, chosen_codes in selected_by_group.items():
                 rule_code_in_grp = next((c for c in rule["conditions"] if c.startswith(grp)), None)
@@ -3888,7 +1666,6 @@ class CameraExpertSystem:
             elif len(matched_facts) > 0:
                 partial_matched_rules.append(rule_eval)
 
-        # Sắp xếp lịch công việc (Agenda)
         subset_matched_rules.sort(key=lambda x: (-x["match_count"], x["rule"]["id"]))
         partial_matched_rules.sort(key=lambda x: (-x["match_count"], x["rule"]["id"]))
 
@@ -3955,7 +1732,6 @@ class CameraExpertSystem:
 
             if cam_id not in seen_cameras:
                 seen_cameras.add(cam_id)
-                matched_desc = ", ".join(self.get_fact_label(f) for f in item["matched_facts"])
                 explanation = (
                     f"Dựa trên nhu cầu của bạn ({(', '.join(self.fact_labels.get(f, f) for f in item['matched_facts']))}), MingDShop gợi ý {cam['name']} — mẫu máy ảnh rất phù hợp với tiêu chí và ngân sách bạn đã chọn."
                 )
@@ -4004,20 +1780,25 @@ expert_system = CameraExpertSystem(FACTS_META, CAMERAS, RULES)
 
 
 # ==============================================================================
-# 5. WEB SERVER & WSGI APP (TƯƠNG THÍCH GITHUB, RENDER, GUNICORN & LOCAL)
+# 5. WEB SERVER ĐA NĂNG: HỖ TRỢ CẢ ASGI (UVICORN) + WSGI (GUNICORN) + HTTP LOCAL
 # ==============================================================================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+STATUS_TEXT = {
+    200: "200 OK",
+    204: "204 No Content",
+    404: "404 Not Found",
+    500: "500 Internal Server Error",
+}
 
-def app(environ, start_response):
+
+def _route_http_request(method, path, raw_body_bytes=b""):
     """
-    WSGI Application hỗ trợ chạy trực tiếp với Gunicorn trên Render:
-      gunicorn main:app
-    hoặc chạy trực tiếp bằng lệnh:
-      python main.py
+    Hàm xử lý routing dùng chung cho cả ASGI (Uvicorn), WSGI (Gunicorn) và Local HTTPServer.
+    Trả về tuple: (status_code: int, headers: list[(str, str)], body: bytes)
     """
-    method = environ.get("REQUEST_METHOD", "GET").upper()
-    path = environ.get("PATH_INFO", "/")
+    method = (method or "GET").upper()
+    parsed_path = urlparse(path or "/").path or "/"
 
     cors_headers = [
         ("Access-Control-Allow-Origin", "*"),
@@ -4026,47 +1807,53 @@ def app(environ, start_response):
     ]
 
     if method == "OPTIONS":
-        start_response("204 No Content", cors_headers)
-        return [b""]
+        return 204, cors_headers, b""
 
-    if path in ("/", "/index.html"):
+    if parsed_path in ("/", "/index.html"):
         html_path = os.path.join(BASE_DIR, "index.html")
         if os.path.exists(html_path):
             with open(html_path, "rb") as f:
                 body = f.read()
-            headers = [("Content-Type", "text/html; charset=utf-8"), ("Content-Length", str(len(body)))] + cors_headers
-            start_response("200 OK", headers)
-            return [b""] if method == "HEAD" else [body]
+            headers = [
+                ("Content-Type", "text/html; charset=utf-8"),
+                ("Content-Length", str(len(body))),
+            ] + cors_headers
+            return 200, headers, (b"" if method == "HEAD" else body)
+
         msg = "<h1>Không tìm thấy file index.html trong cùng thư mục!</h1>".encode("utf-8")
-        headers = [("Content-Type", "text/html; charset=utf-8"), ("Content-Length", str(len(msg)))] + cors_headers
-        start_response("404 Not Found", headers)
-        return [b""] if method == "HEAD" else [msg]
+        headers = [
+            ("Content-Type", "text/html; charset=utf-8"),
+            ("Content-Length", str(len(msg))),
+        ] + cors_headers
+        return 404, headers, (b"" if method == "HEAD" else msg)
 
-    if path in ("/api/health", "/healthz"):
-        body = json.dumps({"status": "ok", "cameras": len(CAMERAS), "rules": len(RULES)}, ensure_ascii=False).encode("utf-8")
-        headers = [("Content-Type", "application/json; charset=utf-8"), ("Content-Length", str(len(body)))] + cors_headers
-        start_response("200 OK", headers)
-        return [b""] if method == "HEAD" else [body]
+    if parsed_path in ("/api/health", "/healthz"):
+        body = json.dumps(
+            {"status": "ok", "cameras": len(CAMERAS), "rules": len(RULES)},
+            ensure_ascii=False
+        ).encode("utf-8")
+        headers = [
+            ("Content-Type", "application/json; charset=utf-8"),
+            ("Content-Length", str(len(body))),
+        ] + cors_headers
+        return 200, headers, (b"" if method == "HEAD" else body)
 
-    if path == "/api/kb":
+    if parsed_path == "/api/kb":
         body = json.dumps({
             "facts_meta": expert_system.facts_meta,
             "cameras": list(expert_system.cameras.values()),
             "rules": expert_system.rules
         }, ensure_ascii=False).encode("utf-8")
-        headers = [("Content-Type", "application/json; charset=utf-8"), ("Content-Length", str(len(body)))] + cors_headers
-        start_response("200 OK", headers)
-        return [b""] if method == "HEAD" else [body]
+        headers = [
+            ("Content-Type", "application/json; charset=utf-8"),
+            ("Content-Length", str(len(body))),
+        ] + cors_headers
+        return 200, headers, (b"" if method == "HEAD" else body)
 
-    if path == "/api/consult":
-        if method == "POST":
+    if parsed_path == "/api/consult":
+        if method == "POST" and raw_body_bytes:
             try:
-                length = int(environ.get("CONTENT_LENGTH") or 0)
-            except ValueError:
-                length = 0
-            raw = environ["wsgi.input"].read(length).decode("utf-8") if length > 0 else "{}"
-            try:
-                payload = json.loads(raw)
+                payload = json.loads(raw_body_bytes.decode("utf-8"))
             except Exception:
                 payload = {}
             facts = payload.get("facts", [])
@@ -4074,120 +1861,174 @@ def app(environ, start_response):
             facts = []
         result = expert_system.forward_chaining(facts)
         body = json.dumps(result, ensure_ascii=False).encode("utf-8")
-        headers = [("Content-Type", "application/json; charset=utf-8"), ("Content-Length", str(len(body)))] + cors_headers
-        start_response("200 OK", headers)
-        return [body]
+        headers = [
+            ("Content-Type", "application/json; charset=utf-8"),
+            ("Content-Length", str(len(body))),
+        ] + cors_headers
+        return 200, headers, (b"" if method == "HEAD" else body)
 
-    if path == "/api/add-rule" and method == "POST":
+    if parsed_path == "/api/add-rule" and method == "POST":
         try:
-            length = int(environ.get("CONTENT_LENGTH") or 0)
-        except ValueError:
-            length = 0
-        raw = environ["wsgi.input"].read(length).decode("utf-8") if length > 0 else "{}"
-        try:
-            payload = json.loads(raw)
+            payload = json.loads(raw_body_bytes.decode("utf-8")) if raw_body_bytes else {}
         except Exception:
             payload = {}
         conditions = payload.get("conditions", [])
         conclusion = payload.get("conclusion", "K1")
         description = payload.get("description", "")
         new_rule = expert_system.add_rule(conditions, conclusion, description)
-        body = json.dumps({"status": "ok", "rule": new_rule, "total_rules": len(expert_system.rules)}, ensure_ascii=False).encode("utf-8")
-        headers = [("Content-Type", "application/json; charset=utf-8"), ("Content-Length", str(len(body)))] + cors_headers
-        start_response("200 OK", headers)
-        return [body]
+        body = json.dumps(
+            {"status": "ok", "rule": new_rule, "total_rules": len(expert_system.rules)},
+            ensure_ascii=False
+        ).encode("utf-8")
+        headers = [
+            ("Content-Type", "application/json; charset=utf-8"),
+            ("Content-Length", str(len(body))),
+        ] + cors_headers
+        return 200, headers, body
 
     body = json.dumps({"error": "Endpoint not found"}, ensure_ascii=False).encode("utf-8")
-    headers = [("Content-Type", "application/json; charset=utf-8"), ("Content-Length", str(len(body)))] + cors_headers
-    start_response("404 Not Found", headers)
-    return [body]
+    headers = [
+        ("Content-Type", "application/json; charset=utf-8"),
+        ("Content-Length", str(len(body))),
+    ] + cors_headers
+    return 404, headers, (b"" if method == "HEAD" else body)
 
 
-# Alias chuẩn cho các dịch vụ Cloud PaaS (Render / Gunicorn / uWSGI)
+class HybridWSGIASGIApp:
+    """
+    Application tự động tương thích với cả 3 chuẩn chạy trên Render / Cloud / Local:
+      1. ASGI 3.0 (Uvicorn mặc định trên Render: `uvicorn main:app` -> gọi `app(scope, receive, send)`)
+      2. ASGI 2.0 (Uvicorn ASGI2Middleware -> gọi `app(scope)`)
+      3. WSGI 1.0 (Gunicorn trên Render: `gunicorn main:app` -> gọi `app(environ, start_response)`)
+    """
+
+    def __call__(self, *args):
+        # Chuẩn WSGI: app(environ, start_response) -> 2 tham số
+        if len(args) == 2 and callable(args[1]):
+            environ, start_response = args
+            return self._handle_wsgi(environ, start_response)
+
+        # Chuẩn ASGI 3.0: app(scope, receive, send) -> 3 tham số
+        if len(args) == 3:
+            scope, receive, send = args
+            return self._handle_asgi(scope, receive, send)
+
+        # Chuẩn ASGI 2.0 fallback: app(scope) -> 1 tham số, trả về coroutine (receive, send)
+        if len(args) == 1 and isinstance(args[0], dict):
+            scope = args[0]
+
+            async def asgi2_instance(receive, send):
+                await self._handle_asgi(scope, receive, send)
+
+            return asgi2_instance
+
+        raise TypeError(f"Unsupported application call signature with {len(args)} argument(s).")
+
+    def _handle_wsgi(self, environ, start_response):
+        method = environ.get("REQUEST_METHOD", "GET").upper()
+        path = environ.get("PATH_INFO", "/")
+        try:
+            length = int(environ.get("CONTENT_LENGTH") or 0)
+        except ValueError:
+            length = 0
+        raw_body = environ["wsgi.input"].read(length) if length > 0 and "wsgi.input" in environ else b""
+        status_code, headers, body = _route_http_request(method, path, raw_body)
+        start_response(STATUS_TEXT.get(status_code, f"{status_code} OK"), headers)
+        return [body]
+
+    async def _handle_asgi(self, scope, receive, send):
+        scope_type = scope.get("type")
+
+        if scope_type == "lifespan":
+            while True:
+                message = await receive()
+                if message["type"] == "lifespan.startup":
+                    await send({"type": "lifespan.startup.complete"})
+                elif message["type"] == "lifespan.shutdown":
+                    await send({"type": "lifespan.shutdown.complete"})
+                    return
+
+        if scope_type != "http":
+            return
+
+        method = scope.get("method", "GET").upper()
+        path = scope.get("path", "/")
+
+        body_chunks = []
+        while True:
+            message = await receive()
+            if message["type"] == "http.request":
+                chunk = message.get("body", b"")
+                if chunk:
+                    body_chunks.append(chunk)
+                if not message.get("more_body", False):
+                    break
+            elif message["type"] == "http.disconnect":
+                return
+
+        raw_body = b"".join(body_chunks)
+        status_code, headers, response_body = _route_http_request(method, path, raw_body)
+
+        asgi_headers = [
+            (k.lower().encode("latin-1"), v.encode("latin-1"))
+            for k, v in headers
+        ]
+
+        await send({
+            "type": "http.response.start",
+            "status": status_code,
+            "headers": asgi_headers,
+        })
+        await send({
+            "type": "http.response.body",
+            "body": b"" if method == "HEAD" else response_body,
+        })
+
+
+# Khởi tạo đối tượng `app` và `application` tương thích đồng thời Uvicorn (ASGI) & Gunicorn (WSGI)
+app = HybridWSGIASGIApp()
 application = app
 
 
 class ExpertSystemRequestHandler(SimpleHTTPRequestHandler):
     def do_OPTIONS(self):
-        self.send_response(204)
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type, Accept")
+        status_code, headers, _ = _route_http_request("OPTIONS", self.path)
+        self.send_response(status_code)
+        for k, v in headers:
+            self.send_header(k, v)
         self.end_headers()
 
     def do_HEAD(self):
         parsed = urlparse(self.path)
-        if parsed.path in ("/", "/index.html", "/api/health", "/healthz"):
-            self.send_response(200)
-            self.send_header("Content-Type", "text/html; charset=utf-8")
-            self.send_header("Access-Control-Allow-Origin", "*")
+        if parsed.path in ("/", "/index.html", "/api/health", "/healthz", "/api/kb"):
+            status_code, headers, _ = _route_http_request("HEAD", parsed.path)
+            self.send_response(status_code)
+            for k, v in headers:
+                self.send_header(k, v)
             self.end_headers()
         else:
             super().do_HEAD()
 
     def do_GET(self):
         parsed = urlparse(self.path)
-        if parsed.path in ("/", "/index.html"):
-            html_path = os.path.join(BASE_DIR, "index.html")
-            if os.path.exists(html_path):
-                with open(html_path, "rb") as f:
-                    data = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "text/html; charset=utf-8")
-                self.send_header("Content-Length", str(len(data)))
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(data)
-            else:
-                msg = b"<h1>Khong tim thay file index.html trong cung thu muc!</h1>"
-                self.send_response(404)
-                self.send_header("Content-Type", "text/html; charset=utf-8")
-                self.send_header("Content-Length", str(len(msg)))
-                self.end_headers()
-                self.wfile.write(msg)
-        elif parsed.path in ("/api/health", "/healthz"):
-            self._send_json({"status": "ok", "cameras": len(CAMERAS), "rules": len(RULES)})
-        elif parsed.path == "/api/kb":
-            self._send_json({
-                "facts_meta": expert_system.facts_meta,
-                "cameras": list(expert_system.cameras.values()),
-                "rules": expert_system.rules
-            })
-        elif parsed.path == "/api/consult":
-            self._send_json(expert_system.forward_chaining([]))
+        if parsed.path in ("/", "/index.html", "/api/health", "/healthz", "/api/kb", "/api/consult"):
+            status_code, headers, body = _route_http_request("GET", parsed.path)
+            self.send_response(status_code)
+            for k, v in headers:
+                self.send_header(k, v)
+            self.end_headers()
+            self.wfile.write(body)
         else:
             super().do_GET()
 
     def do_POST(self):
         parsed = urlparse(self.path)
         content_len = int(self.headers.get("Content-Length", 0))
-        raw_body = self.rfile.read(content_len).decode("utf-8") if content_len > 0 else "{}"
-        try:
-            payload = json.loads(raw_body)
-        except Exception:
-            payload = {}
-
-        if parsed.path == "/api/consult":
-            facts = payload.get("facts", [])
-            result = expert_system.forward_chaining(facts)
-            self._send_json(result)
-        elif parsed.path == "/api/add-rule":
-            conditions = payload.get("conditions", [])
-            conclusion = payload.get("conclusion", "K1")
-            description = payload.get("description", "")
-            new_rule = expert_system.add_rule(conditions, conclusion, description)
-            self._send_json({"status": "ok", "rule": new_rule, "total_rules": len(expert_system.rules)})
-        else:
-            self._send_json({"error": "Endpoint not found"}, status=404)
-
-    def _send_json(self, data, status=200):
-        body = json.dumps(data, ensure_ascii=False).encode("utf-8")
-        self.send_response(status)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type, Accept")
-        self.send_header("Content-Length", str(len(body)))
+        raw_body = self.rfile.read(content_len) if content_len > 0 else b"{}"
+        status_code, headers, body = _route_http_request("POST", parsed.path, raw_body)
+        self.send_response(status_code)
+        for k, v in headers:
+            self.send_header(k, v)
         self.end_headers()
         self.wfile.write(body)
 
